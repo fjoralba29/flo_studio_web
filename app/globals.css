@@ -1,0 +1,162 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    /* 🎨 Custom Palette Colors */
+    --color-grape: #372e39;
+    --color-violet: #583c84;
+    --color-olive: #4d4735;
+    --color-espresso: #281f14;
+    --color-blush: #fff8f7;
+    --color-sand: #dfbeae;
+    --color-peach: #d5ae9c;
+    --color-rose: #edd4c9;
+    --color-cocoa: #4c3836;
+
+    /* 🩵 Kodchasan Fonts */
+    --font-kodchasan-light: "Kodchasan Light", sans-serif;
+    --font-kodchasan-regular: "Kodchasan Regular", sans-serif;
+    --font-kodchasan-semibold: "Kodchasan SemiBold", sans-serif;
+    --font-kodchasan-bold: "Kodchasan Bold", sans-serif;
+
+    /* 🩶 Literata Fonts */
+    --font-literata-light: "Literata Light", serif;
+    --font-literata-regular: "Literata Regular", serif;
+    --font-literata-semibold: "Literata SemiBold", serif;
+    --font-literata-bold: "Literata Bold", serif;
+    --font-literata-black: "Literata Black", serif;
+}
+
+body {
+    font-family: var(--font-kodchasan-regular);
+}
+
+h1 {
+    font-family: var(--font-literata-bold);
+    font-size: 64px;
+}
+
+p {
+    font-family: var(--font-literata-regular);
+    font-size: 24px;
+}
+
+.xp {
+    font-family: var(--font-literata-regular);
+    font-size: 18px;
+}
+
+.subtitle {
+    font-family: var(--font-kodchasan-light);
+    font-size: 22px;
+}
+
+.section-title {
+    font-family: var(--font-literata-bold);
+    font-size: 36px;
+}
+
+.section-subtitle {
+    font-family: var(--font-literata-semibold);
+    font-size: 28px;
+}
+
+.normal-text {
+    font-family: var(--font-kodchasan-regular);
+    font-size: 32px;
+}
+
+.navbar {
+    font-family: var(--font-kodchasan-bold);
+    font-size: 16px;
+}
+
+.info-text {
+    font-family: var(--font-kodchasan-semibold);
+    font-size: 28px;
+}
+
+.info-subtext {
+    font-family: var(--font-kodchasan-regular);
+    font-size: 20px;
+}
+
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+}
+
+/* @media (prefers-color-scheme: dark) {
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
+} */
+
+body {
+    background: var(--background);
+    color: var(--foreground);
+    /* font-family: Arial, Helvetica, sans-serif; */
+}
+
+/* Background colors */
+.bg-grape {
+    background-color: var(--color-grape);
+}
+.bg-violet {
+    background-color: var(--color-violet);
+}
+.bg-olive {
+    background-color: var(--color-olive);
+}
+.bg-espresso {
+    background-color: var(--color-espresso);
+}
+.bg-blush {
+    background-color: var(--color-blush);
+}
+.bg-sand {
+    background-color: var(--color-sand);
+}
+.bg-peach {
+    background-color: var(--color-peach);
+}
+.bg-rose {
+    background-color: var(--color-rose);
+}
+.bg-cocoa {
+    background-color: var(--color-cocoa);
+}
+
+/* Text colors */
+.text-grape {
+    color: var(--color-grape);
+}
+.text-violet {
+    color: var(--color-violet);
+}
+.text-olive {
+    color: var(--color-olive);
+}
+.text-espresso {
+    color: var(--color-espresso);
+}
+.text-blush {
+    color: var(--color-blush);
+}
+.text-sand {
+    color: var(--color-sand);
+}
+.text-peach {
+    color: var(--color-peach);
+}
+.text-rose {
+    color: var(--color-rose);
+}
+.text-cocoa {
+    color: var(--color-cocoa);
+}
