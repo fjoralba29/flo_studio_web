@@ -5,6 +5,7 @@ import clsx from "clsx";
 import type { InputHTMLAttributes, FocusEvent } from "react";
 import EyeIcon from "@/assets/icons/EyeIcon.svg";
 import EyeHiddenIcon from "@/assets/icons/EyeHiddenIcon.svg";
+import Image from "next/image";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
     label?: string | React.ReactNode;
@@ -87,9 +88,15 @@ const InputPlain = ({
                         className='absolute right-[15px] top-1/2 transform -translate-y-1/2 text-black disabled:text-dark-gray'
                     >
                         {showPassword ? (
-                            <EyeIcon className='fill-white' />
+                            <Image
+                                src={EyeIcon}
+                                alt='Show password'
+                            />
                         ) : (
-                            <EyeHiddenIcon className='fill-white' />
+                            <Image
+                                src={EyeHiddenIcon}
+                                alt='Hide password'
+                            />
                         )}
                     </button>
                 )}

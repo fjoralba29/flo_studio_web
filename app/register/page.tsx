@@ -8,7 +8,7 @@ import Input from "@/component/Input/Input";
 import Image from "next/image";
 import z from "zod";
 
-const Login = () => {
+const Register = () => {
     const formSchema = z.object({
         email: z.string().email("Invalid email address"),
         password: z.string().min(6, "Password must be at least 6 characters"),
@@ -31,10 +31,18 @@ const Login = () => {
                 className='bg-cocoa p-8 rounded-md flex flex-col gap-[20px] text-white min-w-[400px] '
                 resetOnSubmit
             >
-                <div className='section-title text-center'>Log in</div>
+                <div className='section-title text-center'>JOIN US</div>
+                <Input
+                    name='name'
+                    label='Name'
+                />
                 <Input
                     name='email'
                     label='Email'
+                />
+                <Input
+                    name='phone'
+                    label='Phone'
                 />
                 <Input
                     name='password'
@@ -46,15 +54,15 @@ const Login = () => {
                         type='submit'
                         theme='secondary'
                     >
-                        Login
+                        Register
                     </Button>
                     <div className='flex items-center justify-center gap-[5px] text-sm '>
-                        <div>Don't have an account?</div>
+                        <div>Already have an account?</div>
                         <a
                             className='font-bold'
-                            href='/register'
+                            href='/login'
                         >
-                            Register
+                            Login
                         </a>
                     </div>
                 </div>
@@ -68,4 +76,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

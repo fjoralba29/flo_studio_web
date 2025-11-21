@@ -16,7 +16,7 @@ const buttonThemes: Record<ButtonTheme, string[]> = {
         "disabled:border-[#8695A4]",
     ],
     secondary: [
-        "bg-white",
+        "bg-sand",
         "text-black",
         "hover:bg-[#F9F9FB]",
         "disabled:text-[#8695A4]",

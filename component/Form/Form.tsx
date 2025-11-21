@@ -15,7 +15,7 @@ import {
     type SubmitHandler,
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { FormChildProps, FormProps } from "@types";
+import { FormChildProps, FormProps } from "@/lib/types/Form.types";
 
 const Form = <T extends FieldValues>({
     onSubmit,
