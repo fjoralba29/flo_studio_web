@@ -14,6 +14,7 @@
     --color-peach: #d5ae9c;
     --color-rose: #edd4c9;
     --color-cocoa: #4c3836;
+    --color-lila: #6b3777;
 
     /* 🩵 Kodchasan Fonts */
     --font-kodchasan-light: "Kodchasan Light", sans-serif;
@@ -130,6 +131,9 @@ body {
 }
 .bg-cocoa {
     background-color: var(--color-cocoa);
+}
+.bg-lila {
+    background-color: var(--color-lila);
 }
 
 /* Text colors */
