@@ -1,7 +1,6 @@
 import Image from "next/image";
 import PrimaryPhoto from "../assets/photos/PrimaryPhoto.png";
 import Logo from "@/assets/photos/Logo.png";
-import Image33 from "@/assets/photos/image33.png";
 import Image24 from "@/assets/photos/image24.png";
 import Categories from "@/component/Categories/Categories";
 import Footer from "@/component/Footer/Footer";
@@ -12,7 +11,6 @@ import Header from "@/component/Header/Header";
 export default function Home() {
     return (
         <>
-            <Header />
             <div className='relative'>
                 <Image
                     src={PrimaryPhoto}
@@ -80,7 +78,6 @@ export default function Home() {
                     />
                 </div>
             </div>
-            <Footer />
         </>
     );
 }

@@ -21,7 +21,7 @@ const AdminHeader = () => {
         "/contact",
         "/user-profile",
         "/admin",
-        "/page-management",
+        "/admin/page-management",
     ];
 
     const showHeader = publicPaths.includes(pathname);
@@ -69,19 +69,19 @@ const AdminHeader = () => {
                 <div className='flex gap-[90px] items-center  justify-self-end'>
                     <div className='flex gap-[90px] items-center '>
                         <a
-                            href='/page-management'
+                            href='/admin/page-management'
                             className='text-white navbar'
                         >
                             Collabs
                         </a>
                         <a
-                            href='/page-management'
+                            href='/admin/page-management'
                             className='text-white navbar'
                         >
                             Categories
                         </a>
                         <a
-                            href='/page-management'
+                            href='/admin/page-management'
                             className='text-white navbar'
                         >
                             Services

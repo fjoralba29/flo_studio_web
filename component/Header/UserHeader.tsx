@@ -21,6 +21,8 @@ const UserHeader = () => {
         "/portfolio",
         "/contact",
         "/user-profile",
+        "/admin",
+        "/admin/page-management",
     ];
 
     const showHeader = publicPaths.includes(pathname);

@@ -17,7 +17,6 @@ const UserProfile = () => {
 
     return (
         <>
-            <UserHeader />
             <div className='flex flex-col gap-[50px] '>
                 <div
                     className='bg-gradient-to-b from-purple-400 to-white w-full bg-cover bg-center h-[400px]'
@@ -92,7 +91,6 @@ const UserProfile = () => {
                     </div>
                 </div>
             </div>
-            <UserFooter />
         </>
     );
 };

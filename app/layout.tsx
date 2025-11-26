@@ -30,12 +30,12 @@ export default function RootLayout({
             className='h-full'
         >
             <body
-                className={`${kodchasanLight.variable} ${kodchasanRegular.variable} ${kodchasanSemiBold.variable} ${kodchasanBold.variable} ${literataLight.variable} ${literataRegular.variable} ${literataSemiBold.variable} ${literataBold.variable} ${literataBlack.variable} h-full antialiased relative `}
+                className={`${kodchasanLight.variable} ${kodchasanRegular.variable} ${kodchasanSemiBold.variable} ${kodchasanBold.variable} ${literataLight.variable} ${literataRegular.variable} ${literataSemiBold.variable} ${literataBold.variable} ${literataBlack.variable} min-h-screen  antialiased relative `}
             >
                 <ReactQueryProvider>
-                    {/* <HeaderController /> */}
+                    <HeaderController />
                     {children}
-                    {/* <FooterController /> */}
+                    <FooterController />
                 </ReactQueryProvider>
             </body>
         </html>

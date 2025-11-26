@@ -10,7 +10,6 @@ import Cards from "@/component/Cards/Cards";
 const AdminDashboard = () => {
     return (
         <>
-            <AdminHeader />
             <div className='p-5 flex flex-col gap-10 items-center'>
                 <div className=' grid grid-cols-3 items-center justify-center gap-5'>
                     <Cards
@@ -45,7 +44,6 @@ const AdminDashboard = () => {
                     />
                 </div>
             </div>
-            <AdminFooter />
         </>
     );
 };

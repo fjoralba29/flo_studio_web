@@ -66,7 +66,7 @@ const InputPlain = ({
     };
 
     return (
-        <div className=' h-fit w-full min-h-[42px] relative'>
+        <div className=' h-fit  min-h-[42px] relative'>
             {label && <div className={labelClasses}>{label}</div>}
 
             <div className='relative'>
