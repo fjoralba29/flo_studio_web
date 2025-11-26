@@ -10,7 +10,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-const Header = () => {
+const UserHeader = () => {
     const router = useRouter();
     const pathname = usePathname();
 
@@ -57,25 +57,13 @@ const Header = () => {
     return (
         showHeader && (
             <div className='absolute  top-0 left-0 right-0 z-10 flex justify-between px-[80px] py-[30px] items-center'>
-                <Image
-                    src={Instagram}
-                    alt='Logo'
-                    width={30}
-                    height={30}
-                />
                 <div className='flex gap-[90px] items-center'>
-                    <a
+                    {/* <a
                         href='/'
                         className='text-white navbar'
                     >
                         About
-                    </a>
-                    <a
-                        href='/'
-                        className='text-white navbar'
-                    >
-                        Portfolio
-                    </a>
+                    </a> */}
                     <a href='/'>
                         <Image
                             src={Logo}
@@ -83,18 +71,6 @@ const Header = () => {
                             width={60}
                             height={60}
                         />
-                    </a>
-                    <a
-                        href='/wedding'
-                        className='text-white navbar'
-                    >
-                        Wedding
-                    </a>
-                    <a
-                        href='/'
-                        className='text-white navbar'
-                    >
-                        Contact
                     </a>
                 </div>
                 <div
@@ -156,4 +132,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default UserHeader;

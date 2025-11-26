@@ -91,11 +91,13 @@ const InputPlain = ({
                             <Image
                                 src={EyeIcon}
                                 alt='Show password'
+                                className='fill-black'
                             />
                         ) : (
                             <Image
                                 src={EyeHiddenIcon}
                                 alt='Hide password'
+                                className='fill-black'
                             />
                         )}
                     </button>

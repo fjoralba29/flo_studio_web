@@ -7,9 +7,10 @@ type Props = {
     title?: string;
     description?: string;
     type: "category" | "collaboration";
+    className?: string;
 };
 
-const Cards = ({ photo, title, description, type }: Props) => {
+const Cards = ({ photo, title, description, type, className }: Props) => {
     // text visibility logic
     const textVisibility =
         type === "collaboration"
@@ -24,7 +25,7 @@ const Cards = ({ photo, title, description, type }: Props) => {
 
     return (
         <div
-            className={`relative group cursor-pointer overflow-hidden rounded-[15px] ${cardSize}`}
+            className={`relative group cursor-pointer overflow-hidden rounded-[15px] ${cardSize} ${className}`}
         >
             <Image
                 src={photo}

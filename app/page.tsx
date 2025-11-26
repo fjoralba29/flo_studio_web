@@ -7,10 +7,12 @@ import Categories from "@/component/Categories/Categories";
 import Footer from "@/component/Footer/Footer";
 import Collaborations from "@/component/Collaborations/Collaborations";
 import Services from "@/component/Services/Services";
+import Header from "@/component/Header/Header";
 
 export default function Home() {
     return (
         <>
+            <Header />
             <div className='relative'>
                 <Image
                     src={PrimaryPhoto}

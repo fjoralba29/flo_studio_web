@@ -30,10 +30,10 @@ const buttonThemes: Record<ButtonTheme, string[]> = {
         "hover:!text-black",
     ],
     tertiary: [
-        "bg-[#F9F9FB]",
-        "border-[#ECECEC]",
+        "bg-light-grey",
+        "border-0",
         "text-[#454449]",
-        "hover:bg-black",
+        "hover:bg-[#583c84]",
         "hover:text-white",
         "hover:border-black",
     ],
