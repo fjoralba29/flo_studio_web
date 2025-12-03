@@ -12,32 +12,36 @@ export async function POST(request: Request) {
             );
         }
 
-        const buffer = await file.arrayBuffer();
-        const bytes = Buffer.from(buffer);
-
         const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
         const uploadPreset = process.env.CLOUDINARY_UPLOAD_PRESET;
 
-        const cloudinaryRes = await fetch(
+        if (!cloudName || !uploadPreset) {
+            return NextResponse.json(
+                { error: "Cloudinary config missing" },
+                { status: 500 }
+            );
+        }
+
+        const buffer = await file.arrayBuffer();
+        const blob = new Blob([buffer], { type: file.type });
+
+        const cloudinaryForm = new FormData();
+        cloudinaryForm.append("file", blob);
+        cloudinaryForm.append("upload_preset", uploadPreset);
+
+        const uploadRes = await fetch(
             `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
             {
                 method: "POST",
-                body: (() => {
-                    const fd = new FormData();
-                    const blob = new Blob([buffer], { type: file.type });
-                    fd.append("file", blob);
-                    fd.append("file", blob);
-                    fd.append("upload_preset", uploadPreset!);
-                    return fd;
-                })(),
+                body: cloudinaryForm,
             }
         );
 
-        const data = await cloudinaryRes.json();
+        const data = await uploadRes.json();
 
         if (!data.secure_url) {
             return NextResponse.json(
-                { error: "Upload failed" },
+                { error: data.error?.message || "Upload failed" },
                 { status: 500 }
             );
         }
@@ -47,6 +51,7 @@ export async function POST(request: Request) {
             publicId: data.public_id,
         });
     } catch (error) {
+        console.error(error);
         return NextResponse.json({ error: "Server error" }, { status: 500 });
     }
 }

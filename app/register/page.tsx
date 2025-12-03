@@ -2,9 +2,9 @@
 
 import BackgroundImage from "@/assets/photos/background-image.png";
 import Logo from "@/assets/photos/Logo.png";
-import Button from "@/component/Button/Button";
-import Form from "@/component/Form/Form";
-import Input from "@/component/Input/Input";
+import Button from "@/component/atoms/Button/Button";
+import Form from "@/component/atoms/Form/Form";
+import Input from "@/component/atoms/Input/Input";
 import { useRegister } from "@/src/apis/auth";
 import Image from "next/image";
 import z from "zod";

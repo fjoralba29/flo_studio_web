@@ -3,12 +3,12 @@
 import Image from "next/image";
 import Image11 from "@/assets/photos/image11.png";
 import Image38 from "@/assets/photos/image38.png";
-import Button from "@/component/Button/Button";
+import Button from "@/component/atoms/Button/Button";
 import { useUserStore } from "@/src/store/userStore";
-import Gallery from "@/component/Gallery/Gallery";
-import UrlWithDownload from "@/component/UrlWithDownload/UrlWithDownload";
-import UserHeader from "@/component/Header/UserHeader";
-import UserFooter from "@/component/Footer/UserFooter";
+import Gallery from "@/component/molecules/Gallery/Gallery";
+import UrlWithDownload from "@/component/molecules/UrlWithDownload/UrlWithDownload";
+import UserHeader from "@/component/molecules/Header/UserHeader";
+import UserFooter from "@/component/molecules/Footer/UserFooter";
 
 const UserProfile = () => {
     const { user } = useUserStore();

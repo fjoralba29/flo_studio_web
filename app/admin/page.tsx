@@ -1,11 +1,11 @@
-import AdminFooter from "@/component/Footer/AdminFooter";
-import AdminHeader from "@/component/Header/AdminHeader";
+"use client";
+
 import Image38 from "@/assets/photos/image38.png";
 import Image5 from "@/assets/photos/image5.png";
 import Image30 from "@/assets/photos/image30.png";
 import Image10 from "@/assets/photos/image10.png";
 import Image7 from "@/assets/photos/image7.png";
-import Cards from "@/component/Cards/Cards";
+import Cards from "@/component/atoms/Cards/Cards";
 
 const AdminDashboard = () => {
     return (
@@ -17,18 +17,27 @@ const AdminDashboard = () => {
                         type={"category"}
                         title='Add collaborations'
                         className='!w-[400px] !h-[300px]'
+                        onClick={() => {
+                            window.location.href = "/admin/page-management";
+                        }}
                     />
                     <Cards
                         photo={Image5.src}
                         type={"category"}
                         title='Add categories'
                         className='!w-[400px] !h-[300px]'
+                        onClick={() => {
+                            window.location.href = "/admin/page-management";
+                        }}
                     />
                     <Cards
                         photo={Image38.src}
                         type={"category"}
                         title='Add services'
                         className='!w-[400px] !h-[300px]'
+                        onClick={() => {
+                            window.location.href = "/admin/services-management";
+                        }}
                     />
                     <Cards
                         photo={Image30.src}
@@ -41,6 +50,9 @@ const AdminDashboard = () => {
                         type={"category"}
                         title='User management'
                         className='!w-[400px] !h-[300px]'
+                        onClick={() => {
+                            window.location.href = "/admin/user-management";
+                        }}
                     />
                 </div>
             </div>

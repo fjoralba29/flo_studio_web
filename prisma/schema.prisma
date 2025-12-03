@@ -37,6 +37,7 @@ model UserEvent {
   event     Event    @relation(fields: [eventId], references: [id])
   eventId   Int
   photos    Photo[] // photos/links uploaded for this user-event
+  urls      String[]
   createdAt DateTime @default(now())
 }
 

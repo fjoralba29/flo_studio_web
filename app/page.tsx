@@ -2,11 +2,11 @@ import Image from "next/image";
 import PrimaryPhoto from "../assets/photos/PrimaryPhoto.png";
 import Logo from "@/assets/photos/Logo.png";
 import Image24 from "@/assets/photos/image24.png";
-import Categories from "@/component/Categories/Categories";
-import Footer from "@/component/Footer/Footer";
-import Collaborations from "@/component/Collaborations/Collaborations";
-import Services from "@/component/Services/Services";
-import Header from "@/component/Header/Header";
+import Categories from "@/component/molecules/Categories/Categories";
+import Footer from "@/component/molecules/Footer/Footer";
+import Collaborations from "@/component/molecules/Collaborations/Collaborations";
+import Services from "@/component/molecules/Services/Services";
+import Header from "@/component/molecules/Header/Header";
 
 export default function Home() {
     return (
