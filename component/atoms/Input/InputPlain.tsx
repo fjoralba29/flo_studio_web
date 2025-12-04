@@ -77,7 +77,7 @@ const InputPlain = ({
                     onFocus={open}
                     onBlur={handleBlur}
                     {...rest}
-                    value={value || ""}
+                    value={value}
                     onChange={handleOnChange}
                 />
                 {type === "password" && (

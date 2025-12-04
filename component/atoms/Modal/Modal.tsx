@@ -64,11 +64,7 @@ const ModalHeader = ({
                         className={cn(
                             "cursor-pointer",
                             "fill-black",
-                            "hover:fill-white",
-                            "min-w-6",
-                            "min-h-6",
-                            "sm:min-w-4",
-                            "sm:min-h-4"
+                            "hover:fill-white"
                         )}
                     />
                 )}
@@ -105,7 +101,7 @@ export const Modal = ({
     //modal header
     header: Header = ModalHeader,
     title = "Title",
-    subtitle = "Subtitle",
+    subtitle = "",
     headerClassName,
     hideHeader = true,
     //modal footer
@@ -122,12 +118,12 @@ export const Modal = ({
 
     const classes = cn(
         "relative",
-        "bg-black",
+        "bg-white",
         "border",
         "border-black",
         "text-black",
         "rounded-md",
-        "overflow-hidden",
+
         "p-5",
         "min-w-[370px]",
         "max-w-[370px]",

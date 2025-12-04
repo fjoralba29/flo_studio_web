@@ -8,7 +8,7 @@ export type ButtonSize = "xs" | "s" | "m";
 
 const buttonThemes: Record<ButtonTheme, string[]> = {
     primary: [
-        "bg-black",
+        "bg-grape",
         "text-white",
         "disabled:bg-[#8695A4]",
         "disabled:text-white",

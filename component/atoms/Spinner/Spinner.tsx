@@ -2,6 +2,7 @@
 
 import { cn } from "@/helpers/cn";
 import SpinnerIcon from "@/assets/icons/SpinnerIcon.svg";
+import Image from "next/image";
 
 const themes = {
     primary: ["fill-white"],
@@ -22,7 +23,13 @@ const Spinner = ({ theme = "primary", className }: SpinnerProps) => {
         className
     );
 
-    return <SpinnerIcon className={classNames} />;
+    return (
+        <Image
+            src={SpinnerIcon}
+            alt='SpinnerIcon'
+            className={classNames}
+        />
+    );
 };
 
 export default Spinner;

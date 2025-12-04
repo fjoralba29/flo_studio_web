@@ -19,3 +19,19 @@ export const useGetUsers = (search: string) => {
         getNextPageParam: (lastPage) => lastPage.nextPage ?? null,
     });
 };
+
+export const getUserById = async (id: number | undefined) => {
+    console.log(id, "idddddd");
+
+    if (!id) return null;
+    const res = await axios.get(`/api/users/${id}`);
+    return res.data;
+};
+
+export const useGetUserById = (id: number | undefined) => {
+    return useQuery({
+        queryKey: ["user", id],
+        queryFn: () => getUserById(id),
+        enabled: !!id, // only fetch if id exists
+    });
+};

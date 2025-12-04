@@ -3,6 +3,7 @@
 import InfinityTable from "@/component/atoms/Table/InfinityTable";
 import { useGetUsers } from "@/src/apis/users";
 import { useSelectedUserStore } from "@/src/store/selectedUser";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const UserManagement = () => {
@@ -14,10 +15,12 @@ const UserManagement = () => {
 
     const setSelectedUser = useSelectedUserStore((s) => s.setSelectedUser);
 
+    const router = useRouter();
+
     const handleRowClick = (row: any) => {
         console.log("Row clicked:", row);
         setSelectedUser(row);
-        window.location.href = `/admin/user-management/${row.id}`;
+        router.push(`/admin/user-management/${row.id}`);
     };
 
     return (

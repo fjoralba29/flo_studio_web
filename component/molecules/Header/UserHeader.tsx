@@ -27,7 +27,8 @@ const UserHeader = () => {
         "/admin/user-management",
     ];
 
-    const showHeader = publicPaths.includes(pathname);
+    // const showHeader = publicPaths.includes(pathname);
+    const showHeader = publicPaths.some((p) => pathname.startsWith(p));
 
     const [open, setOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);

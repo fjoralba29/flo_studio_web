@@ -116,7 +116,9 @@ const DropzoneItemPicture = ({
                 <p className='w-full truncate'>{`${file.name} ${formatFileSize(
                     file.size
                 )}`}</p>
-                <Trash
+                <Image
+                    src={Trash}
+                    alt={"Trash"}
                     onClick={removeFile}
                     className='cursor-pointer fill-secondary-text min-w-4 min-h-4 h-5 w-5'
                 />
