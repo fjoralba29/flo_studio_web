@@ -3,6 +3,8 @@
 import Button from "@/component/atoms/Button/Button";
 import { DropzonePlain } from "@/component/atoms/Dropzone/DropzonePlain";
 import { Modal } from "@/component/atoms/Modal/Modal";
+import { useAddPhotosToUserEvent } from "@/src/apis/addUserData";
+import { useUploadImage } from "@/src/apis/uploadImage";
 import { useAddUserDataStore } from "@/src/store/addUserData";
 
 const AddPhotosModal = () => {
@@ -10,6 +12,38 @@ const AddPhotosModal = () => {
     const setPhotoModalOpen = useAddUserDataStore((s) => s.setPhotoModalOpen);
 
     const setSelectedPhotos = useAddUserDataStore((s) => s.setSelectedPhotos);
+
+    const selectedEventId = useAddUserDataStore((s) => s.selectedEventId);
+    const selectedPhotos = useAddUserDataStore((s) => s.selectedPhotos);
+
+    const addPhotos = useAddPhotosToUserEvent();
+    const uploadImageMutation = useUploadImage();
+
+    const handleAddPhotosForEvent = async () => {
+        // Logic to add photos goes here
+
+        const urls = await Promise.all(
+            selectedPhotos.map(async (base64) => {
+                return await uploadImageMutation.mutateAsync(base64);
+            })
+        );
+
+        // 2️⃣ Transform URLs into Photo objects
+        const photosToAdd = urls.map((url) => ({
+            url,
+            title: "", // optional
+            description: "", // optional
+        }));
+        console.log(photosToAdd, selectedEventId, "photosssss");
+
+        // 3️⃣ Send to your API
+        await addPhotos.mutateAsync({
+            userEventId: selectedEventId as number,
+            photos: photosToAdd,
+        });
+        setPhotoModalOpen(false);
+    };
+
     return (
         <Modal
             title='Add Photos'
@@ -24,12 +58,17 @@ const AddPhotosModal = () => {
                     outputType='base64'
                     onChange={(value) => {
                         console.log("dropzone value", value);
-                        setSelectedPhotos(value);
+                        setSelectedPhotos(value as string[]);
                     }}
                     multiSelect
                     maxFilesCount={5}
                 />
-                <Button theme='primary'>Add Photos</Button>
+                <Button
+                    theme='primary'
+                    onClick={handleAddPhotosForEvent}
+                >
+                    Add Photos
+                </Button>
             </div>
         </Modal>
     );

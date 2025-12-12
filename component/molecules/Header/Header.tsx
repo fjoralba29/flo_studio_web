@@ -21,6 +21,7 @@ const Header = () => {
         "/portfolio",
         "/contact",
         "/user-profile",
+        "/about",
     ];
 
     const showHeader = publicPaths.includes(pathname);
@@ -65,7 +66,7 @@ const Header = () => {
                 />
                 <div className='flex gap-[90px] items-center'>
                     <a
-                        href='/'
+                        href='/about'
                         className='text-white navbar'
                     >
                         About
@@ -119,12 +120,21 @@ const Header = () => {
                                 {user ? (
                                     <>
                                         <li>
-                                            <a
-                                                href='/user-profile'
-                                                className='block px-4 py-2 hover:bg-gray-100 rounded'
-                                            >
-                                                Profile
-                                            </a>
+                                            {user.type === "User" ? (
+                                                <a
+                                                    href='/user-profile'
+                                                    className='block px-4 py-2 hover:bg-gray-100 rounded'
+                                                >
+                                                    Profile
+                                                </a>
+                                            ) : (
+                                                <a
+                                                    href='/admin'
+                                                    className='block px-4 py-2 hover:bg-gray-100 rounded'
+                                                >
+                                                    Admin Profile
+                                                </a>
+                                            )}
                                         </li>
                                         <li>
                                             <button

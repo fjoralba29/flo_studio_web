@@ -9,8 +9,22 @@ import Whatsapp from "@/assets/icons/Whatsapp.svg";
 import Form from "../../atoms/Form/Form";
 import InputPlain from "../../atoms/Input/InputPlain";
 import Button from "../../atoms/Button/Button";
+import Input from "@/component/atoms/Input/Input";
+import { useLogin } from "@/src/apis/auth";
+import z from "zod";
 
 const Footer = () => {
+    const { mutate: loginUser } = useLogin();
+
+    const formSchema = z.object({
+        email: z.string().email("Invalid email address"),
+        password: z.string().min(6, "Password must be at least 6 characters"),
+    }); // Define your form schema here
+
+    const handleSubmit = (data: any) => {
+        console.log(data);
+        loginUser(data);
+    };
     return (
         <div className='bg-grape flex justify-between items-center px-[100px] py-[50px] text-white'>
             <div className='flex flex-col gap-[20px]'>
@@ -60,21 +74,42 @@ const Footer = () => {
                 </div>
             </div>
             <div className='flex flex-col gap-[40px] items-center min-w-[400px]'>
-                <div className='info-text'>JOIN NOW</div>
-                <div className='flex flex-col gap-[20px] w-full items-center'>
-                    <InputPlain placeholder='Username' />
-                    <InputPlain placeholder='Password' />
-                    <Button
-                        theme='primary'
-                        size='m'
-                        className='w-full'
-                    >
-                        Log In
-                    </Button>
-                    <div className='flex gap-[5px] info-subtext'>
-                        Don't have an account?<a>Sign Up</a>
+                <Form
+                    onSubmit={handleSubmit}
+                    defaultValues={{}}
+                    schema={formSchema}
+                    className='flex flex-col gap-[20px] text-white min-w-[400px] '
+                    resetOnSubmit
+                >
+                    <div className='section-title text-center'>Log in</div>
+                    <Input
+                        name='email'
+                        label='Email'
+                    />
+                    <Input
+                        name='password'
+                        label='Password'
+                        type='password'
+                    />
+                    <div className='flex flex-col gap-[5px]'>
+                        <Button
+                            type='submit'
+                            theme='primary'
+                            className='!!bg-lila'
+                        >
+                            Login
+                        </Button>
+                        <div className='flex items-center justify-center gap-[5px] text-sm '>
+                            <div>Don't have an account?</div>
+                            <a
+                                className='font-bold'
+                                href='/register'
+                            >
+                                Register
+                            </a>
+                        </div>
                     </div>
-                </div>
+                </Form>
             </div>
         </div>
     );

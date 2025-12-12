@@ -18,22 +18,32 @@ const EventsMenu = ({ events }: EventProp) => {
     const { type } = user || {};
 
     const setEventModalOpen = useAddUserDataStore((s) => s.setEventModalOpen);
-    const setSelectedEvent = useAddUserDataStore((s) => s.setSelectedEvent);
+    const setSelectedEventId = useAddUserDataStore((s) => s.setSelectedEventId);
+
+    const selectedEventId = useAddUserDataStore((s) => s.selectedEventId);
+    console.log(selectedEventId, "event");
 
     return (
         <div className='flex bg-grey-light justify-between  gap-[20px] p-[20px] rounded-lg'>
             <div className='flex gap-[20px]'>
                 {events?.map((event: any, index: number) => (
-                    <Button
-                        theme='tertiary'
-                        key={index}
-                        onClick={() => {
-                            console.log("Event clicked:", event);
-                            setSelectedEvent(event);
-                        }}
-                    >
-                        {event.event.name}
-                    </Button>
+                    <div className='flex gap-[5px] w-full'>
+                        <Button
+                            theme={
+                                selectedEventId === event.id
+                                    ? "primary"
+                                    : "tertiary"
+                            }
+                            key={index}
+                            onClick={() => {
+                                console.log("Event clicked:", event.id);
+                                setSelectedEventId(event.id);
+                            }}
+                        >
+                            {event.event.name}
+                        </Button>
+                        <Button theme='ghost'>🗑️</Button>
+                    </div>
                 ))}
             </div>
             {type === "Admin" && (

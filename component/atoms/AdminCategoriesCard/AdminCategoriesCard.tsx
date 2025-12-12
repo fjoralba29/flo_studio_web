@@ -4,11 +4,19 @@ type CardProps = {
     title: string;
     description: string;
     image?: string;
+    className?: string;
 };
 
-const AdminCategoriesCard = ({ title, description, image }: CardProps) => {
+const AdminCategoriesCard = ({
+    title,
+    description,
+    image,
+    className,
+}: CardProps) => {
     return (
-        <div className='flex items-center bg-white shadow-xs rounded-xl overflow-hidden  h-[100px] hover:shadow-sm transition-shadow duration-300'>
+        <div
+            className={`flex items-center bg-white shadow-xs rounded-xl overflow-hidden  h-[100px] hover:shadow-sm transition-shadow duration-300 ${className}`}
+        >
             {/* Image */}
             {image && (
                 <div className='flex-shrink-0 w-32  h-32 relative'>

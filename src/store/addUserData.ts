@@ -2,31 +2,19 @@ import { create } from "zustand";
 import { Event, User } from "@prisma/client";
 
 interface UserDataStore {
-    selectedEvent: Event | null;
-    setSelectedEvent: (event: Event) => void;
+    selectedEvent: string | undefined;
+    selectedEventId: number | undefined;
+    setSelectedEventId: (id: number) => void;
+    resetSelectedEventId: () => void;
+    setSelectedEvent: (event: string) => void;
     resetSelectedEvent: () => void;
 
     isEventModalOpen: boolean;
     setEventModalOpen: (isOpen: boolean) => void;
 
-    selectedPhotos:
-        | string
-        | string[]
-        | File
-        | File[]
-        | ArrayBuffer
-        | ArrayBuffer[]
-        | undefined;
-    setSelectedPhotos: (
-        photos:
-            | string
-            | string[]
-            | File
-            | File[]
-            | ArrayBuffer
-            | ArrayBuffer[]
-            | undefined
-    ) => void;
+    selectedPhotos: string[];
+
+    setSelectedPhotos: (photos: string[]) => void;
     resetSelectedPhotos: () => void;
 
     isPhotoModalOpen: boolean;
@@ -45,9 +33,12 @@ interface UserDataStore {
 }
 
 export const useAddUserDataStore = create<UserDataStore>((set) => ({
-    selectedEvent: null,
-    setSelectedEvent: (event) => set({ selectedEvent: event }),
-    resetSelectedEvent: () => set({ selectedEvent: null }),
+    selectedEvent: "",
+    setSelectedEvent: (eventName) => set({ selectedEvent: eventName }),
+    resetSelectedEvent: () => set({ selectedEvent: undefined }),
+    selectedEventId: undefined,
+    setSelectedEventId: (id) => set({ selectedEventId: id }),
+    resetSelectedEventId: () => set({ selectedEventId: undefined }),
     isEventModalOpen: false,
     setEventModalOpen: (isOpen) => set({ isEventModalOpen: isOpen }),
 

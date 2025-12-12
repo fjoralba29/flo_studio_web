@@ -1,6 +1,8 @@
 "use client";
 
 import Download from "@/assets/icons/Download.svg";
+import Button from "@/component/atoms/Button/Button";
+import { useUserStore } from "@/src/store/userStore";
 import Image from "next/image";
 
 interface UrlWithDownloadProps {
@@ -8,11 +10,16 @@ interface UrlWithDownloadProps {
 }
 
 export default function UrlWithDownload({ urls }: UrlWithDownloadProps) {
+    console.log(urls, "urlss");
+    const user = useUserStore((state) => state.user);
+    const { type } = user || {};
+
     return (
         <div className='space-y-2'>
             {urls.length > 0 ? (
                 urls.map((item, idx) => {
-                    const fileName = item.url.split("/").pop() || "download";
+                    const fileName = item.url?.split("/").pop() || "download";
+                    console.log(item, "itemmmm");
 
                     return (
                         <div
@@ -41,6 +48,9 @@ export default function UrlWithDownload({ urls }: UrlWithDownloadProps) {
                                     className='w-5 h-5 text-gray-700'
                                 />
                             </a>
+                            {type === "Admin" && (
+                                <Button theme='ghost'>🗑️</Button>
+                            )}
                         </div>
                     );
                 })

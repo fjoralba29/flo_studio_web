@@ -18,9 +18,20 @@ const UserDetailsPage = () => {
     const params = useParams();
     const userId = Number(params.id);
 
+    const selectedEventId = useAddUserDataStore((s) => s.selectedEventId);
+
     const { data: userData = {} } = useGetUserById(userId);
     console.log(userData);
     const { name, email, phone, events = [] } = userData;
+
+    const photos =
+        events.find((e: any) => e.id === selectedEventId)?.photos || [];
+    const photosUrls = Array.from(photos.map((p: any) => p.url)) || [];
+    const urls = events.find((e: any) => e.id === selectedEventId)?.urls || [];
+    const formattedUrls = urls.map((item: string) => ({ url: item }));
+    console.log(urls, "urlss from api ");
+
+    // const urlsUrls = urls.map((u: any) => (u.label = u.url)) || [];
 
     const setPhotoModalOpen = useAddUserDataStore((s) => s.setPhotoModalOpen);
     const setUrlsModalOpen = useAddUserDataStore((s) => s.setUrlsModalOpen);
@@ -80,7 +91,7 @@ const UserDetailsPage = () => {
                                 Add Photos
                             </Button>
                         </div>
-                        <Gallery images={[]} />
+                        <Gallery images={photosUrls as string[]} />
                     </div>
                     <div className='w-[30%] flex flex-col gap-[10px]'>
                         <div className='flex justify-between items-center '>
@@ -93,7 +104,7 @@ const UserDetailsPage = () => {
                                 Add Urls
                             </Button>
                         </div>
-                        <UrlWithDownload urls={[]} />
+                        <UrlWithDownload urls={formattedUrls} />
                     </div>
                 </div>
             </div>

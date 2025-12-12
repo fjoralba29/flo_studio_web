@@ -4,6 +4,7 @@ import Button from "@/component/atoms/Button/Button";
 import { DropzonePlain } from "@/component/atoms/Dropzone/DropzonePlain";
 import InputPlain from "@/component/atoms/Input/InputPlain";
 import { Modal } from "@/component/atoms/Modal/Modal";
+import { useAddUrlsToUserEvent } from "@/src/apis/addUserData";
 import { useAddUserDataStore } from "@/src/store/addUserData";
 import { useState } from "react";
 import { set } from "zod";
@@ -15,7 +16,17 @@ const AddUrlsModal = () => {
 
     const setSelectedUrls = useAddUserDataStore((s) => s.setSelectedUrls);
     const selectedUrls = useAddUserDataStore((s) => s.selectedUrls);
+    const selectedEventId = useAddUserDataStore((s) => s.selectedEventId);
     console.log(value, "value");
+    const addUrls = useAddUrlsToUserEvent();
+
+    const handleAddUrls = () => {
+        addUrls.mutateAsync({
+            userEventId: selectedEventId as number,
+            urls: selectedUrls,
+        });
+        setUrlsModalOpen(false);
+    };
 
     return (
         <Modal
@@ -48,10 +59,15 @@ const AddUrlsModal = () => {
                 </div>
                 <div className='text-gray-700'>
                     {selectedUrls.map((url, index) => (
-                        <div>{url}</div>
+                        <div key={index}>{url}</div>
                     ))}
                 </div>
-                <Button theme='primary'>Add Urls</Button>
+                <Button
+                    theme='primary'
+                    onClick={handleAddUrls}
+                >
+                    Add Urls
+                </Button>
             </div>
         </Modal>
     );

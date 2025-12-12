@@ -1,7 +1,7 @@
 import Image from "next/image";
 import PrimaryPhoto from "../assets/photos/PrimaryPhoto.png";
 import Logo from "@/assets/photos/Logo.png";
-import Image24 from "@/assets/photos/image24.png";
+import Image11 from "@/assets/photos/image11.png";
 import Categories from "@/component/molecules/Categories/Categories";
 import Footer from "@/component/molecules/Footer/Footer";
 import Collaborations from "@/component/molecules/Collaborations/Collaborations";
@@ -51,7 +51,7 @@ export default function Home() {
 
             <div className='bg-lila text-white flex flex-col py-[50px] px-[100px] items-center gap-[20px]'>
                 <div className='info-text'>YOUR PERSONAL PROFILE</div>
-                <div className='flex items-center justify-between gap-[100px]'>
+                <div className='flex items-center justify-between gap-[20px]'>
                     <div className='flex flex-col gap-[50px] info-subtext'>
                         When you log in, you’ll have access to your own private
                         profile — a secure space where all your wedding memories
@@ -73,8 +73,9 @@ export default function Home() {
                         </p>
                     </div>
                     <Image
-                        src={Image24}
+                        src={Image11}
                         alt='Image'
+                        width={500}
                     />
                 </div>
             </div>
