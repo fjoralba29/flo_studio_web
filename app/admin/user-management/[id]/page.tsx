@@ -1,8 +1,6 @@
 "use client";
 
-import { useSelectedUserStore } from "@/src/store/selectedUser";
 import Image from "next/image";
-import Image11 from "@/assets/photos/image11.png";
 import EventsMenu from "@/component/molecules/EventsMenu/EventsMenu";
 import Button from "@/component/atoms/Button/Button";
 import Gallery from "@/component/molecules/Gallery/Gallery";
@@ -21,7 +19,6 @@ const UserDetailsPage = () => {
     const selectedEventId = useAddUserDataStore((s) => s.selectedEventId);
 
     const { data: userData = {} } = useGetUserById(userId);
-    console.log(userData);
     const { name, email, phone, events = [] } = userData;
 
     const photos =
@@ -29,7 +26,6 @@ const UserDetailsPage = () => {
     const photosUrls = Array.from(photos.map((p: any) => p.url)) || [];
     const urls = events.find((e: any) => e.id === selectedEventId)?.urls || [];
     const formattedUrls = urls.map((item: string) => ({ url: item }));
-    console.log(urls, "urlss from api ");
 
     // const urlsUrls = urls.map((u: any) => (u.label = u.url)) || [];
 
@@ -41,9 +37,10 @@ const UserDetailsPage = () => {
             <div className='h-full p-5 flex flex-col gap-[30px]'>
                 <div className='flex items-end gap-[100px]'>
                     <Image
-                        src={Image11}
+                        src={"/photos/image11.png"}
                         alt='Profile'
                         width={150}
+                        height={150}
                         className='rounded-lg border border-white border-4 shadow-lg'
                     />
 

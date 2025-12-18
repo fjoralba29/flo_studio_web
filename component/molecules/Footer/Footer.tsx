@@ -1,5 +1,6 @@
+"use client";
+
 import Image from "next/image";
-import Logo from "@/assets/photos/Logo.png";
 import Location from "@/assets/icons/Location.svg";
 import Phone from "@/assets/icons/Phone.svg";
 import Email from "@/assets/icons/Email.svg";
@@ -7,7 +8,6 @@ import Web from "@/assets/icons/Web.svg";
 import InstagramFill from "@/assets/icons/InstagramFill.svg";
 import Whatsapp from "@/assets/icons/Whatsapp.svg";
 import Form from "../../atoms/Form/Form";
-import InputPlain from "../../atoms/Input/InputPlain";
 import Button from "../../atoms/Button/Button";
 import Input from "@/component/atoms/Input/Input";
 import { useLogin } from "@/src/apis/auth";
@@ -22,14 +22,13 @@ const Footer = () => {
     }); // Define your form schema here
 
     const handleSubmit = (data: any) => {
-        console.log(data);
         loginUser(data);
     };
     return (
         <div className='bg-grape flex justify-between items-center px-[100px] py-[50px] text-white'>
             <div className='flex flex-col gap-[20px]'>
                 <Image
-                    src={Logo}
+                    src={"/photos/Logo.png"}
                     alt='Logo'
                     width={120}
                     height={120}

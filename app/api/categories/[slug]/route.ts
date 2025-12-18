@@ -1,14 +1,18 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { CategoryType, PrismaClient } from "@prisma/client";
 import { v2 as cloudinary } from "cloudinary";
 import { prisma } from "@/lib/prisma";
+export const runtime = "nodejs";
 
-// Configure Cloudinary
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+async function getCloudinary() {
+    const { v2: cloudinary } = await import("cloudinary");
+    cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+    });
+    return cloudinary;
+}
 
 function extractPublicId(url: string): string | null {
     try {
@@ -26,10 +30,10 @@ function extractPublicId(url: string): string | null {
 
 // GET: Fetch categories by type
 export async function GET(
-    req: Request,
-    { params }: { params: { slug: string } }
+    req: NextRequest,
+    context: { params: Promise<{ slug: string }> }
 ) {
-    const { slug } = await params;
+    const { slug } = await context.params;
 
     // Check if slug is a valid CategoryType
 
@@ -59,11 +63,12 @@ export async function GET(
 
 // DELETE: Delete category by ID
 export async function DELETE(
-    req: Request,
-    { params }: { params: { slug: string } }
+    req: NextRequest,
+    context: { params: Promise<{ slug: string }> }
 ) {
-    const { slug } = await params;
+    const { slug } = await context.params;
     const id = Number(slug);
+    const cloudinary = await getCloudinary();
 
     if (isNaN(id)) {
         return NextResponse.json(

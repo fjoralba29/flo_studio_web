@@ -12,7 +12,6 @@ const AddEventModal = () => {
 
     const setSelectedEvent = useAddUserDataStore((s) => s.setSelectedEvent);
     const selectedEvent = useAddUserDataStore((s) => s.selectedEvent);
-    console.log(selectedEvent, "selectedEvent");
     const params = useParams();
     const userId = Number(params.id);
 

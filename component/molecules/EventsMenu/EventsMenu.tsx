@@ -21,7 +21,6 @@ const EventsMenu = ({ events }: EventProp) => {
     const setSelectedEventId = useAddUserDataStore((s) => s.setSelectedEventId);
 
     const selectedEventId = useAddUserDataStore((s) => s.selectedEventId);
-    console.log(selectedEventId, "event");
 
     return (
         <div className='flex bg-grey-light justify-between  gap-[20px] p-[20px] rounded-lg'>
@@ -36,7 +35,6 @@ const EventsMenu = ({ events }: EventProp) => {
                             }
                             key={index}
                             onClick={() => {
-                                console.log("Event clicked:", event.id);
                                 setSelectedEventId(event.id);
                             }}
                         >

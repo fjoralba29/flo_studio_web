@@ -1,9 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 // DELETE /api/services/:id
 export async function DELETE(
-    req: Request,
+    req: NextRequest,
     context: { params: Promise<{ id: string }> } // params is a Promise in App Router
 ) {
     try {

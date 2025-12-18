@@ -34,7 +34,6 @@ const AddPhotosModal = () => {
             title: "", // optional
             description: "", // optional
         }));
-        console.log(photosToAdd, selectedEventId, "photosssss");
 
         // 3️⃣ Send to your API
         await addPhotos.mutateAsync({
@@ -57,7 +56,6 @@ const AddPhotosModal = () => {
                     listType={"picture-card"}
                     outputType='base64'
                     onChange={(value) => {
-                        console.log("dropzone value", value);
                         setSelectedPhotos(value as string[]);
                     }}
                     multiSelect

@@ -7,7 +7,6 @@ const AdminServicesPanel = () => {
     const mutateDelete = useDeleteService();
 
     const handleDeleteService = (id: number) => {
-        console.log(id);
         mutateDelete.mutate(id);
     };
 

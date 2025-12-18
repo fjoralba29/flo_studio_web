@@ -1,22 +1,31 @@
 import Image from "next/image";
-import PrimaryPhoto from "../assets/photos/PrimaryPhoto.png";
-import Logo from "@/assets/photos/Logo.png";
-import Image11 from "@/assets/photos/image11.png";
-import Categories from "@/component/molecules/Categories/Categories";
-import Footer from "@/component/molecules/Footer/Footer";
-import Collaborations from "@/component/molecules/Collaborations/Collaborations";
-import Services from "@/component/molecules/Services/Services";
 import Header from "@/component/molecules/Header/Header";
+
+import Footer from "@/component/molecules/Footer/Footer";
+
+import dynamic from "next/dynamic";
+
+const Services = dynamic(
+    () => import("@/component/molecules/Services/Services")
+);
+const Categories = dynamic(
+    () => import("@/component/molecules/Categories/Categories")
+);
+const Collaborations = dynamic(
+    () => import("@/component/molecules/Collaborations/Collaborations")
+);
 
 export default function Home() {
     return (
         <>
+            <Header />
             <div className='relative'>
                 <Image
-                    src={PrimaryPhoto}
+                    src={"/photos/PrimaryPhoto.png"}
                     alt='Logo'
                     className='w-full'
-                    height={770}
+                    width={1920}
+                    height={1080}
                 />
                 <div className='absolute top-[450px] left-0 right-0 text-center text-white flex flex-col gap-[5px]'>
                     <h1>ART STARTS RIGHT HERE</h1>
@@ -38,7 +47,7 @@ export default function Home() {
                 </div>
                 <div>
                     <Image
-                        src={Logo}
+                        src={"/photos/Logo.png"}
                         alt='Logo'
                         width={458}
                         height={324}
@@ -73,12 +82,14 @@ export default function Home() {
                         </p>
                     </div>
                     <Image
-                        src={Image11}
+                        src={"/photos/image11.png"}
                         alt='Image'
                         width={500}
+                        height={500}
                     />
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

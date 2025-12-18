@@ -63,7 +63,7 @@ export async function POST(
 }
 
 export async function DELETE(
-    req: Request,
+    req: NextRequest,
     { params }: { params: Promise<{ userEventId: string }> }
 ) {
     const { userEventId } = await params;

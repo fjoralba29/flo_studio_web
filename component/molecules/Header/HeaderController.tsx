@@ -1,10 +1,12 @@
 "use client";
 
 import { useUserStore } from "@/src/store/userStore";
-import UserHeader from "./UserHeader";
-import Header from "./Header";
-import AdminHeader from "./AdminHeader";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
+
+const Header = dynamic(() => import("./Header"), { ssr: false });
+const UserHeader = dynamic(() => import("./UserHeader"), { ssr: false });
+const AdminHeader = dynamic(() => import("./AdminHeader"), { ssr: false });
 
 const publicPaths = ["/", "/wedding", "/portfolio", "/contact", "/about"];
 

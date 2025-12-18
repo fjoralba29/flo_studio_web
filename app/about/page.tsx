@@ -9,7 +9,7 @@ const AboutPage = () => {
                 <div
                     className='bg-gradient-to-b from-purple-400 to-white w-full bg-cover bg-center h-[400px]'
                     style={{
-                        backgroundImage: `url(${Image38.src}) `,
+                        backgroundImage: `url(${"/photos/image7.png"}) `,
                     }}
                 />
 

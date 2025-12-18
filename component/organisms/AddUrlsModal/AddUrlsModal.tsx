@@ -17,7 +17,6 @@ const AddUrlsModal = () => {
     const setSelectedUrls = useAddUserDataStore((s) => s.setSelectedUrls);
     const selectedUrls = useAddUserDataStore((s) => s.selectedUrls);
     const selectedEventId = useAddUserDataStore((s) => s.selectedEventId);
-    console.log(value, "value");
     const addUrls = useAddUrlsToUserEvent();
 
     const handleAddUrls = () => {
@@ -41,8 +40,6 @@ const AddUrlsModal = () => {
                     <InputPlain
                         value={value}
                         onChange={(value) => {
-                            console.log("value changed", value);
-
                             setValue(value);
                         }}
                     />

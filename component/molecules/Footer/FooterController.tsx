@@ -1,10 +1,12 @@
 "use client";
 
 import { useUserStore } from "@/src/store/userStore";
-import UserFooter from "./UserFooter";
-import Footer from "./Footer";
-import AdminFooter from "./AdminFooter";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
+
+const Footer = dynamic(() => import("./Footer"), { ssr: false });
+const UserFooter = dynamic(() => import("./UserFooter"), { ssr: false });
+const AdminFooter = dynamic(() => import("./AdminFooter"), { ssr: false });
 
 const publicPaths = ["/", "/wedding", "/portfolio", "/contact", "/about"];
 

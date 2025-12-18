@@ -14,7 +14,6 @@ export async function POST(req: NextRequest) {
                 { status: 404 }
             );
         }
-        console.log(user);
 
         const valid = await bcrypt.compare(password, user.password);
         if (!valid) {

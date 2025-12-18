@@ -10,7 +10,6 @@ interface UrlWithDownloadProps {
 }
 
 export default function UrlWithDownload({ urls }: UrlWithDownloadProps) {
-    console.log(urls, "urlss");
     const user = useUserStore((state) => state.user);
     const { type } = user || {};
 
@@ -19,7 +18,6 @@ export default function UrlWithDownload({ urls }: UrlWithDownloadProps) {
             {urls.length > 0 ? (
                 urls.map((item, idx) => {
                     const fileName = item.url?.split("/").pop() || "download";
-                    console.log(item, "itemmmm");
 
                     return (
                         <div

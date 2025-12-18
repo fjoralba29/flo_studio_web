@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+export const runtime = "nodejs";
+
 export async function POST(request: Request) {
     try {
         const body = await request.json();
@@ -31,14 +33,22 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-    try {
-        const services = await prisma.service.findMany({
-            orderBy: { createdAt: "desc" },
-        });
+    console.time("TOTAL");
 
-        return NextResponse.json(services);
+    try {
+        console.time("DB");
+        const services = await prisma.service.findMany();
+        console.timeEnd("DB");
+
+        console.time("RESPONSE");
+        const res = NextResponse.json(services);
+        console.timeEnd("RESPONSE");
+
+        console.timeEnd("TOTAL");
+        return res;
     } catch (error) {
         console.error(error);
+        console.timeEnd("TOTAL");
         return NextResponse.json(
             { error: "Failed to fetch services" },
             { status: 500 }

@@ -1,10 +1,5 @@
 "use client";
 
-import Image38 from "@/assets/photos/image38.png";
-import Image5 from "@/assets/photos/image5.png";
-import Image30 from "@/assets/photos/image30.png";
-import Image10 from "@/assets/photos/image10.png";
-import Image7 from "@/assets/photos/image7.png";
 import Cards from "@/component/atoms/Cards/Cards";
 
 const AdminDashboard = () => {
@@ -13,7 +8,7 @@ const AdminDashboard = () => {
             <div className='p-5 flex flex-col gap-10 items-center'>
                 <div className=' grid grid-cols-3 items-center justify-center gap-5'>
                     <Cards
-                        photo={Image7.src}
+                        photo={"/photos/image7.png"}
                         type={"category"}
                         title='Add collaborations'
                         className='!w-[400px] !h-[300px]'
@@ -22,7 +17,7 @@ const AdminDashboard = () => {
                         }}
                     />
                     <Cards
-                        photo={Image5.src}
+                        photo={"/photos/image5.png"}
                         type={"category"}
                         title='Add categories'
                         className='!w-[400px] !h-[300px]'
@@ -31,7 +26,7 @@ const AdminDashboard = () => {
                         }}
                     />
                     <Cards
-                        photo={Image38.src}
+                        photo={"/photos/image38.png"}
                         type={"category"}
                         title='Add services'
                         className='!w-[400px] !h-[300px]'
@@ -40,13 +35,13 @@ const AdminDashboard = () => {
                         }}
                     />
                     <Cards
-                        photo={Image30.src}
+                        photo={"/photos/image30.png"}
                         type={"category"}
                         title='Add weddings'
                         className='!w-[400px] !h-[300px]'
                     />
                     <Cards
-                        photo={Image10.src}
+                        photo={"/photos/image10.png"}
                         type={"category"}
                         title='User management'
                         className='!w-[400px] !h-[300px]'

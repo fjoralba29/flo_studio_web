@@ -69,3 +69,15 @@ export const useDeleteCategory = () => {
         },
     });
 };
+
+export const getCategories = async () => {
+    const res = await axios.get(`/api/categories`);
+    return res.data;
+};
+
+export const useGetCategories = () => {
+    return useQuery({
+        queryKey: ["categories"],
+        queryFn: getCategories,
+    });
+};

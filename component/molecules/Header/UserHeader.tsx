@@ -57,7 +57,6 @@ const UserHeader = () => {
         // Then redirect to login page
         logoutUser();
     };
-    console.log(user);
 
     return (
         showHeader && (

@@ -1,7 +1,5 @@
 "use client";
 
-import BackgroundImage from "@/assets/photos/background-image.png";
-import Logo from "@/assets/photos/Logo.png";
 import Button from "@/component/atoms/Button/Button";
 import Form from "@/component/atoms/Form/Form";
 import Input from "@/component/atoms/Input/Input";
@@ -18,14 +16,13 @@ const Login = () => {
     }); // Define your form schema here
 
     const handleSubmit = (data: any) => {
-        console.log(data);
         loginUser(data);
     };
     return (
         <div
             className='w-full h-full bg-cover bg-center flex gap-4 justify-between items-center p-40'
             style={{
-                backgroundImage: `url(${BackgroundImage.src}) `,
+                backgroundImage: `url("/photos/background-image.png") `,
             }}
         >
             <Form
@@ -64,7 +61,7 @@ const Login = () => {
                 </div>
             </Form>
             <Image
-                src={Logo}
+                src={"/photos/Logo.png"}
                 alt='Background Image'
                 width={500}
             />

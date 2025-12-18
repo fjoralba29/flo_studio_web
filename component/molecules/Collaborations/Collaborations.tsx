@@ -1,13 +1,16 @@
 "use client";
 
-import Cards from "../../atoms/Cards/Cards";
-import { useGetCategoriesByType } from "@/src/apis/categories";
 import { CategoryType } from "@prisma/client";
+import Cards from "../../atoms/Cards/Cards";
+import { useGetCategories } from "@/src/apis/categories";
 
 const Collaborations = () => {
-    const { data: collaborations = [] } = useGetCategoriesByType(
-        CategoryType.Collaboration
+    const { data } = useGetCategories();
+
+    const collaborations = data?.filter(
+        (category: any) => category.type === CategoryType.Collaboration
     );
+
     return (
         <div className='px-[153px] py-[65px] flex flex-col items-center gap-[40px]'>
             <div className='text-center flex flex-col gap-[10px]'>
@@ -26,30 +29,6 @@ const Collaborations = () => {
                         type={"collaboration"}
                     />
                 ))}
-                {/* <Cards
-                    photo={Image4.src}
-                    title='MODELS'
-                    description='29/10/2025'
-                    type={"collaboration"}
-                />
-                <Cards
-                    photo={Image5.src}
-                    title='FOOD'
-                    description='29/10/2025'
-                    type={"collaboration"}
-                />
-                <Cards
-                    photo={Image15.src}
-                    title='ARCHITECTURE'
-                    description='29/10/2025'
-                    type={"collaboration"}
-                />
-                <Cards
-                    photo={Image7.src}
-                    title='FII INSTITUTE'
-                    description='29/10/2025'
-                    type={"collaboration"}
-                /> */}
             </div>
         </div>
     );

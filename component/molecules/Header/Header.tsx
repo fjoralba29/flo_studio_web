@@ -2,10 +2,11 @@
 
 import Instagram from "@/assets/icons/Instagram.svg";
 import User from "@/assets/icons/User.svg";
-import Logo from "@/assets/photos/Logo.png";
+
+import { useClickedOutside } from "@/helpers/useClickedOutside";
+import { useDisclosure } from "@/helpers/useDisclosure";
 import { useLogout } from "@/src/apis/auth";
 import { useUserStore } from "@/src/store/userStore";
-import { log } from "console";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -33,27 +34,35 @@ const Header = () => {
 
     const { mutate: logoutUser } = useLogout();
 
-    // Close dropdown if clicked outside
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (
-                menuRef.current &&
-                !menuRef.current.contains(event.target as Node)
-            ) {
-                setOpen(false);
-            }
-        };
-        document.addEventListener("mousedown", handleClickOutside);
-        return () =>
-            document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+    // // Close dropdown if clicked outside
+    // useEffect(() => {
+    //     const handleClickOutside = (event: MouseEvent) => {
+    //         if (
+    //             menuRef.current &&
+    //             !menuRef.current.contains(event.target as Node)
+    //         ) {
+    //             setOpen(false);
+    //         }
+    //     };
+    //     document.addEventListener("mousedown", handleClickOutside);
+    //     return () =>
+    //         document.removeEventListener("mousedown", handleClickOutside);
+    // }, []);
+
+    const {
+        isOpen: dropdownOpen,
+        close: closeDropdown,
+        toggle: toggleDropdown,
+    } = useDisclosure();
+    const { setRef } = useClickedOutside(toggleDropdown, dropdownOpen);
 
     const handleLogout = () => {
         // Clear user session logic here (e.g., remove token from storage)
         // Then redirect to login page
+
         logoutUser();
+        closeDropdown();
     };
-    console.log(user);
 
     return (
         showHeader && (
@@ -79,7 +88,7 @@ const Header = () => {
                     </a>
                     <a href='/'>
                         <Image
-                            src={Logo}
+                            src={"/photos/Logo.png"}
                             alt='Logo'
                             width={60}
                             height={60}
@@ -104,7 +113,7 @@ const Header = () => {
                 >
                     <div
                         className='cursor-pointer'
-                        onClick={() => setOpen(!open)}
+                        onClick={toggleDropdown}
                     >
                         <Image
                             src={User}
@@ -114,8 +123,11 @@ const Header = () => {
                         />
                     </div>
 
-                    {open && (
-                        <div className='absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg z-50'>
+                    {dropdownOpen && (
+                        <div
+                            className='absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg z-50'
+                            ref={setRef}
+                        >
                             <ul className='flex flex-col p-2'>
                                 {user ? (
                                     <>

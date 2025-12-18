@@ -1,14 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import Image11 from "@/assets/photos/image11.png";
-import Image38 from "@/assets/photos/image38.png";
+
 import Button from "@/component/atoms/Button/Button";
 import { useUserStore } from "@/src/store/userStore";
 import Gallery from "@/component/molecules/Gallery/Gallery";
 import UrlWithDownload from "@/component/molecules/UrlWithDownload/UrlWithDownload";
-import UserHeader from "@/component/molecules/Header/UserHeader";
-import UserFooter from "@/component/molecules/Footer/UserFooter";
 import { useGetUserById } from "@/src/apis/users";
 import { useAddUserDataStore } from "@/src/store/addUserData";
 
@@ -37,13 +34,13 @@ const UserProfile = () => {
                 <div
                     className='bg-gradient-to-b from-purple-400 to-white w-full bg-cover bg-center h-[400px]'
                     style={{
-                        backgroundImage: `url(${Image38.src}) `,
+                        backgroundImage: `url(${"/photos/image38.png"}) `,
                     }}
                 />
 
                 <div className='mt-[-150px] px-[150px] flex items-end gap-[100px]'>
                     <Image
-                        src={Image11}
+                        src={"/photos/image11.png"}
                         alt='Profile'
                         width={250}
                         className='rounded-lg border border-white border-4 shadow-lg'

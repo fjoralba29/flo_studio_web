@@ -21,8 +21,6 @@ export const useGetUsers = (search: string) => {
 };
 
 export const getUserById = async (id: number | undefined) => {
-    console.log(id, "idddddd");
-
     if (!id) return null;
     const res = await axios.get(`/api/users/${id}`);
     return res.data;

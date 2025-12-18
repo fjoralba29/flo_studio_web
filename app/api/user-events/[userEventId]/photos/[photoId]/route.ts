@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -9,19 +9,17 @@ cloudinary.config({
 });
 
 export async function DELETE(
-    req: Request,
-    { params }: { params: Promise<{ userEventId: string; photoId: string }> }
+    req: NextRequest,
+    { params }: { params: Promise<{ userEventId: string; photoId: string }> } // <- promise wrapper
 ) {
-    const { userEventId, photoId } = await params;
+    const { userEventId, photoId } = await params; // unwrap the promise
 
     const photoIdNum = Number(photoId);
-
     if (isNaN(photoIdNum)) {
         return NextResponse.json({ error: "Invalid photoId" }, { status: 400 });
     }
 
     try {
-        // 1. Get photo to delete
         const photo = await prisma.photo.findUnique({
             where: { id: photoIdNum },
         });
@@ -33,18 +31,12 @@ export async function DELETE(
             );
         }
 
-        // 2. Extract Cloudinary public_id from URL (important!)
         const publicId = photo.url.split("/").pop()?.split(".")[0];
-
-        // 3. Delete from Cloudinary
         if (publicId) {
             await cloudinary.uploader.destroy(publicId);
         }
 
-        // 4. Delete from database
-        await prisma.photo.delete({
-            where: { id: photoIdNum },
-        });
+        await prisma.photo.delete({ where: { id: photoIdNum } });
 
         return NextResponse.json({ message: "Photo deleted" });
     } catch (error) {

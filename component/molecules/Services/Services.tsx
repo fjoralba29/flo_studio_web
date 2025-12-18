@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Image35 from "@/assets/photos/image35.jpg";
+
 import Cardbox from "../../atoms/CardBox/Cardbox";
 import { useGetServices } from "@/src/apis/services";
 
@@ -35,7 +35,7 @@ const Services = () => {
             {/* Background Image */}
             <div className='absolute inset-0 -z-10'>
                 <Image
-                    src={Image35}
+                    src={"/photos/image35.jpg"}
                     alt='Background'
                     fill
                     className='object-cover opacity-70'
@@ -63,6 +63,7 @@ const Services = () => {
 
                         return (
                             <Cardbox
+                                key={index}
                                 size={isSmall ? "small" : "large"}
                                 title={card.name}
                                 description={card.description}

@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import cloudinary from "@/lib/cloudinary";
 
 export async function POST(
-    req: Request,
-    { params }: { params: { id: string } }
+    req: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const { id } = await params;
@@ -44,44 +44,4 @@ export async function POST(
         console.error(error);
         return NextResponse.json({ error: String(error) }, { status: 500 });
     }
-}
-
-export async function DELETE(
-    req: Request,
-    { params }: { params: Promise<{ userEventId: string }> }
-) {
-    const { userEventId } = await params;
-
-    const id = Number(userEventId);
-    if (isNaN(id)) {
-        return NextResponse.json(
-            { error: "Invalid userEventId" },
-            { status: 400 }
-        );
-    }
-
-    // Get all photos to delete from Cloudinary
-    const photos = await prisma.photo.findMany({
-        where: { userEventId: id },
-    });
-
-    // Delete each Cloudinary asset
-    await Promise.all(
-        photos.map(async (p) => {
-            const publicId = p.url.split("/").pop()?.split(".")[0];
-            if (publicId) await cloudinary.uploader.destroy(publicId);
-        })
-    );
-
-    // Delete photos from DB
-    await prisma.photo.deleteMany({
-        where: { userEventId: id },
-    });
-
-    // Delete userEvent
-    await prisma.userEvent.delete({
-        where: { id },
-    });
-
-    return NextResponse.json({ success: true, deletedEventId: id });
 }

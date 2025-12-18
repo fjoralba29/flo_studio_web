@@ -1,10 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import cloudinary from "@/lib/cloudinary";
 
 export async function POST(
-    req: Request,
-    { params }: { params: { userEventId: string } }
+    req: NextRequest,
+    { params }: { params: Promise<{ userEventId: string }> }
 ) {
     try {
         const { userEventId } = await params;
@@ -57,38 +56,4 @@ export async function POST(
             { status: 500 }
         );
     }
-}
-
-export async function DELETE(
-    req: Request,
-    { params }: { params: Promise<{ userEventId: string; photoId: string }> }
-) {
-    const { userEventId, photoId } = await params;
-
-    const id = Number(photoId);
-    if (isNaN(id)) {
-        return NextResponse.json({ error: "Invalid photoId" }, { status: 400 });
-    }
-
-    // Get photo to extract public_id
-    const photo = await prisma.photo.findUnique({
-        where: { id },
-    });
-
-    if (!photo) {
-        return NextResponse.json({ error: "Photo not found" }, { status: 404 });
-    }
-
-    // extract Cloudinary public_id
-    const publicId = photo.url.split("/").pop()?.split(".")[0];
-
-    if (publicId) {
-        await cloudinary.uploader.destroy(publicId);
-    }
-
-    await prisma.photo.delete({
-        where: { id },
-    });
-
-    return NextResponse.json({ success: true, deletedId: id });
 }

@@ -12,7 +12,6 @@ const AdminAddCategoriesForm = () => {
     const createCategoryMutation = useCreateCategory();
 
     const handleSubmit = async (data: any) => {
-        console.log(data);
         const { primaryPhoto } = data;
         let imageUrl;
         if (primaryPhoto) {

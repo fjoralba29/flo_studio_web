@@ -18,7 +18,6 @@ const UserManagement = () => {
     const router = useRouter();
 
     const handleRowClick = (row: any) => {
-        console.log("Row clicked:", row);
         setSelectedUser(row);
         router.push(`/admin/user-management/${row.id}`);
     };

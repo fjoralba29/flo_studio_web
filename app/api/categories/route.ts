@@ -28,3 +28,24 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "Server error" }, { status: 500 });
     }
 }
+
+export const runtime = "nodejs";
+
+// GET: Fetch all categories
+export async function GET() {
+    try {
+        const categories = await prisma.category.findMany({
+            include: {
+                photos: true, // remove if not needed
+            },
+        });
+
+        return NextResponse.json(categories);
+    } catch (error) {
+        console.error("GET /api/categories error:", error);
+        return NextResponse.json(
+            { error: "Failed to fetch categories" },
+            { status: 500 }
+        );
+    }
+}
