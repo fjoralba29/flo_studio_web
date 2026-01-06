@@ -5,6 +5,7 @@ type CardProps = {
     description: string;
     image?: string;
     className?: string;
+    onClick?: () => void;
 };
 
 const AdminCategoriesCard = ({
@@ -12,10 +13,12 @@ const AdminCategoriesCard = ({
     description,
     image,
     className,
+    onClick,
 }: CardProps) => {
     return (
         <div
             className={`flex items-center bg-white shadow-xs rounded-xl overflow-hidden  h-[100px] hover:shadow-sm transition-shadow duration-300 ${className}`}
+            onClick={onClick}
         >
             {/* Image */}
             {image && (

@@ -12,15 +12,31 @@ const AdminAddCategoriesForm = () => {
     const createCategoryMutation = useCreateCategory();
 
     const handleSubmit = async (data: any) => {
-        const { primaryPhoto } = data;
-        let imageUrl;
+        const { primaryPhoto, photos, ...rest } = data;
+
+        let primaryPhotoUrl: string | undefined;
+        let photoUrls: string[] = [];
+
+        // Upload primary photo
         if (primaryPhoto) {
-            imageUrl = await uploadImageMutation.mutateAsync(primaryPhoto);
+            primaryPhotoUrl = await uploadImageMutation.mutateAsync(
+                primaryPhoto
+            );
+        }
+
+        // Upload category photos
+        if (Array.isArray(photos) && photos.length > 0) {
+            photoUrls = await Promise.all(
+                photos.map((photo: string) =>
+                    uploadImageMutation.mutateAsync(photo)
+                )
+            );
         }
 
         await createCategoryMutation.mutateAsync({
-            ...data,
-            primaryPhoto: imageUrl,
+            ...rest,
+            primaryPhoto: primaryPhotoUrl,
+            photos: photoUrls, // 👈 send URLs
         });
     };
     return (
@@ -35,7 +51,7 @@ const AdminAddCategoriesForm = () => {
                 className='flex flex-col gap-5'
                 resetOnSubmit
             >
-                <div className='grid grid-cols-2 gap-5'>
+                <div className='flex items-center gap-4'>
                     <Select
                         name='type'
                         options={[
@@ -69,6 +85,18 @@ const AdminAddCategoriesForm = () => {
                             multiSelect={false}
                         />
                     </div>
+                </div>
+                <div className='flex flex-col gap-2'>
+                    <h5>Photos</h5>
+                    <Dropzone
+                        allowedFiles={"image"}
+                        theme='secondary'
+                        inputClassName='max-h-[100px] max-w-[100px] min-h-[100px] min-w-[100px]'
+                        itemClassName='max-h-[100px] max-w-[100px] min-h-[100px] min-w-[100px]'
+                        name='photos'
+                        outputType='base64'
+                        multiSelect
+                    />
                 </div>
                 <Button
                     type='submit'

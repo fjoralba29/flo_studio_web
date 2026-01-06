@@ -14,7 +14,7 @@ const Gallery = ({ images }: GalleryProps) => {
     const handleDeleteImage = () => {};
 
     return (
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>
+        <div className='w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>
             {images.length > 0 ? (
                 images?.map((src, idx) => (
                     <div

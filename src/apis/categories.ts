@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useCategoryStore } from "../store/categories";
 
 export type CreateCategoryPayload = {
     name: string;
@@ -30,14 +31,14 @@ export const useCreateCategory = () => {
 };
 
 export const getCategoriesByType = async (
-    type: "Collaboration" | "Category" | "Wedding"
+    type: "Collaboration" | "Category" | "Wedding" | undefined
 ) => {
     const res = await axios.get(`/api/categories/${type}`);
     return res.data;
 };
 
 export const useGetCategoriesByType = (
-    type: "Collaboration" | "Category" | "Wedding"
+    type: "Collaboration" | "Category" | "Wedding" | undefined
 ) => {
     return useQuery({
         queryKey: ["categories", type],
@@ -79,5 +80,21 @@ export const useGetCategories = () => {
     return useQuery({
         queryKey: ["categories"],
         queryFn: getCategories,
+    });
+};
+
+export const getPhotosByCategoryID = async (categoryId: number) => {
+    const res = await axios.get(` /api/photos/${categoryId}`);
+    return res.data;
+};
+
+export const useGetPhotosByCategoryID = () => {
+    const selectedCategoryId = useCategoryStore(
+        (state) => state.selectedTypeId
+    );
+    return useQuery({
+        queryKey: ["category-photos", selectedCategoryId],
+        queryFn: () => getPhotosByCategoryID(selectedCategoryId as number),
+        enabled: !!selectedCategoryId,
     });
 };

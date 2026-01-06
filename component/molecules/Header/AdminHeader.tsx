@@ -2,7 +2,6 @@
 
 import Instagram from "@/assets/icons/Instagram.svg";
 import User from "@/assets/icons/User.svg";
-import Logo from "@/assets/photos/Logo.png";
 import { useLogout } from "@/src/apis/auth";
 import { useUserStore } from "@/src/store/userStore";
 import Image from "next/image";
@@ -62,7 +61,7 @@ const AdminHeader = () => {
             <div className=' bg-grape  flex justify-between px-[80px] py-[30px] items-center'>
                 <a href='/'>
                     <Image
-                        src={Logo}
+                        src={"/photos/Logo.png"}
                         alt='Logo'
                         width={60}
                         height={60}

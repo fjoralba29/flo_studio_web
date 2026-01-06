@@ -4,9 +4,9 @@ import { prisma } from "@/lib/prisma";
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { name, description, type, primaryPhoto } = body;
+        const { name, description, type, primaryPhoto, photos } = body;
 
-        if (!name || !type || !primaryPhoto) {
+        if (!name || !type) {
             return NextResponse.json(
                 { error: "Missing required fields" },
                 { status: 400 }
@@ -18,7 +18,17 @@ export async function POST(request: Request) {
                 name,
                 description,
                 type,
-                primaryPhoto, // store the Cloudinary URL
+                primaryPhoto,
+                photos: photos?.length
+                    ? {
+                          create: photos.map((url: string) => ({
+                              url,
+                          })),
+                      }
+                    : undefined,
+            },
+            include: {
+                photos: true,
             },
         });
 

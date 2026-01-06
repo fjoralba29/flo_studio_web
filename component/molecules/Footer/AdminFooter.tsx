@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Logo from "@/assets/photos/Logo.png";
 import Location from "@/assets/icons/Location.svg";
 import Phone from "@/assets/icons/Phone.svg";
 import Email from "@/assets/icons/Email.svg";
@@ -11,7 +10,7 @@ const AdminFooter = () => {
     return (
         <div className='bg-grape flex justify-between items-center px-[50px] py-[10px] text-white'>
             <Image
-                src={Logo}
+                src={"/photos/Logo.png"}
                 alt='Logo'
                 width={60}
                 height={60}

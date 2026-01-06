@@ -67,12 +67,17 @@ const Header = () => {
     return (
         showHeader && (
             <div className='absolute  top-0 left-0 right-0 z-10 flex justify-between px-[80px] py-[30px] items-center'>
-                <Image
-                    src={Instagram}
-                    alt='Logo'
-                    width={30}
-                    height={30}
-                />
+                <a
+                    href='https://www.instagram.com/flostudio.al?igshid=YTQwZjQ0NmI0OA%3D%3D'
+                    target='_blank'
+                >
+                    <Image
+                        src={Instagram}
+                        alt='Logo'
+                        width={30}
+                        height={30}
+                    />
+                </a>
                 <div className='flex gap-[90px] items-center'>
                     <a
                         href='/about'
@@ -81,7 +86,7 @@ const Header = () => {
                         About
                     </a>
                     <a
-                        href='/'
+                        href='/portfolio'
                         className='text-white navbar'
                     >
                         Portfolio
@@ -101,7 +106,7 @@ const Header = () => {
                         Wedding
                     </a>
                     <a
-                        href='/'
+                        href='/contact'
                         className='text-white navbar'
                     >
                         Contact

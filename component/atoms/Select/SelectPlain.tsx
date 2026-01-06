@@ -93,7 +93,7 @@ const SelectPlain = <T extends ValueType>({
 
     return (
         <div
-            className={`relative min-w-[180px] max-w-[240px] h-10.5 ${className}`}
+            className={`relative min-w-[180px] max-w-[240px] ${className}`}
             ref={setRef}
         >
             <SelectInput

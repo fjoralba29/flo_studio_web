@@ -1,15 +1,17 @@
 import Image from "next/image";
 import Image38 from "@/assets/photos/image38.png";
+import Header from "@/component/molecules/Header/Header";
+import Footer from "@/component/molecules/Footer/Footer";
 
 const AboutPage = () => {
     return (
         <>
-            {" "}
+            <Header />
             <div className='relative'>
                 <div
                     className='bg-gradient-to-b from-purple-400 to-white w-full bg-cover bg-center h-[400px]'
                     style={{
-                        backgroundImage: `url(${"/photos/image7.png"}) `,
+                        backgroundImage: `url(${"/photos/image38.png"}) `,
                     }}
                 />
 
@@ -21,12 +23,12 @@ const AboutPage = () => {
                     </div>
                 </div>
             </div>
-            <div>
+            <div className='p-[50px] flex flex-col gap-[50px]'>
                 {/* My Story */}
                 <section className='flex flex-col md:flex-row items-center gap-8'>
                     <div className='md:w-1/2'>
                         <Image
-                            src='/my-story.jpg' // replace with your photo
+                            src='/photos/Logo.png' // replace with your photo
                             alt='Photographer'
                             width={500}
                             height={500}
@@ -60,21 +62,21 @@ const AboutPage = () => {
                     </p>
                     <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-6'>
                         <Image
-                            src='/style1.jpg'
+                            src='/photos/image11.png'
                             alt='Sample 1'
                             width={400}
                             height={300}
                             className='rounded-lg object-cover'
                         />
                         <Image
-                            src='/style2.jpg'
+                            src='/photos/image11.png'
                             alt='Sample 2'
                             width={400}
                             height={300}
                             className='rounded-lg object-cover'
                         />
                         <Image
-                            src='/style3.jpg'
+                            src='/photos/image11.png'
                             alt='Sample 3'
                             width={400}
                             height={300}
@@ -98,7 +100,7 @@ const AboutPage = () => {
                     </div>
                     <div className='md:w-1/2'>
                         <Image
-                            src='/behind.jpg' // replace with behind the scenes photo
+                            src='/photos/image11.png' // replace with behind the scenes photo
                             alt='Behind the scenes'
                             width={500}
                             height={500}
@@ -120,21 +122,21 @@ const AboutPage = () => {
                     </p>
                     <div className='flex justify-center gap-4 flex-wrap mt-4'>
                         <Image
-                            src='/award1.jpg'
+                            src='/photos/image11.png'
                             alt='Award 1'
                             width={100}
                             height={100}
                             className='rounded-full'
                         />
                         <Image
-                            src='/award2.jpg'
+                            src='/photos/image11.png'
                             alt='Award 2'
                             width={100}
                             height={100}
                             className='rounded-full'
                         />
                         <Image
-                            src='/award3.jpg'
+                            src='/photos/image11.png'
                             alt='Award 3'
                             width={100}
                             height={100}
@@ -160,6 +162,7 @@ const AboutPage = () => {
                     </a>
                 </section>
             </div>
+            <Footer />
         </>
     );
 };

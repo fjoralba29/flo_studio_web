@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ReactQueryProvider } from "@/src/providers/ReactQueryProvider";
 import {
+    kodchasanBold,
     kodchasanLight,
     kodchasanRegular,
     kodchasanSemiBold,
+    literataBlack,
+    literataBold,
+    literataLight,
     literataRegular,
     literataSemiBold,
 } from "./fonts";
@@ -25,7 +29,7 @@ export default function RootLayout({
             className='h-full'
         >
             <body
-                className={`${kodchasanLight.variable} ${kodchasanRegular.variable} ${kodchasanSemiBold.variable} ${literataRegular.variable} ${literataSemiBold.variable} min-h-screen h-full  antialiased relative `}
+                className={`${kodchasanLight.variable} ${kodchasanRegular.variable} ${kodchasanSemiBold.variable} ${kodchasanBold.variable} ${literataLight.variable} ${literataRegular.variable} ${literataSemiBold.variable} ${literataBold.variable} ${literataBlack.variable} min-h-screen h-full  antialiased relative `}
             >
                 <ReactQueryProvider>{children}</ReactQueryProvider>
             </body>
