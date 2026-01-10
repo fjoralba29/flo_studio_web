@@ -98,3 +98,41 @@ export const useGetPhotosByCategoryID = () => {
         enabled: !!selectedCategoryId,
     });
 };
+
+export interface PhotoInput {
+    url: string;
+    title?: string;
+    description?: string;
+}
+
+// Send photos to the API with categoryId in the URL
+export const addPhotosToCategory = async (
+    categoryId: number,
+    photos: PhotoInput[]
+) => {
+    const res = await axios.post(`/api/photos/${categoryId}`, { photos });
+    return res.data;
+};
+
+export const useAddPhotosToCategory = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: ({
+            categoryId,
+            photos,
+        }: {
+            categoryId: number;
+            photos: PhotoInput[];
+        }) => addPhotosToCategory(categoryId, photos),
+        onSuccess: () => {
+            alert("Photos added successfully!");
+            queryClient.invalidateQueries({
+                queryKey: ["categories", "category-photos"],
+            }); // optional refresh
+        },
+        onError: () => {
+            alert("Failed to add photos");
+        },
+    });
+};

@@ -21,45 +21,44 @@ const FloatingNav = ({ menuItems }: Props) => {
 
     return (
         <div className='p-[50px]'>
-            <div className='relative flex items-center gap-10 rounded-2xl bg-white px-10 py-4 shadow-xl'>
-                {menuItems?.map((item) => {
+            <div className='flex flex-col items-center gap-10 rounded-2xl px-10 py-6 shadow-xl'>
+                {menuItems.map((item) => {
                     const isActive = active === item.key;
 
                     return (
                         <button
                             key={item.key}
                             onClick={() => handleOnClick(item.key)}
-                            className='relative flex flex-col items-center justify-center'
+                            className='relative flex items-center justify-center'
                         >
-                            {isActive && (
-                                // <span className='w-[80px]'>
+                            <div
+                                className={`
+                                    w-12 h-12 
+                                    rounded-full 
+                                    overflow-hidden 
+                                    transition-all duration-300 ease-out
+                                    flex items-center justify-center
+                                    ${
+                                        isActive
+                                            ? "scale-150 -translate-y-6 shadow-xl"
+                                            : "scale-100 opacity-80"
+                                    }
+                                `}
+                            >
                                 <Image
                                     src={item.img}
                                     alt={item.label}
-                                    width={72}
-                                    height={28}
-                                    className=' absolute -top-15 flex h-16 w-16 items-center justify-center rounded-full shadow-lg transition-all'
+                                    fill
+                                    className='object-cover'
                                 />
-                                // </span>
-                            )}
-
-                            <Image
-                                src={item.img}
-                                alt={item.label}
-                                width={48}
-                                height={48}
-                                className={`transition-opacity rounded-md ${
-                                    isActive ? "opacity-0 h-0" : "opacity-100"
-                                }`}
-                            />
-
-                            <span
-                                className={`mt-2 text-sm transition-opacity ${
-                                    isActive ? "opacity-100" : "opacity-0"
+                            </div>
+                            <div
+                                className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 ${
+                                    isActive ? "text-white" : "text-transparent"
                                 }`}
                             >
                                 {item.label}
-                            </span>
+                            </div>
                         </button>
                     );
                 })}
@@ -67,4 +66,5 @@ const FloatingNav = ({ menuItems }: Props) => {
         </div>
     );
 };
+
 export default FloatingNav;

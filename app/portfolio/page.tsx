@@ -7,36 +7,6 @@ import {
     useGetCategories,
     useGetPhotosByCategoryID,
 } from "@/src/apis/categories";
-import { useCategoryStore } from "@/src/store/categories";
-import { useEffect, useState } from "react";
-
-const tabs = [
-    {
-        key: "home",
-        label: "Home",
-        img: "/photos/image38.png",
-    },
-    {
-        key: "profile",
-        label: "Profile",
-        img: "/photos/image38.png",
-    },
-    {
-        key: "message",
-        label: "Message",
-        img: "/photos/image38.png",
-    },
-    {
-        key: "camera",
-        label: "Camera",
-        img: "/photos/image38.png",
-    },
-    {
-        key: "settings",
-        label: "Settings",
-        img: "/photos/image38.png",
-    },
-];
 
 const PortfolioPage = () => {
     const { data: categories = [] } = useGetCategories();
@@ -62,13 +32,13 @@ const PortfolioPage = () => {
     console.log(photoUrls, photoData);
 
     return (
-        <>
+        <div className='bg-grape'>
             <Header />
-            <div className='relative'>
+            <div className='relative '>
                 <div
-                    className='bg-gradient-to-b from-purple-400 to-white w-full bg-cover bg-center h-[400px]'
+                    className=' bg-gradient-to-t from-[#372e39] to-white w-full bg-cover bg-center h-[400px]'
                     style={{
-                        backgroundImage: `url(${"/photos/image38.png"}) `,
+                        backgroundImage: ` linear-gradient(to top, #372e39,  transparent), url(${"/photos/image38.png"}) `,
                     }}
                 />
 
@@ -76,9 +46,11 @@ const PortfolioPage = () => {
                     <h1>PORTFOLIO</h1>
                 </div>
             </div>
-            <FloatingNav menuItems={items} />
-            <Gallery images={photoUrls} />
-        </>
+            <div className='flex gap-4 px-4 py-8'>
+                <FloatingNav menuItems={items} />
+                <Gallery images={photoUrls} />
+            </div>
+        </div>
     );
 };
 

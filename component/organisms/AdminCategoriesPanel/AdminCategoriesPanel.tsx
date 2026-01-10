@@ -9,9 +9,13 @@ import {
 } from "@/src/apis/categories";
 import { useCategoryStore } from "@/src/store/categories";
 import { CategoryType } from "@prisma/client";
+import AddPhotosModal from "../AddPhotosModal/AddPhotosModal";
+import { useAddUserDataStore } from "@/src/store/addUserData";
+import AddCategoryPhotosModal from "../AddCategoryPhotosModal/AddCategoryPhotosModal";
 
 const AdminCategoriesPanel = () => {
     const { selectedType, setSelectedType } = useCategoryStore();
+    const setPhotoModalOpen = useAddUserDataStore((s) => s.setPhotoModalOpen);
 
     const { data: categories = [] } = useGetCategories();
     const setSelectedTypeId = useCategoryStore(
@@ -46,7 +50,7 @@ const AdminCategoriesPanel = () => {
     };
 
     return (
-        <div className='flex flex-col flex-1 p-5'>
+        <div className='flex flex-col flex-1 p-5 gap-5'>
             <div className='flex bg-grey-light justify-center gap-[20px] p-[20px]  mx-[150px] rounded-lg'>
                 {Object.values(CategoryType).map((type, index) => (
                     <Button
@@ -87,7 +91,20 @@ const AdminCategoriesPanel = () => {
                         </div>
                     ))}
                 </div>
-                <Gallery images={photoUrls} />
+                {selectedTypeId && (
+                    <div className='flex flex-col w-full'>
+                        <Button
+                            theme='primary'
+                            size='xs'
+                            onClick={() => setPhotoModalOpen(true)}
+                            className=' place-end'
+                        >
+                            Add Photos
+                        </Button>
+                        <Gallery images={photoUrls} />
+                    </div>
+                )}
+                <AddCategoryPhotosModal />
             </div>
         </div>
     );
