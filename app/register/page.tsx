@@ -75,6 +75,7 @@ const Register = () => {
                 src={"/photos/Logo.png"}
                 alt='Background Image'
                 width={500}
+                height={500}
             />
         </div>
     );

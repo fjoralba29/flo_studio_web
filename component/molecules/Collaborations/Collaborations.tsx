@@ -3,9 +3,12 @@
 import { CategoryType } from "@prisma/client";
 import Cards from "../../atoms/Cards/Cards";
 import { useGetCategories } from "@/src/apis/categories";
+import { redirect, useRouter } from "next/navigation";
+import { useCategoryStore } from "@/src/store/categories";
 
 const Collaborations = () => {
     const { data } = useGetCategories();
+    const router = useRouter();
 
     const collaborations = data?.filter(
         (category: any) => category.type === CategoryType.Collaboration
@@ -27,6 +30,11 @@ const Collaborations = () => {
                         title={collaboration.name}
                         description={collaboration.description}
                         type={"collaboration"}
+                        onClick={() => {
+                            router.push(
+                                `/portfolio?category=${collaboration.id}`
+                            );
+                        }}
                     />
                 ))}
             </div>

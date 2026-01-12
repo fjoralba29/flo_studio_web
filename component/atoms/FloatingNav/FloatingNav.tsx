@@ -1,21 +1,30 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { useCategoryStore } from "@/src/store/categories";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 type Props = {
     menuItems: { key: string; label: string; img: string }[];
 };
 
 const FloatingNav = ({ menuItems }: Props) => {
-    const [active, setActive] = useState("home");
     const setSelectedTypeId = useCategoryStore(
         (state) => state.setSelectedTypeId
     );
+    const selectedTypeId = useCategoryStore((state) => state.selectedTypeId);
+
+    const searchParams = useSearchParams();
+    const category = searchParams.get("category");
+
+    useEffect(() => {
+        if (category) {
+            setSelectedTypeId(Number(category));
+        }
+    }, [category]);
 
     const handleOnClick = (key: any) => {
-        setActive(key);
         setSelectedTypeId(key);
     };
 
@@ -23,7 +32,9 @@ const FloatingNav = ({ menuItems }: Props) => {
         <div className='p-[50px]'>
             <div className='flex flex-col items-center gap-10 rounded-2xl px-10 py-6 shadow-xl'>
                 {menuItems.map((item) => {
-                    const isActive = active === item.key;
+                    const isActive =
+                        selectedTypeId !== null &&
+                        String(selectedTypeId) === String(item.key);
 
                     return (
                         <button
@@ -33,9 +44,9 @@ const FloatingNav = ({ menuItems }: Props) => {
                         >
                             <div
                                 className={`
-                                    w-12 h-12 
-                                    rounded-full 
-                                    overflow-hidden 
+                                    w-12 h-12
+                                    rounded-full
+                                    overflow-hidden
                                     transition-all duration-300 ease-out
                                     flex items-center justify-center
                                     ${
@@ -52,10 +63,18 @@ const FloatingNav = ({ menuItems }: Props) => {
                                     className='object-cover'
                                 />
                             </div>
+
                             <div
-                                className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 ${
-                                    isActive ? "text-white" : "text-transparent"
-                                }`}
+                                className={`
+                                    absolute bottom-0 left-1/2
+                                    -translate-x-1/2
+                                    transition-opacity duration-300
+                                    ${
+                                        isActive
+                                            ? "text-white opacity-100"
+                                            : "text-transparent opacity-0"
+                                    }
+                                `}
                             >
                                 {item.label}
                             </div>

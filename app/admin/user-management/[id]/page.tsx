@@ -11,6 +11,8 @@ import { useAddUserDataStore } from "@/src/store/addUserData";
 import AddUrlsModal from "@/component/organisms/AddUrlsModal/AddUrlsModal";
 import { useGetUserById } from "@/src/apis/users";
 import { useParams } from "next/navigation";
+import AdminHeader from "@/component/molecules/Header/AdminHeader";
+import AdminFooter from "@/component/molecules/Footer/AdminFooter";
 
 const UserDetailsPage = () => {
     const params = useParams();
@@ -34,6 +36,7 @@ const UserDetailsPage = () => {
 
     return (
         <>
+            <AdminHeader />
             <div className='h-full p-5 flex flex-col gap-[30px]'>
                 <div className='flex items-end gap-[100px]'>
                     <Image
@@ -108,6 +111,7 @@ const UserDetailsPage = () => {
             <AddEventModal />
             <AddPhotosModal />
             <AddUrlsModal />
+            <AdminFooter />
         </>
     );
 };

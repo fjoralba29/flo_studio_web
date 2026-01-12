@@ -1,10 +1,13 @@
 "use client";
 
 import Cards from "@/component/atoms/Cards/Cards";
+import AdminFooter from "@/component/molecules/Footer/AdminFooter";
+import AdminHeader from "@/component/molecules/Header/AdminHeader";
 
 const AdminDashboard = () => {
     return (
         <>
+            <AdminHeader />
             <div className='p-5 flex flex-col gap-10 items-center'>
                 <div className=' grid grid-cols-3 items-center justify-center gap-5'>
                     <Cards
@@ -51,6 +54,7 @@ const AdminDashboard = () => {
                     />
                 </div>
             </div>
+            <AdminFooter />
         </>
     );
 };
