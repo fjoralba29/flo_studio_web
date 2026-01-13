@@ -2,6 +2,8 @@
 
 import Instagram from "@/assets/icons/Instagram.svg";
 import User from "@/assets/icons/User.svg";
+import Menu from "@/assets/icons/Menu.svg"; // add hamburger icon
+import Close from "@/assets/icons/CloseCircleIcon.svg"; // add close icon
 
 import { useClickedOutside } from "@/helpers/useClickedOutside";
 import { useDisclosure } from "@/helpers/useDisclosure";
@@ -9,13 +11,12 @@ import { useLogout } from "@/src/apis/auth";
 import { useUserStore } from "@/src/store/userStore";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 const Header = () => {
     const router = useRouter();
     const pathname = usePathname();
 
-    // Define paths where you want the header/footer to appear
     const publicPaths = [
         "/",
         "/wedding",
@@ -27,159 +28,170 @@ const Header = () => {
 
     const showHeader = publicPaths.includes(pathname);
 
-    const [open, setOpen] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
 
     const { user } = useUserStore();
-
     const { mutate: logoutUser } = useLogout();
-
-    // // Close dropdown if clicked outside
-    // useEffect(() => {
-    //     const handleClickOutside = (event: MouseEvent) => {
-    //         if (
-    //             menuRef.current &&
-    //             !menuRef.current.contains(event.target as Node)
-    //         ) {
-    //             setOpen(false);
-    //         }
-    //     };
-    //     document.addEventListener("mousedown", handleClickOutside);
-    //     return () =>
-    //         document.removeEventListener("mousedown", handleClickOutside);
-    // }, []);
 
     const {
         isOpen: dropdownOpen,
         close: closeDropdown,
         toggle: toggleDropdown,
     } = useDisclosure();
+
     const { setRef } = useClickedOutside(toggleDropdown, dropdownOpen);
 
     const handleLogout = () => {
-        // Clear user session logic here (e.g., remove token from storage)
-        // Then redirect to login page
-
         logoutUser();
         closeDropdown();
     };
 
+    const NavLinks = () => (
+        <>
+            <a
+                href='/about'
+                className='navbar text-white'
+            >
+                About
+            </a>
+            <a
+                href='/portfolio'
+                className='navbar text-white'
+            >
+                Portfolio
+            </a>
+            {!mobileMenuOpen && (
+                <a href='/'>
+                    <Image
+                        src='/photos/Logo.png'
+                        alt='Logo'
+                        width={60}
+                        height={60}
+                    />
+                </a>
+            )}
+            <a
+                href='/wedding'
+                className='navbar text-white'
+            >
+                Wedding
+            </a>
+            <a
+                href='/contact'
+                className='navbar text-white'
+            >
+                Contact
+            </a>
+        </>
+    );
+
+    if (!showHeader) return null;
+
     return (
-        showHeader && (
-            <div className='absolute  top-0 left-0 right-0 z-10 flex justify-between px-[80px] py-[30px] items-center'>
+        <header className='absolute top-0 left-0 right-0 z-50'>
+            {/* TOP BAR */}
+            <div className='flex items-center justify-between px-6 sm:px-10 lg:px-[80px] py-6'>
+                {/* Instagram */}
                 <a
-                    href='https://www.instagram.com/flostudio.al?igshid=YTQwZjQ0NmI0OA%3D%3D'
+                    href='https://www.instagram.com/flostudio.al'
                     target='_blank'
                 >
                     <Image
                         src={Instagram}
-                        alt='Logo'
-                        width={30}
-                        height={30}
+                        alt='Instagram'
+                        width={28}
+                        height={28}
                     />
                 </a>
-                <div className='flex gap-[90px] items-center'>
-                    <a
-                        href='/about'
-                        className='text-white navbar'
-                    >
-                        About
-                    </a>
-                    <a
-                        href='/portfolio'
-                        className='text-white navbar'
-                    >
-                        Portfolio
-                    </a>
-                    <a href='/'>
-                        <Image
-                            src={"/photos/Logo.png"}
-                            alt='Logo'
-                            width={60}
-                            height={60}
-                        />
-                    </a>
-                    <a
-                        href='/wedding'
-                        className='text-white navbar'
-                    >
-                        Wedding
-                    </a>
-                    <a
-                        href='/contact'
-                        className='text-white navbar'
-                    >
-                        Contact
-                    </a>
+
+                {/* Desktop Nav */}
+                <div className='hidden lg:flex items-center gap-[90px]'>
+                    <NavLinks />
                 </div>
-                <div
-                    className='relative'
-                    ref={menuRef}
-                >
-                    <div
-                        className='cursor-pointer'
-                        onClick={toggleDropdown}
-                    >
+
+                {/* Right Icons */}
+                <div className='flex items-center gap-4'>
+                    {/* User */}
+                    <div className='relative'>
                         <Image
                             src={User}
                             alt='User'
-                            width={30}
-                            height={30}
+                            width={28}
+                            height={28}
+                            className='cursor-pointer'
+                            onClick={toggleDropdown}
                         />
-                    </div>
 
-                    {dropdownOpen && (
-                        <div
-                            className='absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg z-50'
-                            ref={setRef}
-                        >
-                            <ul className='flex flex-col p-2'>
-                                {user ? (
-                                    <>
-                                        <li>
-                                            {user.type === "User" ? (
+                        {dropdownOpen && (
+                            <div
+                                ref={setRef}
+                                className='absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg'
+                            >
+                                <ul className='flex flex-col p-2 text-sm'>
+                                    {user ? (
+                                        <>
+                                            <li>
                                                 <a
-                                                    href='/user-profile'
+                                                    href={
+                                                        user.type === "User"
+                                                            ? "/user-profile"
+                                                            : "/admin"
+                                                    }
                                                     className='block px-4 py-2 hover:bg-gray-100 rounded'
                                                 >
                                                     Profile
                                                 </a>
-                                            ) : (
-                                                <a
-                                                    href='/admin'
-                                                    className='block px-4 py-2 hover:bg-gray-100 rounded'
+                                            </li>
+                                            <li>
+                                                <button
+                                                    onClick={handleLogout}
+                                                    className='w-full text-left px-4 py-2 hover:bg-gray-100 rounded'
                                                 >
-                                                    Admin Profile
-                                                </a>
-                                            )}
-                                        </li>
+                                                    Logout
+                                                </button>
+                                            </li>
+                                        </>
+                                    ) : (
                                         <li>
                                             <button
-                                                onClick={handleLogout}
-                                                className='w-full text-left px-4 py-2 hover:bg-gray-100 rounded cursor-pointer'
+                                                onClick={() =>
+                                                    router.push("/login")
+                                                }
+                                                className='w-full text-left px-4 py-2 hover:bg-gray-100 rounded'
                                             >
-                                                Logout
+                                                Login
                                             </button>
                                         </li>
-                                    </>
-                                ) : (
-                                    <li>
-                                        <button
-                                            onClick={() =>
-                                                router.push("/login")
-                                            }
-                                            className='w-full text-left px-4 py-2 hover:bg-gray-100 rounded cursor-pointer'
-                                        >
-                                            Login
-                                        </button>
-                                    </li>
-                                )}
-                            </ul>
-                        </div>
-                    )}
+                                    )}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Hamburger */}
+                    <button
+                        className='lg:hidden'
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    >
+                        <Image
+                            src={Menu}
+                            alt='Menu'
+                            width={28}
+                            height={28}
+                            className='stroke-white'
+                        />
+                    </button>
                 </div>
             </div>
-        )
+
+            {/* MOBILE MENU */}
+            {mobileMenuOpen && (
+                <div className='lg:hidden bg-black/90 backdrop-blur-md px-6 py-8 flex flex-col gap-6 text-center'>
+                    <NavLinks />
+                </div>
+            )}
+        </header>
     );
 };
 

@@ -8,33 +8,39 @@ import { useRouter } from "next/navigation";
 const Categories = () => {
     const { data } = useGetCategories();
     const router = useRouter();
+
     const categories = data?.filter(
-        (category: any) => category.type === CategoryType.Collaboration
+        (category: any) => category.type === CategoryType.Category
     );
 
     return (
-        <div className='px-[153px] py-[65px] flex flex-col items-center gap-[40px]'>
-            <div className='text-center flex flex-col gap-[10px]'>
-                <div className='section-title'>Categories</div>
-                <div className='section-subtitle'>
-                    From special occasions to styled shoots{" "}
-                </div>
+        <section className='w-full px-6 sm:px-10 lg:px-20 xl:px-[153px] py-12 sm:py-16'>
+            {/* Title */}
+            <div className='text-center flex flex-col gap-2 mb-10'>
+                <h2 className='section-title text-xl sm:text-2xl lg:text-3xl'>
+                    Categories
+                </h2>
+                <p className='section-subtitle text-sm sm:text-base'>
+                    From special occasions to styled shoots
+                </p>
             </div>
-            <div className='w-full grid grid-cols-2 items-center gap-[40px]'>
+
+            {/* Cards grid */}
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-10 place-items-center'>
                 {categories?.map((category: any) => (
                     <Cards
                         key={category.id}
                         photo={category.primaryPhoto}
                         title={category.name}
                         description={category.description}
-                        type={"category"}
-                        onClick={() => {
-                            router.push(`/portfolio?category=${category.id}`);
-                        }}
+                        type='category'
+                        onClick={() =>
+                            router.push(`/portfolio?category=${category.id}`)
+                        }
                     />
                 ))}
             </div>
-        </div>
+        </section>
     );
 };
 

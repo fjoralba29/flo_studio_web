@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useUserStore } from "../store/userStore";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 interface RegisterData {
     name: string;
@@ -33,6 +34,7 @@ export const useRegister = () => {
         },
         onError: (err) => {
             console.log(err);
+            toast.error("Registration failed: " + err.message);
         },
     });
 
@@ -53,6 +55,7 @@ export const useLogin = () => {
         },
         onError: (error: Error) => {
             console.log(error);
+            toast.error("Login failed: Try again!");
         },
     });
 };
@@ -74,6 +77,7 @@ export const useLogout = () => {
         },
         onError: (error: any) => {
             console.error("Logout failed:", error.message);
+            toast.error("Logout failed: " + error.message);
         },
     });
 };

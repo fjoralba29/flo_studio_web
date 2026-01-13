@@ -25,7 +25,6 @@ const PageManagement = () => {
         <>
             <AdminHeader />
             <div className='flex flex-col gap-5 '>
-                {/* <div className='flex flex-col gap-5'> */}
                 <AdminAddCategoriesForm />
 
                 <AdminCategoriesPanel />

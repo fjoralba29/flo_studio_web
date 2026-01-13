@@ -12,6 +12,7 @@ import {
     literataRegular,
     literataSemiBold,
 } from "./fonts";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
     title: "Flo Studio",
@@ -31,6 +32,7 @@ export default function RootLayout({
             <body
                 className={`${kodchasanLight.variable} ${kodchasanRegular.variable} ${kodchasanSemiBold.variable} ${kodchasanBold.variable} ${literataLight.variable} ${literataRegular.variable} ${literataSemiBold.variable} ${literataBold.variable} ${literataBlack.variable} min-h-screen h-full  antialiased relative `}
             >
+                <Toaster />
                 <ReactQueryProvider>{children}</ReactQueryProvider>
             </body>
         </html>

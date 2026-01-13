@@ -29,8 +29,9 @@ const FloatingNav = ({ menuItems }: Props) => {
     };
 
     return (
-        <div className='p-[50px]'>
-            <div className='flex flex-col items-center gap-10 rounded-2xl px-10 py-6 shadow-xl'>
+        <div className='p-4 sm:p-10'>
+            {/* Flex container: vertical on md+, horizontal scrollable on mobile */}
+            <div className='flex flex-row md:flex-col items-center md:items-center gap-6 md:gap-10 overflow-x-auto md:overflow-visible px-6 md:px-4 py-6 md:py-6 rounded-2xl shadow-xl'>
                 {menuItems.map((item) => {
                     const isActive =
                         selectedTypeId !== null &&
@@ -40,7 +41,7 @@ const FloatingNav = ({ menuItems }: Props) => {
                         <button
                             key={item.key}
                             onClick={() => handleOnClick(item.key)}
-                            className='relative flex items-center justify-center'
+                            className='relative flex-shrink-0 flex items-center justify-center'
                         >
                             <div
                                 className={`
@@ -51,7 +52,7 @@ const FloatingNav = ({ menuItems }: Props) => {
                                     flex items-center justify-center
                                     ${
                                         isActive
-                                            ? "scale-150 -translate-y-6 shadow-xl"
+                                            ? "scale-150 -translate-y-2 md:-translate-y-6 shadow-xl z-10"
                                             : "scale-100 opacity-80"
                                     }
                                 `}
@@ -68,10 +69,11 @@ const FloatingNav = ({ menuItems }: Props) => {
                                 className={`
                                     absolute bottom-0 left-1/2
                                     -translate-x-1/2
+                                    text-center
                                     transition-opacity duration-300
                                     ${
                                         isActive
-                                            ? "text-white opacity-100"
+                                            ? "text-white opacity-100 z-10"
                                             : "text-transparent opacity-0"
                                     }
                                 `}

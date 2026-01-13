@@ -29,60 +29,39 @@ const UserDetailsPage = () => {
     const urls = events.find((e: any) => e.id === selectedEventId)?.urls || [];
     const formattedUrls = urls.map((item: string) => ({ url: item }));
 
-    // const urlsUrls = urls.map((u: any) => (u.label = u.url)) || [];
-
     const setPhotoModalOpen = useAddUserDataStore((s) => s.setPhotoModalOpen);
     const setUrlsModalOpen = useAddUserDataStore((s) => s.setUrlsModalOpen);
 
     return (
         <>
             <AdminHeader />
-            <div className='h-full p-5 flex flex-col gap-[30px]'>
-                <div className='flex items-end gap-[100px]'>
+            <div className=' p-4 md:p-5 flex flex-col gap-6 md:gap-[30px] max-w-7xl mx-auto'>
+                {/* User Info */}
+                <div className='flex flex-col md:flex-row items-center md:items-end gap-4 md:gap-[100px]'>
                     <Image
                         src={"/photos/image11.png"}
                         alt='Profile'
                         width={150}
                         height={150}
-                        className='rounded-lg border border-white border-4 shadow-lg'
+                        className='rounded-lg border-4 border-white shadow-lg'
                     />
 
-                    <div className='flex flex-col gap-[20px] pb-[20px]'>
+                    <div className='flex flex-col gap-2 md:gap-[20px] text-center md:text-left'>
                         <div className='section-title'>{name}</div>
                         <div>Email: {email}</div>
                         <div>Phone: {phone}</div>
                     </div>
                 </div>
-                <EventsMenu
-                    events={
-                        events
-                        // [
-                        // {
-                        //     id: 10,
-                        //     event: { id: 1, name: "Wedding" },
-                        //     photos: [
-                        //         { url: "https://cloudinary.com/photo1.jpg" },
-                        //         { url: "https://cloudinary.com/photo2.jpg" },
-                        //     ],
-                        //     urls: [
-                        //         { url: "https://cloudinary.com/photo1.jpg" },
-                        //         { url: "https://cloudinary.com/photo2.jpg" },
-                        //     ],
-                        // },
-                        // {
-                        //     id: 11,
-                        //     event: { id: 2, name: "Birthday" },
-                        //     photos: [
-                        //         { url: "https://cloudinary.com/photo3.jpg" },
-                        //     ],
-                        // },
-                        // ]
-                    }
-                />
-                <div className='flex w-full gap-[20px]'>
-                    <div className='w-[70%] flex flex-col gap-[10px]'>
-                        <div className='flex justify-between items-center '>
-                            <div className='section-subtitle '>Photos</div>
+
+                {/* Events Menu */}
+                <EventsMenu events={events} />
+
+                {/* Photos & URLs Panels */}
+                <div className='flex flex-col md:flex-row w-full gap-4 md:gap-[20px]'>
+                    {/* Photos */}
+                    <div className='flex-1 flex flex-col gap-2'>
+                        <div className='flex justify-between items-center'>
+                            <div className='section-subtitle'>Photos</div>
                             <Button
                                 theme='primary'
                                 size='xs'
@@ -93,9 +72,11 @@ const UserDetailsPage = () => {
                         </div>
                         <Gallery images={photosUrls as string[]} />
                     </div>
-                    <div className='w-[30%] flex flex-col gap-[10px]'>
-                        <div className='flex justify-between items-center '>
-                            <div className='section-subtitle '>Url-s</div>
+
+                    {/* URLs */}
+                    <div className='flex-1 flex flex-col gap-2'>
+                        <div className='flex justify-between items-center'>
+                            <div className='section-subtitle'>Urls</div>
                             <Button
                                 theme='primary'
                                 size='xs'
@@ -108,6 +89,8 @@ const UserDetailsPage = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Modals */}
             <AddEventModal />
             <AddPhotosModal />
             <AddUrlsModal />
@@ -117,29 +100,3 @@ const UserDetailsPage = () => {
 };
 
 export default UserDetailsPage;
-
-// {
-//   "id": 1,
-//   "name": "John Doe",
-//   "events": [
-//     {
-//       "id": 10,
-//       "event": { "id": 1, "name": "Wedding" },
-//       "photos": [
-//         { "url": "https://cloudinary.com/photo1.jpg" },
-//         { "url": "https://cloudinary.com/photo2.jpg" }
-//       ],
-//         "urls": [
-//             { "url": "https://cloudinary.com/photo1.jpg" },
-//             { "url": "https://cloudinary.com/photo2.jpg" }
-//         ]
-//     },
-//     {
-//       "id": 11,
-//       "event": { "id": 2, "name": "Birthday" },
-//       "photos": [
-//         { "url": "https://cloudinary.com/photo3.jpg" }
-//       ]
-//     }
-//   ]
-// }

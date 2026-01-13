@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@/component/atoms/Button/Button";
 import Dropzone from "@/component/atoms/Dropzone/Dropzone";
 import Form from "@/component/atoms/Form/Form";
@@ -9,7 +11,7 @@ import { useUploadImage } from "@/src/apis/uploadImage";
 
 const AdminAddCategoriesForm = () => {
     const uploadImageMutation = useUploadImage();
-    const createCategoryMutation = useCreateCategory();
+    const { mutate: createCategory } = useCreateCategory();
 
     const handleSubmit = async (data: any) => {
         const { primaryPhoto, photos, ...rest } = data;
@@ -17,14 +19,12 @@ const AdminAddCategoriesForm = () => {
         let primaryPhotoUrl: string | undefined;
         let photoUrls: string[] = [];
 
-        // Upload primary photo
         if (primaryPhoto) {
             primaryPhotoUrl = await uploadImageMutation.mutateAsync(
                 primaryPhoto
             );
         }
 
-        // Upload category photos
         if (Array.isArray(photos) && photos.length > 0) {
             photoUrls = await Promise.all(
                 photos.map((photo: string) =>
@@ -33,14 +33,15 @@ const AdminAddCategoriesForm = () => {
             );
         }
 
-        await createCategoryMutation.mutateAsync({
+        await createCategory({
             ...rest,
             primaryPhoto: primaryPhotoUrl,
-            photos: photoUrls, // 👈 send URLs
+            photos: photoUrls,
         });
     };
+
     return (
-        <div className='justify-self-start p-5 flex flex-col gap-5'>
+        <div className='p-5 flex flex-col gap-5'>
             <div className='section-subtitle'>
                 Add Collaboration, Category or Services
             </div>
@@ -51,32 +52,31 @@ const AdminAddCategoriesForm = () => {
                 className='flex flex-col gap-5'
                 resetOnSubmit
             >
-                <div className='flex items-center gap-4'>
+                {/* Main Inputs */}
+                <div className='flex flex-col md:flex-row md:items-center md:gap-4 gap-4'>
                     <Select
                         name='type'
                         options={[
-                            {
-                                value: "Collaboration",
-                                label: "Collaboration",
-                            },
+                            { value: "Collaboration", label: "Collaboration" },
                             { value: "Category", label: "Category" },
                         ]}
                         label='Section'
+                        className='w-full md:w-auto'
                     />
                     <Input
                         name='name'
                         label='Name'
-                        className='!w-[300px]'
+                        className='w-full md:w-[300px]'
                     />
                     <Input
                         name='description'
                         label='Description'
-                        className='!w-[300px]'
+                        className='w-full md:w-[300px]'
                     />
                     <div className='flex flex-col gap-2'>
                         <h5>Image</h5>
                         <Dropzone
-                            allowedFiles={"image"}
+                            allowedFiles='image'
                             theme='secondary'
                             inputClassName='max-h-[100px] max-w-[100px] min-h-[100px] min-w-[100px]'
                             itemClassName='max-h-[100px] max-w-[100px] min-h-[100px] min-w-[100px]'
@@ -86,10 +86,12 @@ const AdminAddCategoriesForm = () => {
                         />
                     </div>
                 </div>
+
+                {/* Multiple Photos */}
                 <div className='flex flex-col gap-2'>
                     <h5>Photos</h5>
                     <Dropzone
-                        allowedFiles={"image"}
+                        allowedFiles='image'
                         theme='secondary'
                         inputClassName='max-h-[100px] max-w-[100px] min-h-[100px] min-w-[100px]'
                         itemClassName='max-h-[100px] max-w-[100px] min-h-[100px] min-w-[100px]'
@@ -98,9 +100,11 @@ const AdminAddCategoriesForm = () => {
                         multiSelect
                     />
                 </div>
+
+                {/* Submit Button */}
                 <Button
                     type='submit'
-                    className='mt-5 w-[150px] self-end'
+                    className='mt-5 w-full md:w-[150px] self-end'
                 >
                     Submit
                 </Button>

@@ -6,35 +6,41 @@ const ContactPage = () => {
     return (
         <>
             <Header />
+
+            {/* Hero Section */}
             <div className='relative'>
                 <div
-                    className='bg-gradient-to-b from-purple-400 to-white w-full bg-cover bg-center h-[400px]'
+                    className='bg-gradient-to-b from-purple-400 to-white w-full bg-cover bg-center h-64 sm:h-80 md:h-96 lg:h-[400px]'
                     style={{
-                        backgroundImage: `url(${"/photos/image38.png"}) `,
+                        backgroundImage: `url("/photos/image38.png")`,
                     }}
                 />
 
-                <div className='absolute top-[150px] left-0 right-0 text-center text-white flex flex-col gap-[5px]'>
-                    <h1>CONTACT</h1>
+                <div className='absolute top-24 sm:top-28 md:top-32 left-0 right-0 text-center text-white flex flex-col gap-2'>
+                    <h1 className='text-3xl sm:text-4xl md:text-5xl font-bold'>
+                        CONTACT
+                    </h1>
                 </div>
             </div>
-            <div className='max-w-6xl mx-auto px-4 py-16 space-y-20'>
-                {/* Hero */}
+
+            {/* Main Content */}
+            <div className='max-w-6xl mx-auto px-6 sm:px-10 lg:px-24 py-12 space-y-16'>
+                {/* Hero Text */}
                 <section className='text-center space-y-4'>
-                    <h1 className='text-4xl md:text-5xl font-bold'>
+                    <h1 className='text-3xl sm:text-4xl md:text-5xl font-bold'>
                         Let’s Create Something Beautiful
                     </h1>
-                    <p className='text-gray-600 max-w-2xl mx-auto'>
+                    <p className='text-gray-600 max-w-2xl mx-auto text-sm sm:text-base md:text-lg'>
                         Have a project in mind or want to book a session? Fill
                         out the form below and I’ll get back to you as soon as
                         possible.
                     </p>
                 </section>
 
-                {/* Content */}
-                <section className='grid grid-cols-1 md:grid-cols-2 gap-12 items-center'>
+                {/* Form & Image */}
+                <section className='grid grid-cols-1 md:grid-cols-2 gap-12 items-start md:items-center'>
                     {/* Left: Image */}
-                    <div className='relative w-full h-[500px] rounded-lg overflow-hidden'>
+                    <div className='relative w-full h-64 sm:h-80 md:h-96 rounded-lg overflow-hidden'>
                         <Image
                             src='/photos/LogoColor.png' // replace with your image
                             alt='Photography contact'
@@ -44,7 +50,7 @@ const ContactPage = () => {
                     </div>
 
                     {/* Right: Form */}
-                    <form className='space-y-6'>
+                    <form className='space-y-6 w-full'>
                         <div>
                             <label className='block text-sm font-medium mb-1'>
                                 Full Name
@@ -100,6 +106,7 @@ const ContactPage = () => {
                     </form>
                 </section>
             </div>
+
             <Footer />
         </>
     );

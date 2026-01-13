@@ -16,6 +16,7 @@ import {
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormChildProps, FormProps } from "@/lib/types/Form.types";
+import { isDirty } from "zod/v3";
 
 const Form = <T extends FieldValues>({
     onSubmit,
@@ -47,7 +48,11 @@ const Form = <T extends FieldValues>({
     const submitHandler: SubmitHandler<T> = async (data) => {
         await onSubmit(data);
         if (resetOnSubmit) {
-            reset();
+            reset(undefined, {
+                keepDirty: false,
+                keepTouched: false,
+                keepDefaultValues: false,
+            });
         }
     };
 
@@ -83,7 +88,7 @@ const Form = <T extends FieldValues>({
                         disabled:
                             disabled ||
                             isSubmitting ||
-                            (!isFormReset && !Object.keys(dirtyFields).length),
+                            (!isFormReset && !isDirty),
                     });
                 }
 

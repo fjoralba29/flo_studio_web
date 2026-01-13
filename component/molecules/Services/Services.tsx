@@ -46,11 +46,11 @@ const Services = () => {
             {/* Content Container */}
             <div className='w-full p-4  flex flex-col items-center text-white'>
                 {/* Title */}
-                <h1 className='text-4xl md:text-5xl font-bold drop-shadow-lg'>
+                <h1 className='section-title text-4xl md:text-5xl font-bold drop-shadow-lg'>
                     SERVICES
                 </h1>
                 {/* Subtitle */}
-                <p className='mt-2 text-lg md:text-xl opacity-90'>
+                <p className='section-subtitle mt-2 text-lg md:text-xl opacity-90'>
                     From special occasions to styled shoots
                 </p>
                 {/* Cards Grid */}

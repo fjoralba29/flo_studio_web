@@ -11,15 +11,38 @@ export type CreateCategoryPayload = {
 };
 
 // POST API to create a category
-export const createCategory = async (payload: CreateCategoryPayload) => {
-    const res = await axios.post("/api/categories", payload);
+type Props = CreateCategoryPayload & {
+    photos?: { title?: string; url: string; description?: string }[];
+};
+
+export const createCategory = async ({
+    name,
+    description,
+    type,
+    primaryPhoto,
+    photos,
+}: Props) => {
+    const res = await axios.post("/api/categories", {
+        name,
+        description,
+        type,
+        primaryPhoto,
+        photos,
+    });
     return res.data;
 };
 
 export const useCreateCategory = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (payload: CreateCategoryPayload) => createCategory(payload),
+        mutationFn: ({
+            name,
+            description,
+            type,
+            primaryPhoto,
+            photos,
+        }: Props) =>
+            createCategory({ name, description, type, primaryPhoto, photos }),
         onSuccess: () => {
             alert("Category created successfully!");
             queryClient.invalidateQueries({ queryKey: ["categories"] }); // optional: refresh list

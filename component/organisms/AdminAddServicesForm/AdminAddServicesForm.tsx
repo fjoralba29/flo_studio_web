@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@/component/atoms/Button/Button";
 import Form from "@/component/atoms/Form/Form";
 import Input from "@/component/atoms/Input/Input";
@@ -12,6 +14,7 @@ const AdminAddServicesForm = () => {
             ...data,
         });
     };
+
     return (
         <div className='justify-self-start p-5 flex flex-col gap-5'>
             <div className='section-subtitle'>Add Services</div>
@@ -22,18 +25,20 @@ const AdminAddServicesForm = () => {
                 className='flex flex-col gap-5'
                 resetOnSubmit
             >
-                <div className='grid grid-cols-2 gap-5'>
+                {/* Responsive grid: 1 column on mobile, 2 on md+ */}
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
                     <Input
                         name='name'
                         label='Name'
-                        className='!w-[300px]'
+                        className='w-full'
                     />
                     <Input
                         name='description'
                         label='Description'
-                        className='!w-[300px]'
+                        className='w-full'
                     />
                 </div>
+
                 <Button
                     type='submit'
                     className='mt-5 w-[150px] self-end'

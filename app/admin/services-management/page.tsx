@@ -9,11 +9,15 @@ const ServicesManagement = () => {
     return (
         <>
             <AdminHeader />
-            <div className='h-full flex gap-5 '>
-                <div className='flex flex-col gap-5'>
+            <div className=' flex flex-col md:flex-row gap-5 p-5'>
+                {/* Form on top for mobile, side by side on desktop */}
+                <div className='flex-1'>
                     <AdminAddServicesForm />
                 </div>
-                <AdminServicesPanel />
+
+                <div className='flex-2'>
+                    <AdminServicesPanel />
+                </div>
             </div>
             <AdminFooter />
         </>

@@ -1,7 +1,8 @@
 "use client";
 
-import Instagram from "@/assets/icons/Instagram.svg";
+import Instagram from "@/assets/icons/Instagram.svg"; // optional for future use
 import User from "@/assets/icons/User.svg";
+import Menu from "@/assets/icons/Menu.svg"; // hamburger icon
 import { useLogout } from "@/src/apis/auth";
 import { useUserStore } from "@/src/store/userStore";
 import Image from "next/image";
@@ -12,7 +13,6 @@ const AdminHeader = () => {
     const router = useRouter();
     const pathname = usePathname();
 
-    // Define paths where you want the header/footer to appear
     const publicPaths = [
         "/",
         "/wedding",
@@ -25,15 +25,15 @@ const AdminHeader = () => {
         "/admin/user-management",
     ];
 
-    // const showHeader = publicPaths.includes(pathname);
     const showHeader = publicPaths.some((p) => pathname.startsWith(p));
 
-    const [open, setOpen] = useState(false);
-    const menuRef = useRef<HTMLDivElement>(null);
-
     const { user } = useUserStore();
-
     const { mutate: logoutUser } = useLogout();
+
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+    const menuRef = useRef<HTMLDivElement>(null);
 
     // Close dropdown if clicked outside
     useEffect(() => {
@@ -42,7 +42,7 @@ const AdminHeader = () => {
                 menuRef.current &&
                 !menuRef.current.contains(event.target as Node)
             ) {
-                setOpen(false);
+                setDropdownOpen(false);
             }
         };
         document.addEventListener("mousedown", handleClickOutside);
@@ -51,62 +51,55 @@ const AdminHeader = () => {
     }, []);
 
     const handleLogout = () => {
-        // Clear user session logic here (e.g., remove token from storage)
-        // Then redirect to login page
         logoutUser();
+        setDropdownOpen(false);
+        setMobileMenuOpen(false);
     };
+
+    const navLinks = [
+        { label: "Collabs", href: "/admin/page-management" },
+        { label: "Categories", href: "/admin/page-management" },
+        { label: "Services", href: "/admin/services-management" },
+        { label: "Wedding", href: "/wedding" },
+        { label: "Users", href: "/admin/user-management" },
+    ];
 
     return (
         showHeader && (
-            <div className=' bg-grape  flex justify-between px-[80px] py-[30px] items-center'>
-                <a href='/'>
+            <header className='bg-grape text-white px-6 sm:px-12 py-4 flex items-center justify-between relative'>
+                {/* Logo */}
+                <a
+                    href='/'
+                    className='flex-shrink-0'
+                >
                     <Image
-                        src={"/photos/Logo.png"}
+                        src='/photos/Logo.png'
                         alt='Logo'
                         width={60}
                         height={60}
                     />
                 </a>
-                <div className='flex gap-[90px] items-center  justify-self-end'>
-                    <div className='flex gap-[90px] items-center '>
+
+                {/* Desktop nav */}
+                <nav className='hidden md:flex items-center gap-10'>
+                    {navLinks.map((link) => (
                         <a
-                            href='/admin/page-management'
-                            className='text-white navbar'
+                            key={link.label}
+                            href={link.href}
+                            className='navbar'
                         >
-                            Collabs
+                            {link.label}
                         </a>
-                        <a
-                            href='/admin/page-management'
-                            className='text-white navbar'
-                        >
-                            Categories
-                        </a>
-                        <a
-                            href='/admin/services-management'
-                            className='text-white navbar'
-                        >
-                            Services
-                        </a>
-                        <a
-                            href='/wedding'
-                            className='text-white navbar'
-                        >
-                            Wedding
-                        </a>
-                        <a
-                            href='/admin/user-management'
-                            className='text-white navbar'
-                        >
-                            Users
-                        </a>
-                    </div>
+                    ))}
+
+                    {/* User dropdown */}
                     <div
                         className='relative'
                         ref={menuRef}
                     >
                         <div
                             className='cursor-pointer'
-                            onClick={() => setOpen(!open)}
+                            onClick={() => setDropdownOpen(!dropdownOpen)}
                         >
                             <Image
                                 src={User}
@@ -116,20 +109,18 @@ const AdminHeader = () => {
                             />
                         </div>
 
-                        {open && (
-                            <div className='absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-lg z-50'>
+                        {dropdownOpen && (
+                            <div className='absolute right-0 mt-2 w-40 bg-white text-black border rounded-md shadow-lg z-50'>
                                 <ul className='flex flex-col p-2'>
                                     {user ? (
-                                        <>
-                                            <li>
-                                                <button
-                                                    onClick={handleLogout}
-                                                    className='w-full text-left px-4 py-2 hover:bg-gray-100 rounded cursor-pointer'
-                                                >
-                                                    Logout
-                                                </button>
-                                            </li>
-                                        </>
+                                        <li>
+                                            <button
+                                                onClick={handleLogout}
+                                                className='w-full text-left px-4 py-2 hover:bg-gray-100 rounded cursor-pointer'
+                                            >
+                                                Logout
+                                            </button>
+                                        </li>
                                     ) : (
                                         <li>
                                             <button
@@ -146,8 +137,50 @@ const AdminHeader = () => {
                             </div>
                         )}
                     </div>
+                </nav>
+
+                {/* Mobile Hamburger */}
+                <div className='md:hidden flex items-center gap-4'>
+                    <div
+                        className='cursor-pointer'
+                        onClick={() => setDropdownOpen(!dropdownOpen)}
+                    >
+                        <Image
+                            src={User}
+                            alt='User'
+                            width={30}
+                            height={30}
+                        />
+                    </div>
+                    <div
+                        className='cursor-pointer'
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    >
+                        <Image
+                            src={Menu}
+                            alt='Menu'
+                            width={30}
+                            height={30}
+                        />
+                    </div>
                 </div>
-            </div>
+
+                {/* Mobile menu dropdown */}
+                {mobileMenuOpen && (
+                    <div className='absolute top-full left-0 w-full bg-grape text-white shadow-lg flex flex-col items-center py-4 gap-4 md:hidden z-40'>
+                        {navLinks.map((link) => (
+                            <a
+                                key={link.label}
+                                href={link.href}
+                                className='w-full text-center py-2 hover:bg-[#583C84] transition rounded'
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                {link.label}
+                            </a>
+                        ))}
+                    </div>
+                )}
+            </header>
         )
     );
 };

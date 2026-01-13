@@ -42,6 +42,11 @@ const Gallery = ({ images }: GalleryProps) => {
 
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
+    // Loading state for each image
+    const [loadingImages, setLoadingImages] = useState(
+        Array(images.length).fill(true)
+    );
+
     const openImage = (index: number) => setActiveIndex(index);
     const close = () => setActiveIndex(null);
 
@@ -54,6 +59,12 @@ const Gallery = ({ images }: GalleryProps) => {
             i === null ? null : (i - 1 + images.length) % images.length
         );
     }, [images.length]);
+
+    const handleImageLoad = (index: number) => {
+        const newLoading = [...loadingImages];
+        newLoading[index] = false;
+        setLoadingImages(newLoading);
+    };
 
     return (
         <>
@@ -69,8 +80,15 @@ const Gallery = ({ images }: GalleryProps) => {
                         <motion.div
                             key={idx}
                             variants={itemVariants}
-                            className='relative w-full h-40 md:h-48 lg:h-56 overflow-hidden rounded-lg shadow-md group'
+                            className='relative w-full h-40 md:h-48 lg:h-56 overflow-hidden rounded-lg shadow-md group bg-gray-200'
                         >
+                            {/* LOADING SPINNER */}
+                            {loadingImages[idx] && (
+                                <div className='absolute inset-0 flex items-center justify-center'>
+                                    <div className='w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin'></div>
+                                </div>
+                            )}
+
                             {/* CLICKABLE IMAGE */}
                             <div
                                 onClick={() => openImage(idx)}
@@ -80,7 +98,7 @@ const Gallery = ({ images }: GalleryProps) => {
                                     src={src}
                                     alt={`Gallery image ${idx + 1}`}
                                     fill
-                                    className='object-cover transition-transform duration-300 group-hover:scale-110'
+                                    className={`object-cover transition-transform duration-300 group-hover:scale-110`}
                                 />
                             </div>
 
@@ -117,6 +135,13 @@ const Gallery = ({ images }: GalleryProps) => {
                         className='fixed inset-0 z-50 bg-black/90 flex items-center justify-center'
                         onClick={close}
                     >
+                        {/* LOADING SPINNER */}
+                        {loadingImages[activeIndex] && (
+                            <div className='absolute inset-0 flex items-center justify-center'>
+                                <div className='w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin'></div>
+                            </div>
+                        )}
+
                         {/* IMAGE */}
                         <motion.div
                             key={activeIndex}
@@ -132,7 +157,14 @@ const Gallery = ({ images }: GalleryProps) => {
                                 alt='Preview image'
                                 fill
                                 priority
-                                className='object-contain'
+                                className={`object-contain ${
+                                    loadingImages[activeIndex]
+                                        ? "opacity-0"
+                                        : "opacity-100"
+                                }`}
+                                onLoadingComplete={() =>
+                                    handleImageLoad(activeIndex)
+                                }
                             />
                         </motion.div>
 
