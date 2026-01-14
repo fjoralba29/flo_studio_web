@@ -27,8 +27,11 @@ const PortfolioPage = () => {
 
     const photoUrls =
         photoData?.photos?.length > 0
-            ? photoData.photos?.map((item: any) => item.url)
+            ? photoData.photos?.map((item: any) => {
+                  return { url: item.url, id: item.id };
+              })
             : [];
+    console.log(photoUrls);
 
     return (
         <div className='bg-grape min-h-screen'>

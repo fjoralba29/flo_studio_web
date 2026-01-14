@@ -1,4 +1,5 @@
 import Button from "@/component/atoms/Button/Button";
+import { useDeleteEventToUser } from "@/src/apis/addUserData";
 import { useAddUserDataStore } from "@/src/store/addUserData";
 import { useUserStore } from "@/src/store/userStore";
 
@@ -21,6 +22,14 @@ const EventsMenu = ({ events }: EventProp) => {
     const setSelectedEventId = useAddUserDataStore((s) => s.setSelectedEventId);
     const selectedEventId = useAddUserDataStore((s) => s.selectedEventId);
 
+    const { mutate: deleteEventToUser } = useDeleteEventToUser();
+
+    const handleDeleteEvent = (eventId: number) => {
+        // Implement event deletion logic here
+        console.log("Delete event:", eventId);
+        deleteEventToUser({ userEventId: eventId });
+    };
+
     return (
         <div className='flex flex-col md:flex-row justify-between gap-4 p-4 md:p-5 bg-grey-light rounded-lg'>
             {/* Events Buttons */}
@@ -41,7 +50,12 @@ const EventsMenu = ({ events }: EventProp) => {
                             >
                                 {event.event.name}
                             </Button>
-                            <Button theme='ghost'>🗑️</Button>
+                            <Button
+                                theme='ghost'
+                                onClick={() => handleDeleteEvent(event.id)}
+                            >
+                                🗑️
+                            </Button>
                         </div>
                     ))}
                 </div>

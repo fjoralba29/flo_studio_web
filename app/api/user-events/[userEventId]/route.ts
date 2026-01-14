@@ -1,54 +1,69 @@
+import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
 
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME!,
-    api_key: process.env.CLOUDINARY_API_KEY!,
-    api_secret: process.env.CLOUDINARY_API_SECRET!,
-});
+const getCloudinaryPublicId = (url: string) => {
+    if (!url) return null;
+    const parts = url.split("/");
+    const filename = parts[parts.length - 1];
+    return filename?.split(".")[0] ?? null;
+};
 
 export async function DELETE(
-    req: NextRequest,
+    req: Request,
     { params }: { params: Promise<{ userEventId: string }> }
 ) {
-    const { userEventId } = await params;
-    const id = Number(userEventId);
-
-    if (isNaN(id)) {
-        return NextResponse.json(
-            { error: "Invalid userEventId" },
-            { status: 400 }
-        );
-    }
-
     try {
-        // 1. Fetch all photos to clean Cloudinary
-        const photos = await prisma.photo.findMany({
-            where: { userEventId: id },
-            select: { url: true },
+        const { userEventId } = await params;
+        const id = Number(userEventId);
+
+        if (isNaN(id)) {
+            return NextResponse.json({ error: "Invalid id" }, { status: 400 });
+        }
+
+        // 1️⃣ Find user-event with photos
+        const userEvent = await prisma.userEvent.findUnique({
+            where: { id: id },
+            include: {
+                photos: true,
+            },
         });
 
-        // 2. Delete Cloudinary images
-        for (const p of photos) {
-            const publicId = p.url.split("/").pop()?.split(".")[0];
-            if (publicId) {
+        if (!userEvent) {
+            return NextResponse.json(
+                { error: "UserEvent not found" },
+                { status: 404 }
+            );
+        }
+
+        // 2️⃣ Delete Cloudinary images
+        for (const photo of userEvent.photos) {
+            const publicId = getCloudinaryPublicId(photo.url);
+            if (!publicId) continue;
+
+            try {
                 await cloudinary.uploader.destroy(publicId);
+            } catch (err) {
+                console.warn("Cloudinary delete failed:", publicId);
             }
         }
 
-        // 3. Delete UserEvent → deletes photos automatically due to FK
-        await prisma.userEvent.delete({
+        // 3️⃣ Delete photos from DB
+        await prisma.photo.deleteMany({
             where: { id },
         });
 
-        return NextResponse.json({
-            message: "Event and all related data deleted",
+        // 4️⃣ Delete user-event (urls array removed automatically)
+        await prisma.userEvent.delete({
+            where: { id: id },
         });
+
+        return NextResponse.json({ success: true });
     } catch (error) {
-        console.error(error);
+        console.error("DELETE USER EVENT ERROR:", error);
+
         return NextResponse.json(
-            { error: "Failed to delete event" },
+            { error: "Failed to delete user event" },
             { status: 500 }
         );
     }

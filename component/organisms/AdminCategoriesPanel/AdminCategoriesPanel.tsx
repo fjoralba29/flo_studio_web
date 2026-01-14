@@ -32,7 +32,10 @@ const AdminCategoriesPanel = () => {
     const { data: photoData = [] } = useGetPhotosByCategoryID();
     const photoUrls =
         photoData?.photos?.length > 0
-            ? photoData.photos?.map((item: any) => item.url)
+            ? photoData.photos?.map((item: any) => ({
+                  url: item.url,
+                  id: item.id,
+              }))
             : [];
 
     const handleDeleteCategory = (categoryId: number) => {

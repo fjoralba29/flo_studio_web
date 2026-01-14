@@ -1,5 +1,6 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export const useUploadImage = () => {
     return useMutation({
@@ -35,6 +36,38 @@ export const useUploadImage = () => {
             console.log(res.data.imageUrl);
 
             return res.data.imageUrl;
+        },
+    });
+};
+
+export const deletePhotos = async (id: number) => {
+    const res = await axios.delete(`/api/photos/${id}`);
+    return res.data;
+};
+
+export const useDeletePhotos = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (id: number) => deletePhotos(id),
+
+        onSuccess: () => {
+            toast.success("Photos deleted successfully");
+            queryClient.invalidateQueries({
+                queryKey: [
+                    "categories",
+                    "category-photos",
+                    "photos",
+                    "event-photos",
+                    "user-photos",
+                ],
+            });
+        },
+
+        onError: (err: any) => {
+            toast.error(
+                err?.response?.data?.error || "Failed to delete Photos"
+            );
         },
     });
 };

@@ -16,6 +16,7 @@ const AddUrlsModal = () => {
 
     const setSelectedUrls = useAddUserDataStore((s) => s.setSelectedUrls);
     const selectedUrls = useAddUserDataStore((s) => s.selectedUrls);
+    const resetSelectedUrls = useAddUserDataStore((s) => s.resetSelectedUrls);
     const selectedEventId = useAddUserDataStore((s) => s.selectedEventId);
     const addUrls = useAddUrlsToUserEvent();
 
@@ -25,6 +26,7 @@ const AddUrlsModal = () => {
             urls: selectedUrls,
         });
         setUrlsModalOpen(false);
+        resetSelectedUrls();
     };
 
     return (
@@ -33,6 +35,7 @@ const AddUrlsModal = () => {
             isOpen={isUrlsModalOpen}
             onClose={() => {
                 setUrlsModalOpen(false);
+                resetSelectedUrls();
             }}
         >
             <div className='flex flex-col gap-[20px]'>

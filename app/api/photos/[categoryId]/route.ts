@@ -1,3 +1,4 @@
+import cloudinary from "@/lib/cloudinary";
 import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -93,6 +94,72 @@ export async function POST(
         console.error(error);
         return NextResponse.json(
             { error: "Internal server error" },
+            { status: 500 }
+        );
+    }
+}
+
+/**
+ * Extract Cloudinary public_id from image URL
+ */
+const getCloudinaryPublicId = (url: string) => {
+    const parts = url.split("/");
+    const filename = parts[parts.length - 1];
+    return filename.split(".")[0];
+};
+
+export async function DELETE(
+    req: Request,
+    context: { params: Promise<{ categoryId: string }> }
+) {
+    try {
+        const { categoryId } = await context.params;
+        const photoId = Number(categoryId);
+        if (isNaN(photoId)) {
+            return NextResponse.json(
+                { error: "Invalid photo id" },
+                { status: 400 }
+            );
+        }
+
+        // 1️⃣ Find photo
+        const photo = await prisma.photo.findUnique({
+            where: { id: photoId },
+            include: {
+                category: true,
+            },
+        });
+
+        if (!photo) {
+            return NextResponse.json(
+                { error: "Photo not found" },
+                { status: 404 }
+            );
+        }
+
+        // 2️⃣ Delete from Cloudinary
+        const publicId = getCloudinaryPublicId(photo.url);
+        await cloudinary.uploader.destroy(publicId);
+
+        // 3️⃣ Clear category primary photo if needed
+        if (photo.category && photo.category.primaryPhoto === photo.url) {
+            await prisma.category.update({
+                where: { id: photo.category.id },
+                data: { primaryPhoto: null },
+            });
+        }
+
+        // 4️⃣ Delete photo record
+        await prisma.photo.delete({
+            where: { id: photoId },
+        });
+
+        return NextResponse.json({ success: true });
+    } catch (error) {
+        console.error("DELETE PHOTO ERROR:", error);
+
+        return NextResponse.json(
+            { error: "Failed to delete photo" },
             { status: 500 }
         );
     }

@@ -2,16 +2,25 @@
 
 import Download from "@/assets/icons/Download.svg";
 import Button from "@/component/atoms/Button/Button";
+import { useDeleteUserEventUrl } from "@/src/apis/addUserData";
 import { useUserStore } from "@/src/store/userStore";
 import Image from "next/image";
 
 interface UrlWithDownloadProps {
-    urls: { url: string; label?: string }[];
+    urls: { url: string; label?: string; eventId: number }[];
 }
 
 export default function UrlWithDownload({ urls }: UrlWithDownloadProps) {
     const user = useUserStore((state) => state.user);
     const { type } = user || {};
+
+    const { mutate: deleteUrl } = useDeleteUserEventUrl();
+
+    const handleDeleteUrl = (url: string, eventId: number) => {
+        // Implement URL deletion logic here
+        console.log("Delete URL:", url);
+        deleteUrl({ userEventId: eventId, url });
+    };
 
     return (
         <div className='space-y-2'>
@@ -47,7 +56,14 @@ export default function UrlWithDownload({ urls }: UrlWithDownloadProps) {
                                 />
                             </a>
                             {type === "Admin" && (
-                                <Button theme='ghost'>🗑️</Button>
+                                <Button
+                                    theme='ghost'
+                                    onClick={() =>
+                                        handleDeleteUrl(item.url, item.eventId)
+                                    }
+                                >
+                                    🗑️
+                                </Button>
                             )}
                         </div>
                     );

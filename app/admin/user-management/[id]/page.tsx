@@ -25,9 +25,13 @@ const UserDetailsPage = () => {
 
     const photos =
         events.find((e: any) => e.id === selectedEventId)?.photos || [];
-    const photosUrls = Array.from(photos.map((p: any) => p.url)) || [];
+    const photosUrls =
+        Array.from(photos.map((p: any) => ({ url: p.url, id: p.id }))) || [];
     const urls = events.find((e: any) => e.id === selectedEventId)?.urls || [];
-    const formattedUrls = urls.map((item: string) => ({ url: item }));
+    const formattedUrls = urls.map((item: string) => ({
+        url: item,
+        eventId: selectedEventId,
+    }));
 
     const setPhotoModalOpen = useAddUserDataStore((s) => s.setPhotoModalOpen);
     const setUrlsModalOpen = useAddUserDataStore((s) => s.setUrlsModalOpen);
@@ -70,7 +74,7 @@ const UserDetailsPage = () => {
                                 Add Photos
                             </Button>
                         </div>
-                        <Gallery images={photosUrls as string[]} />
+                        <Gallery images={photosUrls as any} />
                     </div>
 
                     {/* URLs */}
