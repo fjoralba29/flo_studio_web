@@ -50,11 +50,11 @@ const Services = () => {
                     SERVICES
                 </h1>
                 {/* Subtitle */}
-                <p className='section-subtitle mt-2 text-lg md:text-xl opacity-90'>
+                <p className='section-subtitle mt-2 text-lg md:text-xl opacity-90 text-center'>
                     From special occasions to styled shoots
                 </p>
                 {/* Cards Grid */}
-                <div className='flex items-center gap-4 mx-[80px] p-[60px] flex-wrap justify-center'>
+                <div className='flex items-center gap-4 mx-[80px] md:p-[60px] p-[15px] flex-wrap justify-center'>
                     {services.map((card: any, index: number) => {
                         const row = Math.floor(index / 2);
                         const isFirstInRow = index % 2 === 0;

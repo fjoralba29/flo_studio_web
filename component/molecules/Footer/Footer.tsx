@@ -28,112 +28,73 @@ const Footer = () => {
     };
 
     return (
-        <footer className='bg-grape text-white px-6 sm:px-10 lg:px-[100px] py-12 shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.3)]'>
-            <div className='flex flex-col lg:flex-row justify-between gap-12'>
+        <footer className='bg-grape text-white px-6 sm:px-10 lg:px-[100px] pt-12 py-6 shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.3)]'>
+            <div className='flex flex-col  justify-between gap-12'>
                 {/* LEFT SIDE */}
-                <div className='flex flex-col gap-6 items-center lg:items-start text-center lg:text-left'>
+                <div className='flex flex-col lg:flex-row gap-12 lg:gap-64 justify-evenly items-center lg:items-start text-center lg:text-left'>
                     <Image
                         src='/photos/Logo.png'
                         alt='Logo'
-                        width={120}
-                        height={120}
+                        width={300}
+                        height={300}
                     />
-
-                    <div className='flex items-center gap-2 text-sm'>
-                        <Image
-                            src={Location}
-                            alt='Location'
-                        />
-                        Tirane, Albania
-                    </div>
-
-                    <div className='flex items-center gap-2 text-sm'>
-                        <Image
-                            src={Phone}
-                            alt='Phone'
-                        />
-                        (+355) 68 501 7244
-                    </div>
-
-                    <div className='flex items-center gap-2 text-sm'>
-                        <Image
-                            src={Email}
-                            alt='Email'
-                        />
-                        flostudio.al@gmail.com
-                    </div>
-
-                    <div className='flex items-center gap-2 text-sm'>
-                        <Image
-                            src={Web}
-                            alt='Web'
-                        />
-                        flostudio.al
-                    </div>
-
-                    <div className='flex gap-4 mt-2'>
-                        <a
-                            href='https://www.instagram.com/flostudio.al'
-                            target='_blank'
-                        >
+                    <div className='flex flex-col gap-6 items-center lg:items-start text-center lg:text-left'>
+                        <div className='flex items-center gap-2 text-sm'>
                             <Image
-                                src={InstagramFill}
-                                alt='Instagram'
+                                src={Location}
+                                alt='Location'
                             />
-                        </a>
-                        <a
-                            href='https://wa.me/355685017244'
-                            target='_blank'
-                        >
+                            Tirane, Albania
+                        </div>
+
+                        <div className='flex items-center gap-2 text-sm'>
                             <Image
-                                src={Whatsapp}
-                                alt='Whatsapp'
+                                src={Phone}
+                                alt='Phone'
                             />
-                        </a>
+                            (+355) 68 501 7244
+                        </div>
+
+                        <div className='flex items-center gap-2 text-sm'>
+                            <Image
+                                src={Email}
+                                alt='Email'
+                            />
+                            flostudio.al@gmail.com
+                        </div>
+
+                        <div className='flex items-center gap-2 text-sm'>
+                            <Image
+                                src={Web}
+                                alt='Web'
+                            />
+                            flostudio.al
+                        </div>
+
+                        <div className='flex gap-4 mt-2'>
+                            <a
+                                href='https://www.instagram.com/flostudio.al'
+                                target='_blank'
+                            >
+                                <Image
+                                    src={InstagramFill}
+                                    alt='Instagram'
+                                />
+                            </a>
+                            <a
+                                href='https://wa.me/355685017244'
+                                target='_blank'
+                            >
+                                <Image
+                                    src={Whatsapp}
+                                    alt='Whatsapp'
+                                />
+                            </a>
+                        </div>
                     </div>
                 </div>
-
-                {/* RIGHT SIDE */}
-                <div className='w-full max-w-md mx-auto lg:mx-0'>
-                    <Form
-                        onSubmit={handleSubmit}
-                        defaultValues={{}}
-                        schema={formSchema}
-                        resetOnSubmit
-                        className='flex flex-col gap-5'
-                    >
-                        <h3 className='section-title text-center'>Log in</h3>
-
-                        <Input
-                            name='email'
-                            label='Email'
-                        />
-                        <Input
-                            name='password'
-                            label='Password'
-                            type='password'
-                        />
-
-                        <div className='flex flex-col gap-2'>
-                            <Button
-                                type='submit'
-                                theme='primary'
-                                className='!bg-lila'
-                            >
-                                Login
-                            </Button>
-
-                            <div className='flex justify-center gap-1 text-sm'>
-                                <span>Don&apos;t have an account?</span>
-                                <a
-                                    href='/register'
-                                    className='font-semibold'
-                                >
-                                    Register
-                                </a>
-                            </div>
-                        </div>
-                    </Form>
+                <div className='w-full text-center text-sm text-white/70 py-4 bg-grape border-t'>
+                    © 2026 Flo Studio. All rights reserved.
                 </div>
             </div>
         </footer>

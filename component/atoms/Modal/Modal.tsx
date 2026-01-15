@@ -60,12 +60,15 @@ const ModalHeader = ({
                 {onClose && (
                     <Image
                         src={CloseCircleIcon}
+                        width={16}
+                        height={16}
                         alt='Close'
                         className={cn(
                             "cursor-pointer",
                             "fill-black",
                             "hover:fill-white"
                         )}
+                        onClick={onClose}
                     />
                 )}
             </div>

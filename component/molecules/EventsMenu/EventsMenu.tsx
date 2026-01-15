@@ -33,8 +33,8 @@ const EventsMenu = ({ events }: EventProp) => {
     return (
         <div className='flex flex-col md:flex-row justify-between gap-4 p-4 md:p-5 bg-grey-light rounded-lg'>
             {/* Events Buttons */}
-            <div className='overflow-x-auto whitespace-nowrap scrollbar-hide py-2'>
-                <div className='inline-flex gap-2'>
+            <div className=' whitespace-nowrap scrollbar-hide py-2'>
+                <div className='inline-flex gap-2 flex flex-wrap'>
                     {events?.map((event: any, index: number) => (
                         <div
                             key={index}

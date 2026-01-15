@@ -9,6 +9,7 @@ import { useGetUserById } from "@/src/apis/users";
 import { useAddUserDataStore } from "@/src/store/addUserData";
 import UserHeader from "@/component/molecules/Header/UserHeader";
 import UserFooter from "@/component/molecules/Footer/UserFooter";
+import { getRandomPhotoFromEvents } from "@/helpers/randomProfilePhoto";
 
 const UserProfile = () => {
     const { user } = useUserStore();
@@ -30,6 +31,9 @@ const UserProfile = () => {
         label: item,
     }));
 
+    const profilePhoto = getRandomPhotoFromEvents(events);
+    console.log(profilePhoto?.photo?.url, "profileeee");
+
     return (
         <>
             <UserHeader />
@@ -43,7 +47,7 @@ const UserProfile = () => {
                 {/* Profile Info */}
                 <div className='flex flex-col md:flex-row items-center md:items-end gap-6 md:gap-[100px] px-4 md:px-[150px] mt-[-100px] md:mt-[-150px]'>
                     <Image
-                        src={"/photos/image11.png"}
+                        src={profilePhoto?.photo?.url || ""}
                         alt='Profile'
                         width={200}
                         height={200}

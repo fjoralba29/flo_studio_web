@@ -1,5 +1,6 @@
 import Footer from "@/component/molecules/Footer/Footer";
 import Header from "@/component/molecules/Header/Header";
+import Instagram from "@/assets/icons/Instagram.svg";
 import Image from "next/image";
 
 const ContactPage = () => {
@@ -24,88 +25,83 @@ const ContactPage = () => {
             </div>
 
             {/* Main Content */}
-            <div className='max-w-6xl mx-auto px-6 sm:px-10 lg:px-24 py-12 space-y-16'>
-                {/* Hero Text */}
-                <section className='text-center space-y-4'>
-                    <h1 className='text-3xl sm:text-4xl md:text-5xl font-bold'>
-                        Let’s Create Something Beautiful
-                    </h1>
-                    <p className='text-gray-600 max-w-2xl mx-auto text-sm sm:text-base md:text-lg'>
-                        Have a project in mind or want to book a session? Fill
-                        out the form below and I’ll get back to you as soon as
-                        possible.
-                    </p>
-                </section>
 
-                {/* Form & Image */}
-                <section className='grid grid-cols-1 md:grid-cols-2 gap-12 items-start md:items-center'>
-                    {/* Left: Image */}
-                    <div className='relative w-full h-64 sm:h-80 md:h-96 rounded-lg overflow-hidden'>
-                        <Image
-                            src='/photos/LogoColor.png' // replace with your image
-                            alt='Photography contact'
-                            fill
-                            className='object-cover'
-                        />
+            <main
+                className='min-h-screen flex items-center justify-center px-6 
+    bg-gradient-to-br from-[#372E39] via-[#2A222C] to-[#1E191F]'
+            >
+                <div
+                    className='max-w-3xl w-full rounded-2xl 
+        bg-white/10 backdrop-blur-xl 
+        border border-white/15 
+        text-white p-10 text-center space-y-10 shadow-2xl'
+                >
+                    {/* Title */}
+                    {/* <h1 className='text-4xl md:text-5xl font-light tracking-wide'>
+                        Contact
+                    </h1> */}
+
+                    {/* Subtitle */}
+                    <p className='text-white/70 text-lg leading-relaxed'>
+                        Let’s work together. For collaborations, bookings, or
+                        questions — reach out directly.
+                    </p>
+
+                    {/* Contact Info */}
+                    <div className='flex flex-col gap-6 text-lg'>
+                        {/* Email */}
+                        <div>
+                            <span className='block text-sm text-white/50'>
+                                Email
+                            </span>
+                            <a
+                                href='mailto:hello@flostudio.al'
+                                className='hover:underline'
+                            >
+                                hello@flostudio.al
+                            </a>
+                        </div>
+
+                        {/* Phone */}
+                        <div>
+                            <span className='block text-sm text-white/50'>
+                                Phone / WhatsApp
+                            </span>
+                            <a
+                                href='tel:+355690000000'
+                                className='hover:underline'
+                            >
+                                +355 69 000 0000
+                            </a>
+                        </div>
+
+                        {/* Instagram */}
+                        <div className='flex flex-col items-center gap-2'>
+                            <span className='block text-sm text-white/50'>
+                                Instagram
+                            </span>
+                            <a
+                                href='https://www.instagram.com/flostudio.al'
+                                target='_blank'
+                                className='flex items-center gap-2 hover:opacity-80'
+                            >
+                                <Image
+                                    src={Instagram}
+                                    alt='Instagram'
+                                    width={22}
+                                    height={22}
+                                />
+                                @flostudio.al
+                            </a>
+                        </div>
                     </div>
 
-                    {/* Right: Form */}
-                    <form className='space-y-6 w-full'>
-                        <div>
-                            <label className='block text-sm font-medium mb-1'>
-                                Full Name
-                            </label>
-                            <input
-                                type='text'
-                                placeholder='Your name'
-                                className='w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black'
-                            />
-                        </div>
-
-                        <div>
-                            <label className='block text-sm font-medium mb-1'>
-                                Email Address
-                            </label>
-                            <input
-                                type='email'
-                                placeholder='you@email.com'
-                                className='w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black'
-                            />
-                        </div>
-
-                        <div>
-                            <label className='block text-sm font-medium mb-1'>
-                                Type of Shoot
-                            </label>
-                            <select className='w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black'>
-                                <option>Wedding</option>
-                                <option>Portrait</option>
-                                <option>Lifestyle</option>
-                                <option>Commercial</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label className='block text-sm font-medium mb-1'>
-                                Message
-                            </label>
-                            <textarea
-                                rows={5}
-                                placeholder='Tell me about your project...'
-                                className='w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-black'
-                            />
-                        </div>
-
-                        <button
-                            type='submit'
-                            className='w-full bg-black text-white py-3 rounded-full font-semibold hover:bg-gray-800 transition'
-                        >
-                            Send Message
-                        </button>
-                    </form>
-                </section>
-            </div>
+                    {/* Footer note */}
+                    <p className='text-sm text-white/40 pt-10'>
+                        Based in Albania · Available worldwide
+                    </p>
+                </div>
+            </main>
 
             <Footer />
         </>
@@ -113,3 +109,28 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
+
+//  <div className='max-w-6xl mx-auto px-6 sm:px-10 lg:px-24 py-12 space-y-16'>
+//                 {/* Hero Text */}
+//                 <section className='text-center space-y-4'>
+//                     <h1 className='text-3xl sm:text-4xl md:text-5xl font-bold'>
+//                         Let’s Create Something Beautiful
+//                     </h1>
+//                     <p className='text-gray-600 max-w-2xl mx-auto text-sm sm:text-base md:text-lg'>
+//                         Have a project in mind or want to book a session? Fill
+//                         out the form below and I’ll get back to you as soon as
+//                         possible.
+//                     </p>
+//                 </section>
+
+//                 {/* Form & Image */}
+//                 <section className='grid grid-cols-1 md:grid-cols-2 gap-12 items-start md:items-center'>
+//                     {/* Left: Image */}
+//                     <div className='relative w-full h-64 sm:h-80 md:h-96 rounded-lg overflow-hidden'>
+//                         <Image
+//                             src='/photos/LogoColor.png' // replace with your image
+//                             alt='Photography contact'
+//                             fill
+//                             className='object-cover'
+//                         />
+//                     </div>

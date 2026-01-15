@@ -66,6 +66,9 @@ const DropzoneItemPictureCard = ({
                         <Image
                             src={Trash}
                             alt={"Trash"}
+                            // fill
+                            width={12}
+                            height={12}
                             onClick={handleOnReject}
                             className='cursor-pointer min-w-3 min-h-3 fill-secondary-text'
                         />

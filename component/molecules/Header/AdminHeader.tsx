@@ -166,13 +166,14 @@ const AdminHeader = () => {
                 </div>
 
                 {/* Mobile menu dropdown */}
+                {/* Mobile menu full-screen */}
                 {mobileMenuOpen && (
-                    <div className='absolute top-full left-0 w-full bg-grape text-white shadow-lg flex flex-col items-center py-4 gap-4 md:hidden z-40'>
+                    <div className='fixed top-[64px] left-0 right-0 bottom-0 z-40 bg-grape backdrop-blur-sm flex flex-col items-center justify-center gap-6 text-white text-xl md:hidden'>
                         {navLinks.map((link) => (
                             <a
                                 key={link.label}
                                 href={link.href}
-                                className='w-full text-center py-2 hover:bg-[#583C84] transition rounded'
+                                className='w-full text-center py-4 hover:bg-[#583C84] transition rounded'
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 {link.label}

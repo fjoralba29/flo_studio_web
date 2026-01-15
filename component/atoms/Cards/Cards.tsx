@@ -22,7 +22,7 @@ const Cards = ({
     // Text visibility logic
     const textVisibility =
         type === "collaboration"
-            ? "opacity-0 group-hover:opacity-100"
+            ? "opacity-100 md:opacity-0 md:group-hover:opacity-100"
             : "opacity-100";
 
     // Responsive card sizing
@@ -51,18 +51,20 @@ const Cards = ({
             onClick={onClick}
         >
             {/* Image */}
-            <Image
-                src={photo}
-                alt={title || "Card Image"}
-                fill
-                sizes='(max-width: 640px) 100vw,
-                       (max-width: 1024px) 50vw,
-                       25vw'
-                className='object-cover'
-            />
+            {photo && (
+                <Image
+                    src={photo}
+                    alt={title || "Card Image"}
+                    fill
+                    sizes='(max-width: 640px) 100vw,
+                           (max-width: 1024px) 50vw,
+                           25vw'
+                    className='object-cover'
+                />
+            )}
 
             {/* Gradient overlay */}
-            <div className='absolute inset-0 bg-gradient-to-t from-[#372E39] via-[#372E39]/60 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300' />
+            <div className='absolute inset-0 bg-gradient-to-t from-[#372E39] via-[#372E39]/60 to-transparent opacity-80 md:group-hover:opacity-90 transition-opacity duration-300' />
 
             {/* Text */}
             <div

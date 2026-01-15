@@ -91,7 +91,7 @@ const Header = () => {
     return (
         <header className='absolute top-0 left-0 right-0 z-50'>
             {/* TOP BAR */}
-            <div className='flex items-center justify-between px-6 sm:px-10 lg:px-[80px] py-6'>
+            <div className='flex relative z-99 items-center justify-between px-6 sm:px-10 lg:px-[80px] py-6'>
                 {/* Instagram */}
                 <a
                     href='https://www.instagram.com/flostudio.al'
@@ -187,7 +187,7 @@ const Header = () => {
 
             {/* MOBILE MENU */}
             {mobileMenuOpen && (
-                <div className='lg:hidden bg-black/90 backdrop-blur-md px-6 py-8 flex flex-col gap-6 text-center'>
+                <div className='fixed inset-0 z-40 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center gap-6 text-white text-xl lg:hidden'>
                     <NavLinks />
                 </div>
             )}

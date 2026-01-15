@@ -45,9 +45,11 @@ export const useCreateCategory = () => {
             createCategory({ name, description, type, primaryPhoto, photos }),
         onSuccess: () => {
             alert("Category created successfully!");
+            toast.success("Category created successfully!");
             queryClient.invalidateQueries({ queryKey: ["categories"] }); // optional: refresh list
         },
         onError: () => {
+            toast.error("Failed to create category");
             alert("Failed to create category");
         },
     });

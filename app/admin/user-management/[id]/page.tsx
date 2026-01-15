@@ -70,6 +70,7 @@ const UserDetailsPage = () => {
                                 theme='primary'
                                 size='xs'
                                 onClick={() => setPhotoModalOpen(true)}
+                                disabled={!selectedEventId}
                             >
                                 Add Photos
                             </Button>
@@ -85,6 +86,7 @@ const UserDetailsPage = () => {
                                 theme='primary'
                                 size='xs'
                                 onClick={() => setUrlsModalOpen(true)}
+                                disabled={!selectedEventId}
                             >
                                 Add Urls
                             </Button>

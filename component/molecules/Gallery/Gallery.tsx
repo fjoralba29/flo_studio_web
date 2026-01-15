@@ -6,6 +6,7 @@ import { motion, AnimatePresence, Transition } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useUserStore } from "@/src/store/userStore";
 import { useDeletePhotos } from "@/src/apis/uploadImage";
+import { usePathname } from "next/navigation";
 
 type GalleryImage = {
     id: number;
@@ -46,6 +47,7 @@ const Gallery = ({ images }: GalleryProps) => {
     const { mutate: deletePhoto } = useDeletePhotos();
     const user = useUserStore((state) => state.user);
     const { type } = user || {};
+    const pathname = usePathname();
 
     /** 🔥 LOCAL OPTIMISTIC STATE */
     const [galleryImages, setGalleryImages] = useState<GalleryImage[]>(images);
@@ -87,10 +89,12 @@ const Gallery = ({ images }: GalleryProps) => {
     /** 🗑️ DELETE (OPTIMISTIC) */
     const handleDeleteImage = (imageId: number) => {
         setGalleryImages((prev) => prev.filter((img) => img.id !== imageId));
-
         setActiveIndex(null);
         deletePhoto(imageId);
     };
+
+    /** ✅ Determine if trash should be visible */
+    const canDelete = type === "Admin" && pathname !== "/portfolio"; // only admins OR non-portfolio paths
 
     return (
         <>
@@ -102,53 +106,51 @@ const Gallery = ({ images }: GalleryProps) => {
                 className='w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'
             >
                 {galleryImages.length > 0 ? (
-                    galleryImages.map((image, idx) => {
-                        return (
-                            <motion.div
-                                key={image.id}
-                                variants={itemVariants}
-                                className='relative w-full h-40 md:h-48 lg:h-56 overflow-hidden rounded-lg shadow-md group bg-gray-200'
-                            >
-                                {/* LOADING */}
-                                {loadingImages[idx] && (
-                                    <div className='absolute inset-0 flex items-center justify-center'>
-                                        <div className='w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin' />
-                                    </div>
-                                )}
-
-                                {/* IMAGE */}
-                                <div
-                                    onClick={() => openImage(idx)}
-                                    className='absolute inset-0 cursor-pointer'
-                                >
-                                    <Image
-                                        src={image.url}
-                                        alt={`Gallery image ${idx + 1}`}
-                                        fill
-                                        className='object-cover transition-transform duration-300 group-hover:scale-110'
-                                        onLoadingComplete={() =>
-                                            handleImageLoad(idx)
-                                        }
-                                    />
+                    galleryImages.map((image, idx) => (
+                        <motion.div
+                            key={image.id}
+                            variants={itemVariants}
+                            className='relative w-full h-40 md:h-48 lg:h-56 overflow-hidden rounded-lg shadow-md group bg-gray-200'
+                        >
+                            {/* LOADING */}
+                            {loadingImages[idx] && (
+                                <div className='absolute inset-0 flex items-center justify-center'>
+                                    <div className='w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin' />
                                 </div>
+                            )}
 
-                                {/* ADMIN DELETE */}
-                                {type === "Admin" && (
-                                    <div className='absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none'>
-                                        <button
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                handleDeleteImage(image.id);
-                                            }}
-                                            className='pointer-events-auto p-3 bg-red-600 text-white rounded-full hover:bg-red-700 transition'
-                                        >
-                                            🗑️
-                                        </button>
-                                    </div>
-                                )}
-                            </motion.div>
-                        );
-                    })
+                            {/* IMAGE */}
+                            <div
+                                onClick={() => openImage(idx)}
+                                className='absolute inset-0 cursor-pointer'
+                            >
+                                <Image
+                                    src={image.url}
+                                    alt={`Gallery image ${idx + 1}`}
+                                    fill
+                                    className='object-cover transition-transform duration-300 group-hover:scale-110'
+                                    onLoadingComplete={() =>
+                                        handleImageLoad(idx)
+                                    }
+                                />
+                            </div>
+
+                            {/* DELETE BUTTON */}
+                            {canDelete && (
+                                <div className='absolute inset-0 bg-black/40 flex items-start justify-start pointer-events-none md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200'>
+                                    <button
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleDeleteImage(image.id);
+                                        }}
+                                        className='pointer-events-auto p-3 text-white rounded-full hover:bg-red-700 transition'
+                                    >
+                                        🗑️
+                                    </button>
+                                </div>
+                            )}
+                        </motion.div>
+                    ))
                 ) : (
                     <div className='col-span-full flex items-center justify-center text-gray-500'>
                         No images available.
