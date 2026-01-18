@@ -40,9 +40,9 @@ const PortfolioPage = () => {
             {/* Hero Section */}
             <div className='relative'>
                 <div
-                    className='bg-gradient-to-t from-[#372e39] to-white w-full bg-cover bg-center h-64 sm:h-80 md:h-96 lg:h-[400px]'
+                    className='bg-gradient-to-t from-[#0D0B0F] to-white w-full bg-cover bg-center h-64 sm:h-80 md:h-96 lg:h-[400px]'
                     style={{
-                        backgroundImage: `linear-gradient(to top, #372e39, transparent), url("/photos/image38.png")`,
+                        backgroundImage: `linear-gradient(to top, #0D0B0F, transparent), url("/photos/image38.png")`,
                     }}
                 />
                 <div className='absolute top-24 sm:top-32 md:top-36 left-0 right-0 text-center text-white flex flex-col gap-2'>

@@ -33,9 +33,9 @@ const Services = () => {
     return (
         <section className='relative w-full min-h-screen flex items-center justify-center py-4'>
             {/* Background Image */}
-            <div className='absolute inset-0 -z-10'>
+            <div className='absolute inset-0 -z-10 bg-[#161219]'>
                 <Image
-                    src={"/photos/image35.jpg"}
+                    src={"/photos/Back.jpg"}
                     alt='Background'
                     fill
                     className='object-cover opacity-70'

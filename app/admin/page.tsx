@@ -44,6 +44,9 @@ const AdminDashboard = () => {
                         type={"category"}
                         title='Add weddings'
                         // className='!w-[90%] sm:!w-[400px] !h-[300px]'
+                        onClick={() => {
+                            window.location.href = "/admin/wedding-management";
+                        }}
                     />
                     <Cards
                         photo={"/photos/image10.png"}

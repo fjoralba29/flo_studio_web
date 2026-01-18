@@ -31,7 +31,7 @@ const FloatingNav = ({ menuItems }: Props) => {
     return (
         <div className='p-4 sm:p-10'>
             {/* Flex container: vertical on md+, horizontal scrollable on mobile */}
-            <div className='flex flex-row md:flex-col items-center md:items-center gap-6 md:gap-10 overflow-x-auto md:overflow-visible px-6 md:px-4 py-6 md:py-6 rounded-2xl shadow-xl'>
+            <div className='flex flex-row md:flex-col items-center md:items-center gap-6 md:gap-10 overflow-x-auto md:overflow-visible px-6 md:px-6 py-6 md:py-6 rounded-2xl shadow-xl bg-[#343a40]'>
                 {menuItems.map((item) => {
                     const isActive =
                         selectedTypeId !== null &&

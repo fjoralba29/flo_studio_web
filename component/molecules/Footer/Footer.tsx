@@ -28,7 +28,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className='bg-grape text-white px-6 sm:px-10 lg:px-[100px] pt-12 py-6 shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.3)]'>
+        <footer className='bg-[#0D0B0F] text-white px-6 sm:px-10 lg:px-[100px] pt-12 py-6 shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.3)]'>
             <div className='flex flex-col  justify-between gap-12'>
                 {/* LEFT SIDE */}
                 <div className='flex flex-col lg:flex-row gap-12 lg:gap-64 justify-evenly items-center lg:items-start text-center lg:text-left'>
@@ -93,7 +93,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <div className='w-full text-center text-sm text-white/70 py-4 bg-grape border-t'>
+                <div className='w-full text-center text-sm text-white/70 py-4 bg-[#0D0B0F] border-t'>
                     © 2026 Flo Studio. All rights reserved.
                 </div>
             </div>

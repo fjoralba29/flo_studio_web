@@ -21,9 +21,9 @@ const Cardbox = ({
             className={`
                 relative group w-full ${width} h-[140px]
                 rounded-3xl p-6 cursor-pointer overflow-hidden
-                bg-[#583C84] text-white transition-all duration-300
-                hover:bg-[#372E39] hover:shadow-xl
-                ${isOpen ? "bg-[#372E39] shadow-xl" : ""}
+                bg-[#e9ecef] text-[#0D0B0F] transition-all duration-300
+                hover:bg-[#adb5bd] hover:shadow-xl
+                ${isOpen ? "bg-[#adb5bd] shadow-xl" : ""}
             `}
         >
             {/* Title */}

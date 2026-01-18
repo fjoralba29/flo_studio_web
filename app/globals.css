@@ -5,7 +5,7 @@
 
 :root {
     /* 🎨 Custom Palette Colors */
-    --color-grape: #372e39;
+    --color-grape: #161219;
     --color-violet: #583c84;
     --color-olive: #4d4735;
     --color-espresso: #281f14;
@@ -39,6 +39,10 @@ body {
 h1 {
     font-family: var(--font-literata-bold);
     font-size: 64px;
+}
+
+.primary-title {
+    font-family: var(--font-literata-bold);
 }
 
 p {

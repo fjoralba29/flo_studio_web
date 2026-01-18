@@ -28,7 +28,7 @@ const ContactPage = () => {
 
             <main
                 className='min-h-screen flex items-center justify-center px-6 
-    bg-gradient-to-br from-[#372E39] via-[#2A222C] to-[#1E191F]'
+    bg-gradient-to-br from-[#0D0B0F] via-[#adb5bd] to-[#0D0B0F]'
             >
                 <div
                     className='max-w-3xl w-full rounded-2xl 

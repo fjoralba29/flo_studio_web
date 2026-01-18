@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useUserStore } from "@/src/store/userStore";
 import { useDeletePhotos } from "@/src/apis/uploadImage";
 import { usePathname } from "next/navigation";
+import Container, { EmptyState } from "@/component/atoms/Container/Container";
 
 type GalleryImage = {
     id: number;
@@ -15,6 +16,7 @@ type GalleryImage = {
 
 type GalleryProps = {
     images: GalleryImage[];
+    isLoading?: boolean;
 };
 
 const containerVariants = {
@@ -43,15 +45,13 @@ const itemVariants = {
     },
 };
 
-const Gallery = ({ images }: GalleryProps) => {
+const Gallery = ({ images, isLoading = false }: GalleryProps) => {
     const { mutate: deletePhoto } = useDeletePhotos();
     const user = useUserStore((state) => state.user);
     const { type } = user || {};
     const pathname = usePathname();
 
-    /** 🔥 LOCAL OPTIMISTIC STATE */
     const [galleryImages, setGalleryImages] = useState<GalleryImage[]>(images);
-
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [loadingImages, setLoadingImages] = useState<boolean[]>([]);
 
@@ -86,33 +86,40 @@ const Gallery = ({ images }: GalleryProps) => {
         });
     };
 
-    /** 🗑️ DELETE (OPTIMISTIC) */
     const handleDeleteImage = (imageId: number) => {
         setGalleryImages((prev) => prev.filter((img) => img.id !== imageId));
         setActiveIndex(null);
         deletePhoto(imageId);
     };
 
-    /** ✅ Determine if trash should be visible */
-    const canDelete = type === "Admin" && pathname !== "/portfolio"; // only admins OR non-portfolio paths
+    const canDelete = type === "Admin" && pathname !== "/portfolio";
 
     return (
         <>
-            {/* GRID */}
-            <motion.div
-                variants={containerVariants}
-                initial='hidden'
-                animate='show'
-                className='w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'
+            {/* 🔹 CONTAINER HANDLES LOADING + EMPTY */}
+            <Container
+                isLoading={isLoading}
+                isEmpty={!isLoading && galleryImages.length === 0}
+                emptyComponent={
+                    <EmptyState
+                        title='No images yet'
+                        description='Upload your first photo to showcase your work.'
+                    />
+                }
             >
-                {galleryImages.length > 0 ? (
-                    galleryImages.map((image, idx) => (
+                <motion.div
+                    variants={containerVariants}
+                    initial='hidden'
+                    animate='show'
+                    className='w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'
+                >
+                    {galleryImages.map((image, idx) => (
                         <motion.div
                             key={image.id}
                             variants={itemVariants}
                             className='relative w-full h-40 md:h-48 lg:h-56 overflow-hidden rounded-lg shadow-md group bg-gray-200'
                         >
-                            {/* LOADING */}
+                            {/* IMAGE LOADER */}
                             {loadingImages[idx] && (
                                 <div className='absolute inset-0 flex items-center justify-center'>
                                     <div className='w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin' />
@@ -135,9 +142,9 @@ const Gallery = ({ images }: GalleryProps) => {
                                 />
                             </div>
 
-                            {/* DELETE BUTTON */}
+                            {/* DELETE */}
                             {canDelete && (
-                                <div className='absolute inset-0 bg-black/40 flex items-start justify-start pointer-events-none md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200'>
+                                <div className='absolute inset-0 bg-black/40 flex items-start justify-start pointer-events-none md:opacity-0 md:group-hover:opacity-100 transition-opacity'>
                                     <button
                                         onClick={(e) => {
                                             e.stopPropagation();
@@ -150,15 +157,11 @@ const Gallery = ({ images }: GalleryProps) => {
                                 </div>
                             )}
                         </motion.div>
-                    ))
-                ) : (
-                    <div className='col-span-full flex items-center justify-center text-gray-500'>
-                        No images available.
-                    </div>
-                )}
-            </motion.div>
+                    ))}
+                </motion.div>
+            </Container>
 
-            {/* LIGHTBOX */}
+            {/* 🔹 LIGHTBOX */}
             <AnimatePresence>
                 {activeIndex !== null && galleryImages[activeIndex] && (
                     <motion.div
@@ -170,18 +173,9 @@ const Gallery = ({ images }: GalleryProps) => {
                     >
                         <motion.div
                             key={galleryImages[activeIndex].id}
-                            initial={{
-                                scale: 0.9,
-                                opacity: 0,
-                            }}
-                            animate={{
-                                scale: 1,
-                                opacity: 1,
-                            }}
-                            exit={{
-                                scale: 0.9,
-                                opacity: 0,
-                            }}
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
                             transition={{ duration: 0.25 }}
                             onClick={(e) => e.stopPropagation()}
                             className='relative w-[90vw] h-[80vh]'
@@ -195,10 +189,9 @@ const Gallery = ({ images }: GalleryProps) => {
                             />
                         </motion.div>
 
-                        {/* CONTROLS */}
                         <button
                             onClick={close}
-                            className='absolute top-6 right-6 text-white p-2 hover:scale-110 transition'
+                            className='absolute top-6 right-6 text-white p-2'
                         >
                             <X size={32} />
                         </button>
@@ -208,7 +201,7 @@ const Gallery = ({ images }: GalleryProps) => {
                                 e.stopPropagation();
                                 prev();
                             }}
-                            className='absolute left-6 text-white p-3 hover:scale-110 transition'
+                            className='absolute left-6 text-white p-3'
                         >
                             <ChevronLeft size={40} />
                         </button>
@@ -218,7 +211,7 @@ const Gallery = ({ images }: GalleryProps) => {
                                 e.stopPropagation();
                                 next();
                             }}
-                            className='absolute right-6 text-white p-3 hover:scale-110 transition'
+                            className='absolute right-6 text-white p-3'
                         >
                             <ChevronRight size={40} />
                         </button>

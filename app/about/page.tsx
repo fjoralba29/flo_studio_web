@@ -28,143 +28,52 @@ const AboutPage = () => {
             {/* Content */}
             <div className='px-6 sm:px-10 lg:px-24 py-12 flex flex-col gap-12'>
                 {/* My Story */}
-                <section className='flex flex-col md:flex-row items-center gap-8'>
-                    <div className='md:w-1/2 flex justify-center'>
-                        <Image
-                            src='/photos/Logo.png'
-                            alt='Photographer'
-                            width={400}
-                            height={400}
-                            className='rounded-lg object-cover w-full max-w-sm md:max-w-full'
-                        />
-                    </div>
-                    <div className='md:w-1/2 space-y-4'>
-                        <h2 className='text-2xl sm:text-3xl md:text-3xl font-semibold'>
-                            My Story
-                        </h2>
-                        <p className='text-sm sm:text-base md:text-lg'>
-                            Hi, I’m [Your Name], a passionate photographer based
-                            in [City]. Photography has been my life for [X]
-                            years, turning fleeting moments into timeless
-                            memories. I believe every picture tells a story, and
-                            my mission is to capture yours in its most authentic
-                            form.
-                        </p>
-                    </div>
-                </section>
-
-                {/* Style & Philosophy */}
-                <section className='space-y-6'>
-                    <h2 className='text-2xl sm:text-3xl md:text-3xl font-semibold text-center'>
-                        My Style & Philosophy
+                {/* About Us – Team Section */}
+                <section className='px-6 sm:px-10 lg:px-24 py-16 text-center max-w-5xl mx-auto'>
+                    <h2 className='text-2xl sm:text-3xl md:text-4xl font-semibold mb-6'>
+                        A Full-Service Photography & Videography Team
                     </h2>
-                    <p className='text-center max-w-3xl mx-auto text-sm sm:text-base md:text-lg'>
-                        I specialize in [portrait / wedding / lifestyle /
-                        editorial] photography. My style is [candid, natural,
-                        artistic], focusing on genuine emotions and beautiful
-                        storytelling. Every session is unique, tailored to your
-                        personality and the moments that matter most.
+
+                    <p className='text-sm sm:text-base md:text-lg leading-relaxed text-gray-700'>
+                        We are a fully equipped team of professional
+                        photographers and videographers, specialized in
+                        capturing powerful visual stories. With years of
+                        experience and high-end equipment, we have successfully
+                        completed numerous projects across Albania and
+                        internationally.
+                        <br />
+                        <br />
+                        From commercial campaigns and events to creative
+                        productions and cinematic storytelling, our team
+                        delivers high-quality visuals that meet global
+                        standards. Every project is approached with creativity,
+                        precision, and a deep understanding of our clients’
+                        vision.
                     </p>
-                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6'>
+
+                    <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10'>
                         <Image
                             src='/photos/image11.png'
-                            alt='Sample 1'
+                            alt='Photography project'
                             width={400}
                             height={300}
                             className='rounded-lg object-cover w-full'
                         />
                         <Image
                             src='/photos/image11.png'
-                            alt='Sample 2'
+                            alt='Videography project'
                             width={400}
                             height={300}
                             className='rounded-lg object-cover w-full'
                         />
                         <Image
                             src='/photos/image11.png'
-                            alt='Sample 3'
+                            alt='International project'
                             width={400}
                             height={300}
                             className='rounded-lg object-cover w-full'
                         />
                     </div>
-                </section>
-
-                {/* Behind the Scenes */}
-                <section className='flex flex-col md:flex-row items-center gap-8'>
-                    <div className='md:w-1/2 space-y-4'>
-                        <h2 className='text-2xl sm:text-3xl md:text-3xl font-semibold'>
-                            Behind the Scenes
-                        </h2>
-                        <p className='text-sm sm:text-base md:text-lg'>
-                            I love what I do, and I believe the process should
-                            be just as enjoyable as the final images. From
-                            creative shoots to spontaneous moments, I ensure
-                            every session is fun, comfortable, and memorable.
-                        </p>
-                    </div>
-                    <div className='md:w-1/2 flex justify-center'>
-                        <Image
-                            src='/photos/image11.png'
-                            alt='Behind the scenes'
-                            width={400}
-                            height={400}
-                            className='rounded-lg object-cover w-full max-w-sm md:max-w-full'
-                        />
-                    </div>
-                </section>
-
-                {/* Achievements & Recognition */}
-                <section className='space-y-6 text-center'>
-                    <h2 className='text-2xl sm:text-3xl md:text-3xl font-semibold'>
-                        Achievements & Recognition
-                    </h2>
-                    <p className='text-sm sm:text-base md:text-lg'>
-                        Over the years, I’ve had the honor to work with amazing
-                        clients, feature in [magazines, blogs, exhibitions], and
-                        receive [awards/certifications]. Each project fuels my
-                        passion for capturing stories that last a lifetime.
-                    </p>
-                    <div className='flex justify-center gap-4 flex-wrap mt-4'>
-                        <Image
-                            src='/photos/image11.png'
-                            alt='Award 1'
-                            width={100}
-                            height={100}
-                            className='rounded-full'
-                        />
-                        <Image
-                            src='/photos/image11.png'
-                            alt='Award 2'
-                            width={100}
-                            height={100}
-                            className='rounded-full'
-                        />
-                        <Image
-                            src='/photos/image11.png'
-                            alt='Award 3'
-                            width={100}
-                            height={100}
-                            className='rounded-full'
-                        />
-                    </div>
-                </section>
-
-                {/* Call to Action */}
-                <section className='text-center space-y-6'>
-                    <h2 className='text-2xl sm:text-3xl md:text-3xl font-semibold'>
-                        Let’s Work Together
-                    </h2>
-                    <p className='text-sm sm:text-base md:text-lg'>
-                        Whether it’s a wedding, family session, or personal
-                        portrait, I’d love to capture your story.
-                    </p>
-                    <a
-                        href='/contact'
-                        className='inline-block px-6 py-3 bg-black text-white rounded-full font-semibold hover:bg-gray-800 transition'
-                    >
-                        Book Your Session
-                    </a>
                 </section>
             </div>
 

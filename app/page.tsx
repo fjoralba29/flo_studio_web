@@ -20,19 +20,23 @@ export default function Home() {
 
             {/* HERO */}
             <div className='relative'>
-                <Image
-                    src='/photos/PrimaryPhoto.png'
-                    alt='Hero'
-                    className='w-full h-[60vh] sm:h-[70vh] lg:h-[90vh] object-cover'
-                    width={1920}
-                    height={1080}
-                    priority
-                />
+                <div className='relative w-full h-[60vh] sm:h-[70vh] lg:h-[90vh]'>
+                    <Image
+                        src='/photos/Image1.jpg'
+                        alt='Hero'
+                        fill
+                        priority
+                        className='object-cover'
+                    />
 
-                <div className='absolute bottom-16 left-0 right-0 flex flex-col items-center justify-center text-white text-center px-4'>
-                    <h1 className='text-2xl sm:text-4xl lg:text-6xl font-bold '>
+                    {/* Gradient Overlay */}
+                    <div className='absolute inset-0 bg-gradient-to-t from-[#0D0B0F] to-transparent' />
+                </div>
+
+                <div className='absolute bottom-10 left-0 right-0 flex flex-col items-center justify-center text-white text-center px-4'>
+                    <div className='primary-title text-5xl sm:text-4xl lg:text-6xl font-bold '>
                         ART STARTS RIGHT HERE
-                    </h1>
+                    </div>
                     <div className='mt-3 text-xs sm:text-sm lg:text-lg tracking-[4px] sm:tracking-[8px]'>
                         TURN MOMENTS INTO MASTERPIECES
                     </div>
@@ -40,7 +44,7 @@ export default function Home() {
             </div>
 
             {/* INTRO SECTION */}
-            <div className='bg-grape flex flex-col lg:flex-row items-center justify-between gap-10 px-6 sm:px-12 lg:px-[100px] py-16'>
+            <div className='bg-[#0D0B0F] flex flex-col lg:flex-row items-center justify-between gap-10 px-6 sm:px-12 lg:px-[100px] py-16'>
                 <div className='border border-[#583C84] rounded-lg max-w-[700px] p-6 sm:p-10 text-white flex flex-col gap-6 text-base sm:text-lg'>
                     <p>
                         From the first click to the final frame, we deliver
@@ -68,12 +72,12 @@ export default function Home() {
             <Categories />
 
             {/* PROFILE SECTION */}
-            <div className='bg-lila text-white flex flex-col py-12 sm:py-16 px-6 sm:px-12 lg:px-[100px] gap-10'>
-                <h2 className='section-title text-xl sm:text-2xl lg:text-3xl'>
+            <div className='bg-[#161219] text-white flex flex-col py-12 sm:py-16 px-6 sm:px-12 lg:px-[100px] gap-10'>
+                <h2 className='section-title text-xl sm:text-2xl lg:text-3xl '>
                     YOUR PERSONAL PROFILE
                 </h2>
 
-                <div className='flex flex-col lg:flex-row items-center justify-between gap-10'>
+                <div className='flex flex-col lg:flex-row items-center justify-between gap-10 '>
                     <div className='flex flex-col gap-6 text-sm sm:text-base max-w-xl'>
                         <p>
                             When you log in, you’ll have access to your own

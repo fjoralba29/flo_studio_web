@@ -60,7 +60,7 @@ const AdminHeader = () => {
         { label: "Collabs", href: "/admin/page-management" },
         { label: "Categories", href: "/admin/page-management" },
         { label: "Services", href: "/admin/services-management" },
-        { label: "Wedding", href: "/wedding" },
+        { label: "Wedding", href: "/admin/wedding-management" },
         { label: "Users", href: "/admin/user-management" },
     ];
 

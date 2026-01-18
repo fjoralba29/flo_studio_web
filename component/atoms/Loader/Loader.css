@@ -1,0 +1,43 @@
+/* GridLoader.module.css */
+@keyframes loaderAnimation {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.grid-loader-1 {
+    animation: loaderAnimation 0.888807s ease 0.0888072s infinite normal none;
+}
+.grid-loader-2 {
+    animation: loaderAnimation 0.667068s ease -0.132932s infinite normal none;
+}
+.grid-loader-3 {
+    animation: loaderAnimation 1.14635s ease 0.34635s infinite normal none;
+}
+.grid-loader-4 {
+    animation: loaderAnimation 1.09108s ease 0.291082s infinite normal none;
+}
+.grid-loader-5 {
+    animation: loaderAnimation 1.56886s ease 0.768856s infinite normal none;
+}
+.grid-loader-6 {
+    animation: loaderAnimation 1.04311s ease 0.243105s infinite normal none;
+}
+.grid-loader-7 {
+    animation: loaderAnimation 0.601995s ease -0.198005s infinite normal none;
+}
+.grid-loader-8 {
+    animation: loaderAnimation 1.08208s ease 0.282081s infinite normal none;
+}
+.grid-loader-9 {
+    animation: loaderAnimation 0.935451s ease 0.135451s infinite normal none;
+}
