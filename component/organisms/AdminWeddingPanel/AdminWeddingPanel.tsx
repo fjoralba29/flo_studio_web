@@ -1,13 +1,16 @@
 import AdminCategoriesCard from "@/component/atoms/AdminCategoriesCard/AdminCategoriesCard";
+import AdminWeddingCard from "@/component/atoms/AdminWeddingCard/AdminWeddingCard";
 import Button from "@/component/atoms/Button/Button";
 import { useDeleteService, useGetServices } from "@/src/apis/services";
+import { useDeleteWedding, useWeddingPackages } from "@/src/apis/wedding";
 
 const AdminWeddingPanel = () => {
-    const { data: services = [] } = useGetServices();
-    const mutateDelete = useDeleteService();
+    const { data: weddingPackages = [] } = useWeddingPackages();
+    const { mutate: mutateDelete } = useDeleteWedding();
+    console.log(weddingPackages);
 
-    const handleDeleteService = (id: number) => {
-        // mutateDelete.mutate(id);
+    const handleDeleteWedding = (id: number) => {
+        mutateDelete(id);
     };
 
     return (
@@ -22,28 +25,28 @@ const AdminWeddingPanel = () => {
                 </Button>
             </div>
 
-            {/* Service Cards */}
+            {/* Wedding Cards */}
             <div className='flex flex-col gap-3'>
-                {services?.map((service: any) => (
-                    <div
-                        key={service.id}
-                        className='flex  md:flex-row gap-2 md:gap-5 w-full items-center'
-                    >
-                        <AdminCategoriesCard
-                            title={service.name}
-                            description={service.description}
-                            image={service.primaryPhoto}
-                            className='w-full md:flex-1'
-                        />
-                        <Button
-                            theme='ghost'
-                            onClick={() => handleDeleteService(service.id)}
-                            className='md:self-start'
+                {weddingPackages &&
+                    weddingPackages?.map((wedding: any) => (
+                        <div
+                            key={wedding.id}
+                            className='flex  md:flex-row gap-2 md:gap-5 w-full items-center'
                         >
-                            🗑️
-                        </Button>
-                    </div>
-                ))}
+                            <AdminWeddingCard
+                                title={wedding.name}
+                                items={wedding.items}
+                                className='w-full md:flex-1'
+                            />
+                            <Button
+                                theme='ghost'
+                                onClick={() => handleDeleteWedding(wedding.id)}
+                                className='md:self-start'
+                            >
+                                🗑️
+                            </Button>
+                        </div>
+                    ))}
             </div>
         </div>
     );

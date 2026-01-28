@@ -4,7 +4,7 @@ import Button from "@/component/atoms/Button/Button";
 import InfinityTable from "@/component/atoms/Table/InfinityTable";
 import AdminFooter from "@/component/molecules/Footer/AdminFooter";
 import AdminHeader from "@/component/molecules/Header/AdminHeader";
-import { useGetUsers } from "@/src/apis/users";
+import { useDeleteUser, useGetUsers } from "@/src/apis/users";
 import { useSelectedUserStore } from "@/src/store/selectedUser";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -14,6 +14,7 @@ const UserManagement = () => {
     const [search, setSearch] = useState("");
     const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } =
         useGetUsers(search);
+    const { mutate: deleteUser, isPending } = useDeleteUser();
 
     const users = data?.pages.flatMap((p) => p.content) ?? [];
 
@@ -29,6 +30,8 @@ const UserManagement = () => {
     const handleDeleteUser = (userId: number) => {
         // Implement user deletion logic here
         console.log("Delete User ID:", userId);
+        if (!confirm("Are you sure you want to delete this user?")) return;
+        deleteUser(userId);
     };
 
     return (

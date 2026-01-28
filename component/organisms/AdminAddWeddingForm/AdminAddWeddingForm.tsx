@@ -2,16 +2,28 @@ import Button from "@/component/atoms/Button/Button";
 import Container from "@/component/atoms/Container/Container";
 import Form from "@/component/atoms/Form/Form";
 import Input from "@/component/atoms/Input/Input";
+import InputPlain from "@/component/atoms/Input/InputPlain";
 import { servicesformSchema } from "@/lib/types/CreateServicesSchema";
 import { useCreateService } from "@/src/apis/services";
+import { useCreateWeddingPackage } from "@/src/apis/wedding";
+import { useState } from "react";
 
 const AdminWeddingForm = () => {
     const { mutate: createServiceMutation, isPending } = useCreateService();
+    const [value, setValue] = useState("");
+    const [selectedItemsPackage, setSelectedItemsPackage] = useState<string[]>(
+        [],
+    );
+    const { mutate: createPackage, isPending: isPackagePending } =
+        useCreateWeddingPackage();
 
     const handleSubmit = async (data: any) => {
-        // await createServiceMutation({
-        //     ...data,
-        // });
+        console.log(data, selectedItemsPackage);
+
+        await createPackage({
+            ...data,
+            items: selectedItemsPackage.map((item) => ({ name: item })),
+        });
     };
 
     return (
@@ -32,11 +44,39 @@ const AdminWeddingForm = () => {
                             label='Name'
                             className='w-full'
                         />
-                        <Input
-                            name='description'
-                            label='Description'
-                            className='w-full'
-                        />
+
+                        <div className='flex items-end gap-[20px]'>
+                            <InputPlain
+                                value={value}
+                                onChange={(value) => {
+                                    setValue(value);
+                                }}
+                                label='Items'
+                            />
+                            <Button
+                                theme='primary'
+                                onClick={() => {
+                                    setSelectedItemsPackage(
+                                        (prevSelectedItems) => {
+                                            const updatedSelectedItems = [
+                                                ...prevSelectedItems,
+                                                value,
+                                            ];
+                                            return updatedSelectedItems;
+                                        },
+                                    );
+                                    setValue("");
+                                }}
+                                className='!h-[48px]'
+                            >
+                                +
+                            </Button>
+                        </div>
+                        <div className='text-gray-700'>
+                            {selectedItemsPackage.map((item, index) => (
+                                <div key={index}>{item}</div>
+                            ))}
+                        </div>
                     </div>
 
                     <Button

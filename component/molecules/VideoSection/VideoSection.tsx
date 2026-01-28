@@ -57,7 +57,7 @@ export default function VideoSection() {
                         <button
                             onClick={scrollPrev}
                             className='absolute left-4 top-1/2 -translate-y-1/2 z-10
-                         bg-black/60 hover:bg-black text-white
+                          hover:bg-black text-white
                          w-12 h-12 rounded-full flex items-center justify-center
                          backdrop-blur transition'
                             aria-label='Previous video'

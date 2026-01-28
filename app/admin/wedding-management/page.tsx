@@ -9,7 +9,7 @@ const WeddingManagementPage = () => {
     return (
         <>
             <AdminHeader />
-            <div className=' flex flex-col md:flex-row gap-5 p-5'>
+            <div className='h-full flex flex-col md:flex-row gap-5 p-5'>
                 {/* Form on top for mobile, side by side on desktop */}
                 <div className='flex-1'>
                     <AdminAddWeddingForm />
