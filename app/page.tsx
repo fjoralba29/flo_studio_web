@@ -2,15 +2,16 @@ import Image from "next/image";
 import Header from "@/component/molecules/Header/Header";
 import Footer from "@/component/molecules/Footer/Footer";
 import dynamic from "next/dynamic";
+import VideoSection from "@/component/molecules/VideoSection/VideoSection";
 
 const Services = dynamic(
-    () => import("@/component/molecules/Services/Services")
+    () => import("@/component/molecules/Services/Services"),
 );
 const Categories = dynamic(
-    () => import("@/component/molecules/Categories/Categories")
+    () => import("@/component/molecules/Categories/Categories"),
 );
 const Collaborations = dynamic(
-    () => import("@/component/molecules/Collaborations/Collaborations")
+    () => import("@/component/molecules/Collaborations/Collaborations"),
 );
 
 export default function Home() {
@@ -70,43 +71,38 @@ export default function Home() {
             <Collaborations />
             <Services />
             <Categories />
+            <VideoSection />
 
             {/* PROFILE SECTION */}
-            <div className='bg-[#161219] text-white flex flex-col py-12 sm:py-16 px-6 sm:px-12 lg:px-[100px] gap-10'>
-                <h2 className='section-title text-xl sm:text-2xl lg:text-3xl '>
-                    YOUR PERSONAL PROFILE
-                </h2>
+            <div className='bg-[#ffff000] text-black flex flex-col lg:flex-row items-center justify-between gap-10 py-12 sm:py-16 px-6 sm:px-12 lg:px-[100px] gap-10'>
+                <div className='flex flex-col gap-16 text-sm sm:text-base max-w-xl'>
+                    <h2 className='section-title text-xl sm:text-2xl lg:text-3xl '>
+                        YOUR PERSONAL PROFILE
+                    </h2>
+                    <p>
+                        When you log in, you’ll have access to your own private
+                        profile — a secure space where all your wedding memories
+                        are stored.
+                    </p>
 
-                <div className='flex flex-col lg:flex-row items-center justify-between gap-10 '>
-                    <div className='flex flex-col gap-6 text-sm sm:text-base max-w-xl'>
-                        <p>
-                            When you log in, you’ll have access to your own
-                            private profile — a secure space where all your
-                            wedding memories are stored.
-                        </p>
+                    <ul className='list-disc pl-5 space-y-2'>
+                        <li>View and download your photos in high quality</li>
+                        <li>Access private links to your wedding videos</li>
+                        <li>Share with friends and family anytime</li>
+                    </ul>
 
-                        <ul className='list-disc pl-5 space-y-2'>
-                            <li>
-                                View and download your photos in high quality
-                            </li>
-                            <li>Access private links to your wedding videos</li>
-                            <li>Share with friends and family anytime</li>
-                        </ul>
-
-                        <p>
-                            Your story, beautifully captured — always just one
-                            click away.
-                        </p>
-                    </div>
-
-                    <Image
-                        src='/photos/image11.png'
-                        alt='Profile preview'
-                        width={300}
-                        height={300}
-                        className='w-full max-w-[350px] sm:max-w-[450px]'
-                    />
+                    <p>
+                        Your story, beautifully captured — always just one click
+                        away.
+                    </p>
                 </div>
+                <Image
+                    src='/photos/image11.png'
+                    alt='Profile preview'
+                    width={300}
+                    height={300}
+                    className='w-full max-w-[350px] sm:max-w-[450px]'
+                />
             </div>
 
             <Footer />

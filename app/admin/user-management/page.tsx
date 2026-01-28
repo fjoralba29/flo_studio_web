@@ -1,10 +1,12 @@
 "use client";
 
+import Button from "@/component/atoms/Button/Button";
 import InfinityTable from "@/component/atoms/Table/InfinityTable";
 import AdminFooter from "@/component/molecules/Footer/AdminFooter";
 import AdminHeader from "@/component/molecules/Header/AdminHeader";
 import { useGetUsers } from "@/src/apis/users";
 import { useSelectedUserStore } from "@/src/store/selectedUser";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -22,6 +24,11 @@ const UserManagement = () => {
     const handleRowClick = (row: any) => {
         setSelectedUser(row);
         router.push(`/admin/user-management/${row.id}`);
+    };
+
+    const handleDeleteUser = (userId: number) => {
+        // Implement user deletion logic here
+        console.log("Delete User ID:", userId);
     };
 
     return (
@@ -59,6 +66,24 @@ const UserManagement = () => {
                                 header: "Phone",
                                 accessorKey: "phone",
                                 size: 250,
+                            },
+                            {
+                                header: "Actions",
+                                accessorKey: "id",
+                                size: 150,
+                                cell: ({ row }) => {
+                                    const { original } = row;
+                                    const { id } = original;
+                                    return (
+                                        <Button
+                                            theme='ghost'
+                                            size='xs'
+                                            onClick={() => handleDeleteUser(id)}
+                                        >
+                                            🗑️ Delete User
+                                        </Button>
+                                    );
+                                },
                             },
                         ],
                         data: users,
