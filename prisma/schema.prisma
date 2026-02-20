@@ -91,3 +91,10 @@ model PackageItem {
   weddingPackages WeddingPackage[] @relation("PackageItems")
   createdAt       DateTime         @default(now())
 }
+
+model Video {
+  id        Int      @id @default(autoincrement())
+  title     String
+  url       String
+  createdAt DateTime @default(now())
+}

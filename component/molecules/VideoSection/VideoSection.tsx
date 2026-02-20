@@ -1,21 +1,7 @@
 "use client";
 
+import { useGetVideos } from "@/src/apis/videos";
 import useEmblaCarousel from "embla-carousel-react";
-
-const videos = [
-    {
-        url: "https://www.youtube.com/watch?v=v2tGm0Upyhs",
-        title: "Cinematic Reel",
-    },
-    {
-        url: "https://www.youtube.com/watch?v=UZ0gPzxdeVg",
-        title: "Commercial Video",
-    },
-    {
-        url: "https://www.youtube.com/watch?v=tIfOpITNBt8",
-        title: "Behind the Scenes",
-    },
-];
 
 const getYouTubeId = (url: string) => {
     const regExp =
@@ -25,6 +11,7 @@ const getYouTubeId = (url: string) => {
 };
 
 export default function VideoSection() {
+    const { data: videos = [] } = useGetVideos();
     const [emblaRef, emblaApi] = useEmblaCarousel({
         loop: true,
         align: "center",
@@ -82,7 +69,7 @@ export default function VideoSection() {
                             className='overflow-hidden rounded-2xl'
                         >
                             <div className='flex'>
-                                {videos.map((video, index) => {
+                                {videos.map((video: any, index: number) => {
                                     const videoId = getYouTubeId(video.url);
                                     if (!videoId) return null;
 

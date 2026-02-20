@@ -40,6 +40,15 @@ const AdminDashboard = () => {
                         }}
                     />
                     <Cards
+                        photo={"/photos/image38.png"}
+                        type={"category"}
+                        title='Add Videos'
+                        // className='!w-[90%] sm:!w-[400px] !h-[300px]'
+                        onClick={() => {
+                            window.location.href = "/admin/video-management";
+                        }}
+                    />
+                    <Cards
                         photo={"/photos/image30.png"}
                         type={"category"}
                         title='Add weddings'
