@@ -68,14 +68,14 @@ export async function DELETE(
     }
 
     try {
-        await prisma.$transaction(async (tx) => {
+        await prisma.$transaction(async (tx: any) => {
             // 1️⃣ Find all user events
             const userEvents = await tx.userEvent.findMany({
                 where: { userId },
                 select: { id: true },
             });
 
-            const userEventIds = userEvents.map((ue) => ue.id);
+            const userEventIds = userEvents.map((ue: any) => ue.id);
 
             // 2️⃣ Delete photos linked to user events
             if (userEventIds.length > 0) {
