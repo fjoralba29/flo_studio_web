@@ -7,7 +7,6 @@ import { useDeleteWedding, useWeddingPackages } from "@/src/apis/wedding";
 const AdminWeddingPanel = () => {
     const { data: weddingPackages = [] } = useWeddingPackages();
     const { mutate: mutateDelete } = useDeleteWedding();
-    console.log(weddingPackages);
 
     const handleDeleteWedding = (id: number) => {
         mutateDelete(id);

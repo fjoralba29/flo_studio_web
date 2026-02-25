@@ -33,7 +33,6 @@ export const useRegister = () => {
             router.push("/login"); // redirect after registration
         },
         onError: (err) => {
-            console.log(err);
             toast.error("Registration failed: " + err.message);
         },
     });
@@ -54,7 +53,6 @@ export const useLogin = () => {
             router.push("/");
         },
         onError: (error: Error) => {
-            console.log(error);
             toast.error("Login failed: Try again!");
         },
     });

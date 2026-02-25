@@ -1,5 +1,6 @@
 import { create } from "zustand";
-import { CategoryType } from "@prisma/client";
+
+type CategoryType = "Wedding" | "Collaboration" | "Category";
 
 interface CategoryStore {
     selectedTypeId: number | null;

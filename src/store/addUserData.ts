@@ -1,5 +1,14 @@
 import { create } from "zustand";
-import { Event, User } from "@prisma/client";
+
+type User = {
+    name: string;
+    id: number;
+    email: string;
+    phone: string | null;
+    password: string;
+    type: string;
+    createdAt: Date;
+};
 
 interface UserDataStore {
     selectedEvent: string | undefined;

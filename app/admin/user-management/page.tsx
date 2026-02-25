@@ -29,7 +29,7 @@ const UserManagement = () => {
 
     const handleDeleteUser = (userId: number) => {
         // Implement user deletion logic here
-        console.log("Delete User ID:", userId);
+
         if (!confirm("Are you sure you want to delete this user?")) return;
         deleteUser(userId);
     };

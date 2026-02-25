@@ -23,7 +23,6 @@ const UserProfile = () => {
     const photos =
         events?.find((e: any) => e.id === selectedEventId)?.photos || [];
     const photosUrls = photos.map((p: any) => ({ url: p.url, id: p.id })) || [];
-    console.log(events, "photossss");
 
     const urls = events?.find((e: any) => e.id === selectedEventId)?.urls || [];
     const formattedUrls = urls.map((item: string) => ({
@@ -32,7 +31,6 @@ const UserProfile = () => {
     }));
 
     const profilePhoto = getRandomPhotoFromEvents(events);
-    console.log(profilePhoto?.photo?.url, "profileeee");
 
     return (
         <>

@@ -32,7 +32,6 @@ const PortfolioPage = () => {
                   return { url: item.url, id: item.id };
               })
             : [];
-    console.log(photoUrls);
 
     return (
         <div className='bg-grape min-h-screen'>

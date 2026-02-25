@@ -31,7 +31,6 @@ const AdminVideoPanel = () => {
             <div className='flex flex-col gap-3'>
                 {videos &&
                     videos?.map((video: any) => {
-                        console.log(video);
                         return (
                             <div
                                 key={video.id}

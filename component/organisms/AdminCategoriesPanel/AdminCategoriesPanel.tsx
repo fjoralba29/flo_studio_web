@@ -9,9 +9,16 @@ import {
     useGetPhotosByCategoryID,
 } from "@/src/apis/categories";
 import { useCategoryStore } from "@/src/store/categories";
-import { CategoryType } from "@prisma/client";
 import AddCategoryPhotosModal from "../AddCategoryPhotosModal/AddCategoryPhotosModal";
 import { useAddUserDataStore } from "@/src/store/addUserData";
+export const CategoryType = {
+    Collaboration: "Collaboration",
+    Category: "Category",
+    Wedding: "Wedding",
+} as const;
+
+export type CategoryTypeValue =
+    (typeof CategoryType)[keyof typeof CategoryType];
 
 const AdminCategoriesPanel = () => {
     const { selectedType, setSelectedType } = useCategoryStore();
@@ -19,12 +26,12 @@ const AdminCategoriesPanel = () => {
 
     const { data: categories = [] } = useGetCategories();
     const setSelectedTypeId = useCategoryStore(
-        (state) => state.setSelectedTypeId
+        (state) => state.setSelectedTypeId,
     );
     const selectedTypeId = useCategoryStore((state) => state.selectedTypeId);
 
     const selectedCategories = categories.filter(
-        (category: any) => category.type === selectedType
+        (category: any) => category.type === selectedType,
     );
 
     const mutateDeleteCategory = useDeleteCategory();

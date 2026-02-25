@@ -18,8 +18,6 @@ const AdminWeddingForm = () => {
         useCreateWeddingPackage();
 
     const handleSubmit = async (data: any) => {
-        console.log(data, selectedItemsPackage);
-
         await createPackage({
             ...data,
             items: selectedItemsPackage.map((item) => ({ name: item })),

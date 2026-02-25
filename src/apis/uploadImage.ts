@@ -33,7 +33,6 @@ export const useUploadImage = () => {
                     "Content-Type": "multipart/form-data",
                 },
             });
-            console.log(res.data.imageUrl);
 
             return res.data.imageUrl;
         },
@@ -66,7 +65,7 @@ export const useDeletePhotos = () => {
 
         onError: (err: any) => {
             toast.error(
-                err?.response?.data?.error || "Failed to delete Photos"
+                err?.response?.data?.error || "Failed to delete Photos",
             );
         },
     });

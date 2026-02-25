@@ -18,7 +18,7 @@ export default function UrlWithDownload({ urls }: UrlWithDownloadProps) {
 
     const handleDeleteUrl = (url: string, eventId: number) => {
         // Implement URL deletion logic here
-        console.log("Delete URL:", url);
+
         deleteUrl({ userEventId: eventId, url });
     };
 

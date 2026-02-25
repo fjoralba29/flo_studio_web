@@ -2,15 +2,19 @@
 
 import Cards from "../../atoms/Cards/Cards";
 import { useGetCategories } from "@/src/apis/categories";
-import { CategoryType } from "@prisma/client";
 import { useRouter } from "next/navigation";
 
+const CategoryType = {
+    Collaboration: "Collaboration",
+    Category: "Category",
+    Wedding: "Wedding",
+};
 const Categories = () => {
     const { data } = useGetCategories();
     const router = useRouter();
 
     const categories = data?.filter(
-        (category: any) => category.type === CategoryType.Category
+        (category: any) => category.type === CategoryType.Category,
     );
 
     return (

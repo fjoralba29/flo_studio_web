@@ -1,6 +1,5 @@
 "use client";
 
-import { CategoryType } from "@prisma/client";
 import { useGetCategories } from "@/src/apis/categories";
 import { useRouter } from "next/navigation";
 import Cards from "../../atoms/Cards/Cards";
@@ -9,6 +8,11 @@ import { useState, useEffect } from "react";
 
 const GAP = 24; // gap-6
 
+const CategoryType = {
+    Collaboration: "Collaboration",
+    Category: "Category",
+    Wedding: "Wedding",
+};
 const Collaborations = () => {
     const { data } = useGetCategories();
     const router = useRouter();
@@ -33,7 +37,7 @@ const Collaborations = () => {
         data?.filter(
             (category: any) =>
                 category.type === CategoryType.Collaboration &&
-                category.primaryPhoto
+                category.primaryPhoto,
         ) || [];
 
     const maxIndex = Math.max(collaborations.length - visibleCards, 0);
@@ -93,7 +97,7 @@ const Collaborations = () => {
                                     className='w-full h-full'
                                     onClick={() =>
                                         router.push(
-                                            `/portfolio?category=${collaboration.id}`
+                                            `/portfolio?category=${collaboration.id}`,
                                         )
                                     }
                                 />

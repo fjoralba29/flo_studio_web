@@ -26,7 +26,7 @@ const EventsMenu = ({ events }: EventProp) => {
 
     const handleDeleteEvent = (eventId: number) => {
         // Implement event deletion logic here
-        console.log("Delete event:", eventId);
+
         deleteEventToUser({ userEventId: eventId });
     };
 

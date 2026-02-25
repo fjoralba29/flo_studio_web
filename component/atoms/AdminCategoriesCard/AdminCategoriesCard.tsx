@@ -15,8 +15,6 @@ const AdminCategoriesCard = ({
     className,
     onClick,
 }: CardProps) => {
-    console.log(title, description, "cards");
-
     return (
         <div
             className={`flex items-center bg-white shadow-xs rounded-xl overflow-hidden  h-[100px] hover:shadow-sm transition-shadow duration-300 ${className}`}
