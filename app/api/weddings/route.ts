@@ -14,7 +14,7 @@ export async function POST(req: Request) {
         }
 
         // Create WeddingPackage and PackageItems in a transaction
-        const result = await prisma.$transaction(async (tx) => {
+        const result = await prisma.$transaction(async (tx: any) => {
             // 1️⃣ Create package items first
             const packageItems = await Promise.all(
                 items.map((item: any) =>
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
                     name,
                     description: description || null,
                     items: {
-                        connect: packageItems.map((pi) => ({ id: pi.id })),
+                        connect: packageItems.map((pi: any) => ({ id: pi.id })),
                     },
                 },
                 include: {
