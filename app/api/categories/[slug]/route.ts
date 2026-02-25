@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { CategoryType, PrismaClient } from "@prisma/client";
-import { v2 as cloudinary } from "cloudinary";
 import { prisma } from "@/lib/prisma";
 export const runtime = "nodejs";
 
+const CategoryType = {
+    Collaboration: "Collaboration",
+    Category: "Category",
+    Wedding: "Wedding",
+};
 async function getCloudinary() {
     const { v2: cloudinary } = await import("cloudinary");
     cloudinary.config({
@@ -31,7 +34,7 @@ function extractPublicId(url: string): string | null {
 // GET: Fetch categories by type
 export async function GET(
     req: NextRequest,
-    context: { params: Promise<{ slug: string }> }
+    context: { params: Promise<{ slug: string }> },
 ) {
     const { slug } = await context.params;
 
@@ -42,19 +45,19 @@ export async function GET(
     if (!isNaN(Number(slug))) {
         return NextResponse.json(
             { error: "Use DELETE with numeric ID, GET expects type" },
-            { status: 400 }
+            { status: 400 },
         );
     }
 
-    if (!allowedTypes.includes(slug as CategoryType)) {
+    if (!allowedTypes.includes(slug as keyof typeof CategoryType)) {
         return NextResponse.json(
             { error: "Invalid category type" },
-            { status: 400 }
+            { status: 400 },
         );
     }
 
     const categories = await prisma.category.findMany({
-        where: { type: slug as CategoryType },
+        where: { type: slug as keyof typeof CategoryType },
         orderBy: { createdAt: "desc" },
     });
 
@@ -64,7 +67,7 @@ export async function GET(
 // DELETE: Delete category by ID
 export async function DELETE(
     req: NextRequest,
-    context: { params: Promise<{ slug: string }> }
+    context: { params: Promise<{ slug: string }> },
 ) {
     const { slug } = await context.params;
     const id = Number(slug);
@@ -73,7 +76,7 @@ export async function DELETE(
     if (isNaN(id)) {
         return NextResponse.json(
             { error: "Invalid category ID" },
-            { status: 400 }
+            { status: 400 },
         );
     }
 
@@ -85,7 +88,7 @@ export async function DELETE(
     if (!category) {
         return NextResponse.json(
             { error: "Category not found" },
-            { status: 404 }
+            { status: 404 },
         );
     }
 
@@ -109,6 +112,6 @@ export async function DELETE(
 
     return NextResponse.json(
         { message: "Category + photos deleted successfully" },
-        { status: 200 }
+        { status: 200 },
     );
 }
