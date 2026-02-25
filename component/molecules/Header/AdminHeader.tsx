@@ -1,6 +1,5 @@
 "use client";
 
-import Instagram from "@/assets/icons/Instagram.svg"; // optional for future use
 import User from "@/assets/icons/User.svg";
 import Menu from "@/assets/icons/Menu.svg"; // hamburger icon
 import { useLogout } from "@/src/apis/auth";

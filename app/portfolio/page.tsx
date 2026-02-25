@@ -8,6 +8,7 @@ import {
     useGetCategories,
     useGetPhotosByCategoryID,
 } from "@/src/apis/categories";
+import { Suspense } from "react";
 
 const PortfolioPage = () => {
     const { data: categories = [] } = useGetCategories();
@@ -52,15 +53,15 @@ const PortfolioPage = () => {
                 </div>
             </div>
 
-            {/* Content */}
             <div className='px-6 sm:px-6 lg:px-16 py-8 flex flex-col md:flex-row gap-6'>
-                {/* FloatingNav */}
-                {/* <div className='md:w-1/4'> */}
-                <FloatingNav menuItems={items} />
-                {/* </div> */}
+                <Suspense
+                    fallback={
+                        <div className='text-white'>Loading filters...</div>
+                    }
+                >
+                    <FloatingNav menuItems={items} />
+                </Suspense>
 
-                {/* Gallery */}
-                {/* <div className='md:w-3/4'> */}
                 {isLoading ? (
                     <div className='text-white text-center py-20'>
                         Loading...
@@ -72,7 +73,6 @@ const PortfolioPage = () => {
                 ) : (
                     <Gallery images={photoUrls} />
                 )}
-                {/* </div> */}
             </div>
             <Footer />
         </div>
