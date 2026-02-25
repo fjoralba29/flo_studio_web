@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function POST(
     req: NextRequest,
-    context: { params: Promise<{ userEventId: string }> }
+    context: { params: Promise<{ userEventId: string }> },
 ) {
     try {
         // 🔥 MUST await params object
@@ -14,7 +14,7 @@ export async function POST(
         if (isNaN(id)) {
             return NextResponse.json(
                 { error: "Invalid userEventId" },
-                { status: 400 }
+                { status: 400 },
             );
         }
 
@@ -23,7 +23,7 @@ export async function POST(
         if (!urls || !Array.isArray(urls)) {
             return NextResponse.json(
                 { error: "urls must be an array of strings" },
-                { status: 400 }
+                { status: 400 },
             );
         }
 
@@ -36,7 +36,7 @@ export async function POST(
         if (!existing) {
             return NextResponse.json(
                 { error: "UserEvent not found" },
-                { status: 404 }
+                { status: 404 },
             );
         }
 
@@ -57,14 +57,14 @@ export async function POST(
 
         return NextResponse.json(
             { error: "Failed to add URLs" },
-            { status: 500 }
+            { status: 500 },
         );
     }
 }
 
 export async function DELETE(
     req: NextRequest,
-    { params }: { params: Promise<{ userEventId: string }> }
+    { params }: { params: Promise<{ userEventId: string }> },
 ) {
     const { userEventId } = await params;
     const id = Number(userEventId);
@@ -72,7 +72,7 @@ export async function DELETE(
     if (isNaN(id)) {
         return NextResponse.json(
             { error: "Invalid userEventId" },
-            { status: 400 }
+            { status: 400 },
         );
     }
 
@@ -89,7 +89,7 @@ export async function DELETE(
                                 where: { id },
                                 select: { urls: true },
                             })
-                        )?.urls.filter((u) => u !== url) || [],
+                        )?.urls.filter((u: string) => u !== url) || [],
                 },
             },
         });
@@ -99,7 +99,7 @@ export async function DELETE(
         console.error(error);
         return NextResponse.json(
             { error: "Failed to delete URL" },
-            { status: 500 }
+            { status: 500 },
         );
     }
 }
