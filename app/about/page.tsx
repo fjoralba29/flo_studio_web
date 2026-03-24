@@ -51,9 +51,9 @@ const AboutPage = () => {
                         vision.
                     </p>
 
-                    <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10'>
                         <Image
-                            src='/photos/image11.png'
+                            src='/photos/image10.png'
                             alt='Photography project'
                             width={400}
                             height={300}
@@ -62,13 +62,6 @@ const AboutPage = () => {
                         <Image
                             src='/photos/image11.png'
                             alt='Videography project'
-                            width={400}
-                            height={300}
-                            className='rounded-lg object-cover w-full'
-                        />
-                        <Image
-                            src='/photos/image11.png'
-                            alt='International project'
                             width={400}
                             height={300}
                             className='rounded-lg object-cover w-full'

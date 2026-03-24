@@ -21,11 +21,12 @@ export const useCreateWeddingPackage = () => {
         onSuccess: () => {
             // Refresh wedding packages list if you have a query for it
             queryClient.invalidateQueries({ queryKey: ["weddingPackages"] });
+            toast.success("Wedding package created successfully");
         },
 
         onError: (error: any) => {
             console.error("Error creating wedding package:", error);
-            alert(
+            toast.error(
                 error.response?.data?.error ||
                     "Failed to create wedding package",
             );

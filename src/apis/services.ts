@@ -22,11 +22,14 @@ export const useCreateService = () => {
     return useMutation({
         mutationFn: (payload: ServicePayload) => createService(payload),
         onSuccess: () => {
-            alert("Service created successfully!");
+            toast.success("Service created successfully");
             queryClient.invalidateQueries({ queryKey: ["services"] }); // optional: refresh list
         },
-        onError: () => {
-            alert("Failed to create service");
+        onError: (err: any) => {
+            toast.error(
+                err?.response?.data?.error || "Failed to create service",
+            );
+            // alert("Failed to create service");
         },
     });
 };
@@ -56,7 +59,7 @@ export const useDeleteService = () => {
 
         onError: (err: any) => {
             toast.error(
-                err?.response?.data?.error || "Failed to delete service"
+                err?.response?.data?.error || "Failed to delete service",
             );
         },
     });

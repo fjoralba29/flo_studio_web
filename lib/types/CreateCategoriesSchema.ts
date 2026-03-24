@@ -7,7 +7,7 @@ export const fileSchema = z
 export const formSchema = z.object({
     type: z.string().min(1, "Section is required"),
     name: z.string().min(1, "Name is required"),
-    description: z.string().min(1, "Description is required"),
+    description: z.string().optional(),
     primaryPhoto: fileSchema,
     photos: fileSchema,
 });

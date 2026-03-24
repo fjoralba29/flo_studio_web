@@ -25,13 +25,17 @@ export const useAddEventToUser = () => {
 
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["user"] });
+            toast.success("Event added successfully");
+        },
+        onError: (err: any) => {
+            toast.error(err?.response?.data?.error || "Failed to add event");
         },
     });
 };
 
 export const addPhotosToUserEvent = async (
     userEventId: number,
-    photos: { title?: string; url: string; description?: string }[]
+    photos: { title?: string; url: string; description?: string }[],
 ) => {
     const res = await axios.post(`/api/user-events/${userEventId}/photos`, {
         photos,
@@ -54,13 +58,17 @@ export const useAddPhotosToUserEvent = () => {
         onSuccess: () => {
             // Refresh user data
             queryClient.invalidateQueries({ queryKey: ["user"] });
+            toast.success("Photos added successfully");
+        },
+        onError: (err: any) => {
+            toast.error(err?.response?.data?.error || "Failed to add photos");
         },
     });
 };
 
 export const addUrlsToUserEvent = async (
     userEventId: number,
-    urls: string[]
+    urls: string[],
 ) => {
     const res = await axios.post(`/api/user-events/${userEventId}/urls`, {
         urls,
@@ -83,6 +91,10 @@ export const useAddUrlsToUserEvent = () => {
         onSuccess: () => {
             // Refresh user data
             queryClient.invalidateQueries({ queryKey: ["user"] });
+            toast.success("URLs added successfully");
+        },
+        onError: (err: any) => {
+            toast.error(err?.response?.data?.error || "Failed to add URLs");
         },
     });
 };
@@ -130,6 +142,10 @@ export const useDeleteEventToUser = () => {
 
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["user"] });
+            toast.success("Event deleted successfully");
+        },
+        onError: (err: any) => {
+            toast.error(err?.response?.data?.error || "Failed to delete event");
         },
     });
 };

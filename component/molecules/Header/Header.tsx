@@ -109,7 +109,17 @@ const Header = () => {
                 <div className='hidden lg:flex items-center gap-[90px]'>
                     <NavLinks />
                 </div>
-
+                <a
+                    href='/'
+                    className='lg:hidden'
+                >
+                    <Image
+                        src='/photos/Logo.png'
+                        alt='Logo'
+                        width={60}
+                        height={60}
+                    />
+                </a>
                 {/* Right Icons */}
                 <div className='flex items-center gap-4'>
                     {/* User */}
@@ -170,6 +180,7 @@ const Header = () => {
                     </div>
 
                     {/* Hamburger */}
+
                     <button
                         className='lg:hidden'
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

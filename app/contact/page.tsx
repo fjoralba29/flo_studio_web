@@ -27,22 +27,17 @@ const ContactPage = () => {
             {/* Main Content */}
 
             <main
-                className='min-h-screen flex items-center justify-center px-6 
-    bg-gradient-to-br from-[#0D0B0F] via-[#adb5bd] to-[#0D0B0F]'
+                className='min-h-screen flex items-center justify-center px-6  
+    '
             >
-                <div
-                    className='max-w-3xl w-full rounded-2xl 
-        bg-white/10 backdrop-blur-xl 
-        border border-white/15 
-        text-white p-10 text-center space-y-10 shadow-2xl'
-                >
+                <div className='max-w-3xl w-full rounded-2xl bg-[#F2F2F2] text-black p-10 text-center space-y-10 shadow-2xl'>
                     {/* Title */}
                     {/* <h1 className='text-4xl md:text-5xl font-light tracking-wide'>
                         Contact
                     </h1> */}
 
                     {/* Subtitle */}
-                    <p className='text-white/70 text-lg leading-relaxed'>
+                    <p className='text-black text-lg leading-relaxed'>
                         Let’s work together. For collaborations, bookings, or
                         questions — reach out directly.
                     </p>
@@ -51,7 +46,7 @@ const ContactPage = () => {
                     <div className='flex flex-col gap-6 text-lg'>
                         {/* Email */}
                         <div>
-                            <span className='block text-sm text-white/50'>
+                            <span className='block text-sm text-black'>
                                 Email
                             </span>
                             <a
@@ -64,7 +59,7 @@ const ContactPage = () => {
 
                         {/* Phone */}
                         <div>
-                            <span className='block text-sm text-white/50'>
+                            <span className='block text-sm text-black'>
                                 Phone / WhatsApp
                             </span>
                             <a
@@ -77,7 +72,7 @@ const ContactPage = () => {
 
                         {/* Instagram */}
                         <div className='flex flex-col items-center gap-2'>
-                            <span className='block text-sm text-white/50'>
+                            <span className='block text-sm text-black'>
                                 Instagram
                             </span>
                             <a
@@ -85,19 +80,13 @@ const ContactPage = () => {
                                 target='_blank'
                                 className='flex items-center gap-2 hover:opacity-80'
                             >
-                                <Image
-                                    src={Instagram}
-                                    alt='Instagram'
-                                    width={22}
-                                    height={22}
-                                />
                                 @flostudio.al
                             </a>
                         </div>
                     </div>
 
                     {/* Footer note */}
-                    <p className='text-sm text-white/40 pt-10'>
+                    <p className='text-sm text-black pt-10'>
                         Based in Albania · Available worldwide
                     </p>
                 </div>

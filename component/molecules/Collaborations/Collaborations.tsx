@@ -66,6 +66,7 @@ const Collaborations = () => {
                             gap: `${GAP}px`,
                             // Ensure the track is wide enough to hold all items without shrinking them
                             width: "100%",
+                            justifyContent: "center",
                         }}
                         animate={{
                             x: `calc(${slideX}% - ${

@@ -35,8 +35,9 @@ const Footer = () => {
                     <Image
                         src='/photos/Logo.png'
                         alt='Logo'
-                        width={300}
-                        height={300}
+                        width={100}
+                        height={100}
+                        className='block lg:w-[300px] lg:h-[300px]'
                     />
                     <div className='flex flex-col gap-6 items-center lg:items-start text-center lg:text-left'>
                         <div className='flex items-center gap-2 text-sm'>

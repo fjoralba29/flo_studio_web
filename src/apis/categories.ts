@@ -48,22 +48,24 @@ export const useCreateCategory = () => {
             toast.success("Category created successfully!");
             queryClient.invalidateQueries({ queryKey: ["categories"] }); // optional: refresh list
         },
-        onError: () => {
-            toast.error("Failed to create category");
-            alert("Failed to create category");
+        onError: (err: any) => {
+            toast.error(
+                err?.response?.data?.error || "Failed to create category",
+            );
+            // alert("Failed to create category");
         },
     });
 };
 
 export const getCategoriesByType = async (
-    type: "Collaboration" | "Category" | "Wedding" | undefined
+    type: "Collaboration" | "Category" | "Wedding" | undefined,
 ) => {
     const res = await axios.get(`/api/categories/${type}`);
     return res.data;
 };
 
 export const useGetCategoriesByType = (
-    type: "Collaboration" | "Category" | "Wedding" | undefined
+    type: "Collaboration" | "Category" | "Wedding" | undefined,
 ) => {
     return useQuery({
         queryKey: ["categories", type],
@@ -90,7 +92,7 @@ export const useDeleteCategory = () => {
 
         onError: (err: any) => {
             toast.error(
-                err?.response?.data?.error || "Failed to delete category"
+                err?.response?.data?.error || "Failed to delete category",
             );
         },
     });
@@ -115,7 +117,7 @@ export const getPhotosByCategoryID = async (categoryId: number) => {
 
 export const useGetPhotosByCategoryID = () => {
     const selectedCategoryId = useCategoryStore(
-        (state) => state.selectedTypeId
+        (state) => state.selectedTypeId,
     );
     return useQuery({
         queryKey: ["category-photos", selectedCategoryId],
@@ -133,7 +135,7 @@ export interface PhotoInput {
 // Send photos to the API with categoryId in the URL
 export const addPhotosToCategory = async (
     categoryId: number,
-    photos: PhotoInput[]
+    photos: PhotoInput[],
 ) => {
     const res = await axios.post(`/api/photos/${categoryId}`, { photos });
     return res.data;
@@ -151,13 +153,14 @@ export const useAddPhotosToCategory = () => {
             photos: PhotoInput[];
         }) => addPhotosToCategory(categoryId, photos),
         onSuccess: () => {
-            alert("Photos added successfully!");
+            toast.success("Photos added successfully");
             queryClient.invalidateQueries({
                 queryKey: ["categories", "category-photos"],
             }); // optional refresh
         },
-        onError: () => {
-            alert("Failed to add photos");
+        onError: (err: any) => {
+            toast.error(err?.response?.data?.error || "Failed to add photos");
+            // alert("Failed to add photos");
         },
     });
 };

@@ -5,6 +5,7 @@ import {
     useQueryClient,
 } from "@tanstack/react-query";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export const getUsers = async (search: string, page: number, size: number) => {
     const res = await axios.get(`/api/users`, {
@@ -55,6 +56,11 @@ export const useDeleteUser = () => {
             queryClient.invalidateQueries({
                 queryKey: ["users"],
             });
+            toast.success("User deleted successfully");
+        },
+
+        onError: (err: any) => {
+            toast.error(err?.response?.data?.error || "Failed to delete user");
         },
     });
 };

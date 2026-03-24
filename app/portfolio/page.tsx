@@ -8,6 +8,7 @@ import {
     useGetCategories,
     useGetPhotosByCategoryID,
 } from "@/src/apis/categories";
+import { useCategoryStore } from "@/src/store/categories";
 import { Suspense } from "react";
 
 const PortfolioPage = () => {
@@ -34,7 +35,7 @@ const PortfolioPage = () => {
             : [];
 
     return (
-        <div className='bg-grape min-h-screen'>
+        <div className='bg- min-h-screen'>
             <Header />
 
             {/* Hero Section */}
@@ -52,7 +53,7 @@ const PortfolioPage = () => {
                 </div>
             </div>
 
-            <div className='px-6 sm:px-6 lg:px-16 py-8 flex flex-col md:flex-row gap-6'>
+            <div className='px-6 sm:px-6 lg:px-16 py-8 flex flex-col md:flex-row gap-6 mb-12'>
                 <Suspense
                     fallback={
                         <div className='text-white'>Loading filters...</div>
@@ -70,7 +71,10 @@ const PortfolioPage = () => {
                         Error loading photos
                     </div>
                 ) : (
-                    <Gallery images={photoUrls} />
+                    <>
+                        <h2>{photoData?.name}</h2>
+                        <Gallery images={photoUrls} />
+                    </>
                 )}
             </div>
             <Footer />
