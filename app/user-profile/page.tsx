@@ -35,7 +35,7 @@ const UserProfile = () => {
     return (
         <>
             <UserHeader />
-            <div className='flex flex-col gap-12'>
+            <div className='flex flex-col gap-12 '>
                 {/* Hero Image */}
                 <div
                     className='bg-gradient-to-b from-purple-400 to-white w-full bg-cover bg-center h-[300px] md:h-[400px]'
@@ -44,14 +44,18 @@ const UserProfile = () => {
 
                 {/* Profile Info */}
                 <div className='flex flex-col md:flex-row items-center md:items-end gap-6 md:gap-[100px] px-4 md:px-[150px] mt-[-100px] md:mt-[-150px]'>
-                    <Image
-                        src={profilePhoto?.photo?.url || ""}
-                        alt='Profile'
-                        width={200}
-                        height={200}
-                        className='rounded-lg border border-white border-4 shadow-lg w-[150px]  md:w-[250px] '
-                    />
-                    <div className='flex flex-col gap-3 md:gap-[20px] text-center md:text-left'>
+                    {profilePhoto && (
+                        <Image
+                            src={profilePhoto?.photo?.url || ""}
+                            alt='Profile'
+                            width={200}
+                            height={200}
+                            className='rounded-lg border border-white border-4 shadow-lg w-[150px]  md:w-[250px] '
+                        />
+                    )}
+                    <div
+                        className={`flex flex-col gap-3 md:gap-[20px] text-center md:text-left mt-[100px]`}
+                    >
                         <h1 className='text-2xl md:text-4xl font-bold'>
                             {name}
                         </h1>
@@ -62,26 +66,33 @@ const UserProfile = () => {
 
                 {/* Events Menu */}
                 <div className='overflow-x-auto whitespace-nowrap py-2 px-4 md:px-[150px] scrollbar-hide'>
-                    <div className='inline-flex gap-2 md:gap-4'>
-                        {events?.map((e: any) => (
-                            <Button
-                                theme={
-                                    selectedEventId === e.id
-                                        ? "primary"
-                                        : "tertiary"
-                                }
-                                key={e.id}
-                                onClick={() => setSelectedEventId(e.id)}
-                                className='min-w-max'
-                            >
-                                {e.event.name}
-                            </Button>
-                        ))}
+                    <h2 className='section-title mb-2'>Events</h2>
+                    <div className='w-full gap-2 md:gap-4'>
+                        {events?.length > 0 ? (
+                            events?.map((e: any) => (
+                                <Button
+                                    theme={
+                                        selectedEventId === e.id
+                                            ? "primary"
+                                            : "tertiary"
+                                    }
+                                    key={e.id}
+                                    onClick={() => setSelectedEventId(e.id)}
+                                    className='min-w-max'
+                                >
+                                    {e.event.name}
+                                </Button>
+                            ))
+                        ) : (
+                            <div className='subtitle text-[var(--color-grey-dark)] text-center'>
+                                No events
+                            </div>
+                        )}
                     </div>
                 </div>
 
                 {/* Photos & URLs */}
-                <div className='flex flex-col md:flex-row gap-6 px-4 md:px-[150px]'>
+                <div className='flex flex-col md:flex-row gap-6 px-4 md:px-[150px] mb-6'>
                     <div className='flex-1'>
                         <h2 className='section-title mb-2'>Photos</h2>
                         <Gallery images={photosUrls} />

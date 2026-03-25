@@ -50,10 +50,10 @@ const ContactPage = () => {
                                 Email
                             </span>
                             <a
-                                href='mailto:hello@flostudio.al'
+                                href='mailto:flostudio.al@gmail.com'
                                 className='hover:underline'
                             >
-                                hello@flostudio.al
+                                flostudio.al@gmail.com
                             </a>
                         </div>
 
@@ -63,10 +63,10 @@ const ContactPage = () => {
                                 Phone / WhatsApp
                             </span>
                             <a
-                                href='tel:+355690000000'
+                                href='tel:(+355) 68 501 7244'
                                 className='hover:underline'
                             >
-                                +355 69 000 0000
+                                (+355) 68 501 7244
                             </a>
                         </div>
 

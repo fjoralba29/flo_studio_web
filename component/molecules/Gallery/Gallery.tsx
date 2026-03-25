@@ -66,7 +66,7 @@ const Gallery = ({ images, isLoading = false }: GalleryProps) => {
 
     const next = useCallback(() => {
         setActiveIndex((i) =>
-            i === null ? null : (i + 1) % galleryImages.length
+            i === null ? null : (i + 1) % galleryImages.length,
         );
     }, [galleryImages.length]);
 
@@ -74,7 +74,7 @@ const Gallery = ({ images, isLoading = false }: GalleryProps) => {
         setActiveIndex((i) =>
             i === null
                 ? null
-                : (i - 1 + galleryImages.length) % galleryImages.length
+                : (i - 1 + galleryImages.length) % galleryImages.length,
         );
     }, [galleryImages.length]);
 
@@ -100,12 +100,7 @@ const Gallery = ({ images, isLoading = false }: GalleryProps) => {
             <Container
                 isLoading={isLoading}
                 isEmpty={!isLoading && galleryImages.length === 0}
-                emptyComponent={
-                    <EmptyState
-                        title='No images yet'
-                        description='Upload your first photo to showcase your work.'
-                    />
-                }
+                emptyComponent={<EmptyState title='No images yet' />}
             >
                 <motion.div
                     variants={containerVariants}

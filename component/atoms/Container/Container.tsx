@@ -22,12 +22,12 @@ export const EmptyState = ({
             className='w-full min-h-[240px] flex flex-col items-center justify-center
                        rounded-xl px-6 text-center'
         >
-            <p className='text-base md:text-lg font-semibold text-gray-800 dark:text-gray-400'>
+            <p className='t md:text-lg subtitle text-[var(--color-grey-dark)] text-center'>
                 {title}
             </p>
 
             {description && (
-                <p className='mt-2 text-sm text-gray-500 dark:text-gray-400 max-w-md'>
+                <p className='mt-2 text-sm text-gray-500 dark:text-gray-400 max-w-md '>
                     {description}
                 </p>
             )}
