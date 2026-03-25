@@ -61,12 +61,12 @@ const Collaborations = () => {
                 {/* Viewport */}
                 <div className='overflow-hidden w-full'>
                     <motion.div
-                        className='flex'
+                        className='flex lg:justify-center'
                         style={{
                             gap: `${GAP}px`,
                             // Ensure the track is wide enough to hold all items without shrinking them
                             width: "100%",
-                            justifyContent: "center",
+                            // justifyContent: "center",
                         }}
                         animate={{
                             x: `calc(${slideX}% - ${
