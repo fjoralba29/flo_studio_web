@@ -29,7 +29,7 @@ const Login = () => {
             {/* MOBILE LOGO */}
             <a href='/'>
                 <Image
-                    src='/photos/Logo.png'
+                    src='/photos/FloLogoBlack.png'
                     alt='Logo'
                     width={180}
                     height={180}
@@ -48,7 +48,7 @@ const Login = () => {
                     p-6 sm:p-8
                     rounded-xl
                     flex flex-col gap-5
-                    text-white
+                    text-black
                     w-full max-w-md
                 '
             >
@@ -87,7 +87,7 @@ const Login = () => {
             {/* LOGO (hidden on small screens) */}
             <a href='/'>
                 <Image
-                    src='/photos/Logo.png'
+                    src='/photos/FloLogoBlack.png'
                     alt='Logo'
                     width={400}
                     height={400}

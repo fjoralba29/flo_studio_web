@@ -64,7 +64,7 @@ const Header = () => {
             {!mobileMenuOpen && (
                 <a href='/'>
                     <Image
-                        src='/photos/Logo.png'
+                        src='/photos/FloLogoWhite.png'
                         alt='Logo'
                         width={60}
                         height={60}
@@ -114,7 +114,7 @@ const Header = () => {
                     className='lg:hidden'
                 >
                     <Image
-                        src='/photos/Logo.png'
+                        src='/photos/FloLogoWhite.png'
                         alt='Logo'
                         width={60}
                         height={60}

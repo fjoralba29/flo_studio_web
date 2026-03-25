@@ -31,7 +31,7 @@ const Register = () => {
             {/* MOBILE LOGO */}
             <a href='/'>
                 <Image
-                    src='/photos/Logo.png'
+                    src='/photos/FloLogoBlack.png'
                     alt='Logo'
                     width={180}
                     height={180}
@@ -51,7 +51,7 @@ const Register = () => {
                     p-6 sm:p-8
                     rounded-xl
                     flex flex-col gap-5
-                    text-white
+                    text-black
                     w-full max-w-md
                 '
             >
@@ -98,11 +98,11 @@ const Register = () => {
             {/* DESKTOP LOGO */}
             <a href='/'>
                 <Image
-                    src='/photos/Logo.png'
+                    src='/photos/FloLogoBlack.png'
                     alt='Logo'
                     width={400}
                     height={400}
-                    className='hidden lg:block backdrop-blur-lg bg-black/10 border border-white/10 shadow-xl hover:shadow-2xl p-6 sm:p-8 rounded-lg'
+                    className='hidden lg:block  bg-black/10 border border-white/10 shadow-xl hover:shadow-2xl p-6 sm:p-8 rounded-lg'
                 />
             </a>
         </div>

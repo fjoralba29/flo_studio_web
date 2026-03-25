@@ -57,7 +57,7 @@ const UserHeader = () => {
             <div className='flex items-center gap-4 sm:gap-20'>
                 <a href='/'>
                     <Image
-                        src={"/photos/Logo.png"}
+                        src={"/photos/FloLogoWhite.png"}
                         alt='Logo'
                         width={60}
                         height={60}

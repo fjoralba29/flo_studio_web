@@ -73,7 +73,7 @@ const AdminHeader = () => {
                     className='flex-shrink-0'
                 >
                     <Image
-                        src='/photos/Logo.png'
+                        src='/photos/FloLogoWhite.png'
                         alt='Logo'
                         width={60}
                         height={60}

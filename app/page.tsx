@@ -60,7 +60,7 @@ export default function Home() {
                 </div>
 
                 <Image
-                    src='/photos/Logo.png'
+                    src='/photos/FloLogoWhite.png'
                     alt='Logo'
                     width={458}
                     height={324}

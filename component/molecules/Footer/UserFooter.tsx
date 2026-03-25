@@ -12,7 +12,7 @@ const UserFooter = () => {
             {/* Logo */}
             <div className='flex justify-center md:justify-start'>
                 <Image
-                    src={"/photos/Logo.png"}
+                    src={"/photos/FloLogoWhite.png"}
                     alt='Logo'
                     width={60}
                     height={60}

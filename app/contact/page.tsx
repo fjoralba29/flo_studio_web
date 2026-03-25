@@ -17,7 +17,7 @@ const ContactPage = () => {
                     }}
                 />
 
-                <div className='absolute top-24 sm:top-28 md:top-32 left-0 right-0 text-center text-white flex flex-col gap-2'>
+                <div className='absolute top-32 sm:top-28 md:top-68 left-0 right-0 text-center text-black flex flex-col gap-2'>
                     <h1 className='text-3xl sm:text-4xl md:text-5xl font-bold'>
                         CONTACT
                     </h1>

@@ -15,7 +15,7 @@ const AboutPage = () => {
                         backgroundImage: `url("/photos/image38.png")`,
                     }}
                 />
-                <div className='absolute top-32 sm:top-36 md:top-40 left-0 right-0 text-center text-white flex flex-col gap-2'>
+                <div className='absolute top-32 sm:top-36 md:top-40 left-0 right-0 text-center text-black flex flex-col gap-2'>
                     <h1 className='text-3xl sm:text-4xl md:text-5xl font-bold'>
                         ABOUT
                     </h1>

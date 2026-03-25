@@ -33,11 +33,11 @@ const Footer = () => {
                 {/* LEFT SIDE */}
                 <div className='flex flex-col lg:flex-row gap-12 lg:gap-64 justify-evenly items-center lg:items-start text-center lg:text-left'>
                     <Image
-                        src='/photos/Logo.png'
+                        src='/photos/FloLogoWhite.png'
                         alt='Logo'
                         width={100}
                         height={100}
-                        className='block lg:w-[300px] lg:h-[300px]'
+                        className='block lg:w-[300px] '
                     />
                     <div className='flex flex-col gap-6 items-center lg:items-start text-center lg:text-left'>
                         <div className='flex items-center gap-2 text-sm'>

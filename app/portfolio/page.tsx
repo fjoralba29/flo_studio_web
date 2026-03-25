@@ -43,12 +43,15 @@ const PortfolioPage = () => {
                 <div
                     className='bg-gradient-to-t from-[#0D0B0F] to-white w-full bg-cover bg-center h-64 sm:h-80 md:h-96 lg:h-[400px]'
                     style={{
-                        backgroundImage: `linear-gradient(to top, #0D0B0F, transparent), url("/photos/image38.png")`,
+                        backgroundImage: `linear-gradient(to top, #b4b3b5, transparent), url("/photos/image38.png")`,
                     }}
                 />
-                <div className='absolute top-24 sm:top-32 md:top-36 left-0 right-0 text-center text-white flex flex-col gap-2'>
+                <div className='absolute top-24 sm:top-32 md:top-36 left-0 right-0 text-center text-black flex flex-col gap-2'>
                     <div className='text-3xl sm:text-2xl md:text-5xl font-bold p-6'>
                         PORTFOLIO
+                    </div>
+                    <div className='subtitle tracking-[5px] sm:tracking-[10px] text-sm sm:text-base md:text-lg'>
+                        FROM HERE YOU CAN SEE OUR WORKS
                     </div>
                 </div>
             </div>
