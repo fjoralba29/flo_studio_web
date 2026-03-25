@@ -11,6 +11,8 @@ const AdminAddServicesForm = () => {
     const { mutate: createServiceMutation, isPending } = useCreateService();
 
     const handleSubmit = async (data: any) => {
+        console.log(data);
+
         await createServiceMutation({
             ...data,
         });

@@ -11,7 +11,7 @@ const AdminServicesPanel = () => {
     };
 
     return (
-        <div className='flex flex-col flex-1 p-2 md:p-5 gap-5 max-h-[80vh] overflow-y-auto'>
+        <div className='flex flex-col flex-1 p-2 md:p-5 gap-5 '>
             {/* Header */}
             <div className='flex bg-grey-light justify-center gap-4 p-4 rounded-lg overflow-x-auto'>
                 <Button
@@ -23,7 +23,7 @@ const AdminServicesPanel = () => {
             </div>
 
             {/* Service Cards */}
-            <div className='flex flex-col gap-3'>
+            <div className='flex flex-col gap-3 max-h-[80vh] overflow-y-auto'>
                 {services?.map((service: any) => (
                     <div
                         key={service.id}
