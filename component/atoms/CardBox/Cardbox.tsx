@@ -19,29 +19,26 @@ const Cardbox = ({
         <div
             onClick={() => setIsOpen((prev) => !prev)}
             className={`
-                relative group w-full ${width} h-[140px]
+                relative group w-full ${width} 
+                /* Change fixed height to min-height */
+                min-h-[140px] h-auto 
                 rounded-3xl p-6 cursor-pointer overflow-hidden
-                bg-[#e9ecef] text-[#0D0B0F] transition-all duration-300
+                bg-[#e9ecef] text-[#0D0B0F] transition-all duration-500 ease-in-out
                 hover:bg-[#adb5bd] hover:shadow-xl
-                ${isOpen ? "bg-[#adb5bd] shadow-xl" : ""}
+                flex flex-col
+                ${isOpen ? "bg-[#adb5bd] shadow-xl justify-start items-start" : "justify-center items-center"}
+                
+                /* Desktop hover logic */
+                md:hover:justify-start md:hover:items-start
             `}
         >
             {/* Title */}
             <div
                 className={`
-                    absolute inset-0 text-lg font-semibold transition-all duration-300
-                    flex items-center justify-center text-center
-
+                    text-lg font-semibold transition-all duration-300
+                    ${isOpen ? "text-left mb-3" : "text-center"}
                     /* Desktop hover */
-                    md:group-hover:items-start md:group-hover:justify-start
-                    md:group-hover:text-left md:group-hover:pt-6 md:group-hover:pl-6
-
-                    /* Mobile click */
-                    ${
-                        isOpen
-                            ? "items-start justify-start text-left pt-6 pl-6"
-                            : ""
-                    }
+                    md:group-hover:text-left md:group-hover:mb-3
                 `}
             >
                 {title}
@@ -51,14 +48,19 @@ const Cardbox = ({
             {description && (
                 <div
                     className={`
-                        absolute left-6 right-6 bottom-6 text-xs leading-relaxed
-                        transition-opacity duration-300
-
-                        /* Desktop hover */
-                        md:opacity-0 md:group-hover:opacity-100
-
-                        /* Mobile click */
-                        ${isOpen ? "opacity-100" : "opacity-0"}
+                        text-xs leading-relaxed transition-all duration-500
+                        /* Mobile: Show fully when open, hide when closed */
+                        ${
+                            isOpen
+                                ? "opacity-100 translate-y-0 max-h-[500px]"
+                                : "opacity-0 translate-y-2 max-h-0 md:max-h-0"
+                        }
+                        
+                        /* Desktop: Show on hover */
+                        md:group-hover:opacity-100 md:group-hover:translate-y-0 md:group-hover:max-h-[500px]
+                        
+                        /* Ensure text doesn't wrap weirdly during transition */
+                        overflow-hidden
                     `}
                 >
                     {description}
