@@ -27,13 +27,15 @@ const Login = () => {
             }}
         >
             {/* MOBILE LOGO */}
-            <Image
-                src='/photos/Logo.png'
-                alt='Logo'
-                width={180}
-                height={180}
-                className='block lg:hidden'
-            />
+            <a href='/'>
+                <Image
+                    src='/photos/Logo.png'
+                    alt='Logo'
+                    width={180}
+                    height={180}
+                    className='block lg:hidden'
+                />
+            </a>
             {/* FORM */}
             <Form
                 onSubmit={handleSubmit}
@@ -83,13 +85,15 @@ const Login = () => {
             </Form>
 
             {/* LOGO (hidden on small screens) */}
-            <Image
-                src='/photos/Logo.png'
-                alt='Logo'
-                width={400}
-                height={400}
-                className='hidden lg:block backdrop-blur-lg bg-black/10 border border-white/10 shadow-xl hover:shadow-2xl p-6 sm:p-8 rounded-lg'
-            />
+            <a href='/'>
+                <Image
+                    src='/photos/Logo.png'
+                    alt='Logo'
+                    width={400}
+                    height={400}
+                    className='hidden lg:block backdrop-blur-lg bg-black/10 border border-white/10 shadow-xl hover:shadow-2xl p-6 sm:p-8 rounded-lg'
+                />
+            </a>
         </div>
     );
 };
