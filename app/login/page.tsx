@@ -23,7 +23,7 @@ const Login = () => {
         <div
             className='min-h-screen w-full bg-cover bg-center flex flex-col lg:flex-row items-center justify-evenly gap-4 px-6 sm:px-10 lg:px-24'
             style={{
-                backgroundImage: `url("/photos/background-image.png")`,
+                backgroundImage: `url("/photos/Image1.jpg")`,
             }}
         >
             {/* MOBILE LOGO */}
@@ -88,7 +88,7 @@ const Login = () => {
                 alt='Logo'
                 width={400}
                 height={400}
-                className='hidden lg:block'
+                className='hidden lg:block backdrop-blur-lg bg-black/10 border border-white/10 shadow-xl hover:shadow-2xl p-6 sm:p-8 rounded-lg'
             />
         </div>
     );

@@ -16,9 +16,11 @@ const buttonThemes: Record<ButtonTheme, string[]> = {
         "disabled:border-[#8695A4]",
     ],
     secondary: [
-        "bg-sand",
-        "text-black",
+        "bg-black",
+        "text-white",
         "hover:bg-[#F9F9FB]",
+        "hover:text-black",
+        "border:black",
         "disabled:text-[#8695A4]",
         "border-medium-grey",
         "disabled:border-[#8695A4]",
@@ -83,7 +85,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             type = "button",
             ...props
         },
-        ref
+        ref,
     ) => {
         const iconOnly = Icon && !children;
         const classes = cn(
@@ -106,7 +108,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 ? buttonIconOnlySizes[size].join(" ")
                 : buttonSizes[size].join(" "),
             className,
-            ...buttonThemes[theme]
+            ...buttonThemes[theme],
         );
 
         return (
@@ -130,7 +132,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 )}
             </button>
         );
-    }
+    },
 );
 
 export default Button;
