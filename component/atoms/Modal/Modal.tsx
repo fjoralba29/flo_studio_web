@@ -1,6 +1,13 @@
 "use client";
 
-import { MouseEvent, PropsWithChildren, useRef, JSX } from "react";
+import {
+    MouseEvent,
+    PropsWithChildren,
+    useRef,
+    JSX,
+    useState,
+    useEffect,
+} from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 import { cn } from "@/helpers/cn";
@@ -29,7 +36,7 @@ const ModalHeader = ({
                 "right-0",
                 "left-0",
                 "pb-5",
-                className
+                className,
             )}
         >
             <div className='w-full flex justify-between'>
@@ -39,7 +46,7 @@ const ModalHeader = ({
                             className={cn(
                                 "text-black",
                                 "large-strong",
-                                "box-border"
+                                "box-border",
                             )}
                         >
                             {title}
@@ -50,7 +57,7 @@ const ModalHeader = ({
                             className={cn(
                                 "text-black",
                                 "base-normal",
-                                "box-border"
+                                "box-border",
                             )}
                         >
                             {subtitle}
@@ -66,7 +73,7 @@ const ModalHeader = ({
                         className={cn(
                             "cursor-pointer",
                             "fill-black",
-                            "hover:fill-white"
+                            "hover:fill-white",
                         )}
                         onClick={onClose}
                     />
@@ -119,6 +126,14 @@ export const Modal = ({
             }
         };
 
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
+
     const classes = cn(
         "relative",
         "bg-white",
@@ -131,7 +146,7 @@ export const Modal = ({
         "min-w-[370px]",
         "max-w-[370px]",
         "sm:max-w-fit",
-        className
+        className,
     );
 
     const muskClasses = cn(
@@ -142,7 +157,7 @@ export const Modal = ({
         "bg-black/40",
         "backdrop-blur-xs",
         "z-[800]",
-        muskClassNames
+        muskClassNames,
     );
 
     const modalContent = (

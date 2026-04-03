@@ -3,16 +3,12 @@
 import Button from "@/component/atoms/Button/Button";
 import Container from "@/component/atoms/Container/Container";
 import Dropzone from "@/component/atoms/Dropzone/Dropzone";
-import { DropzonePlain } from "@/component/atoms/Dropzone/DropzonePlain";
 import Form from "@/component/atoms/Form/Form";
 import Input from "@/component/atoms/Input/Input";
-import InputPlain from "@/component/atoms/Input/InputPlain";
 import { Modal } from "@/component/atoms/Modal/Modal";
 import { addSubcategorySchema } from "@/lib/types/CreateCategoriesSchema";
-import { useAddPhotosToUserEvent } from "@/src/apis/addUserData";
 import { useCreatePortfolioSubcategory } from "@/src/apis/portfolioCategories";
 import { useUploadImage } from "@/src/apis/uploadImage";
-import { useAddUserDataStore } from "@/src/store/addUserData";
 import { usePortfolioCategoriesStore } from "@/src/store/portfolioCategories";
 
 const AddSubcategoriesModal = () => {
@@ -52,15 +48,6 @@ const AddSubcategoriesModal = () => {
                 await uploadImageMutation.mutateAsync(primaryPhoto);
         }
 
-        // 2️⃣ Transform URLs into Photo objects
-        // const photosToAdd = urls.map((url) => ({
-        //     url,
-        //     title: "", // optional
-        //     description: "", // optional
-        // }));
-        // console.log(photosToAdd);
-
-        // 3️⃣ Send to your API
         await createPortfolioSubcategory({
             portfolioCategoryId: Number(selectedPortfolioCategoryId),
             name: name,

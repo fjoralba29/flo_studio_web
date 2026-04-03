@@ -71,7 +71,6 @@ export async function DELETE(
 ) {
     const { slug } = await context.params;
     const id = Number(slug);
-    const cloudinary = await getCloudinary();
 
     if (isNaN(id)) {
         return NextResponse.json(
@@ -82,7 +81,6 @@ export async function DELETE(
 
     const category = await prisma.category.findUnique({
         where: { id },
-        include: { photos: true },
     });
 
     if (!category) {
@@ -92,26 +90,12 @@ export async function DELETE(
         );
     }
 
-    // Delete photos from Cloudinary
-    for (const photo of category.photos) {
-        const publicId = extractPublicId(photo.url);
-        if (publicId) {
-            try {
-                await cloudinary.uploader.destroy(publicId);
-            } catch (err) {
-                console.error("Cloudinary delete error:", err);
-            }
-        }
-    }
-
-    // Delete photos from DB
-    await prisma.photo.deleteMany({ where: { categoryId: id } });
-
-    // Delete category
-    await prisma.category.delete({ where: { id } });
+    await prisma.category.delete({
+        where: { id },
+    });
 
     return NextResponse.json(
-        { message: "Category + photos deleted successfully" },
+        { message: "Category deleted successfully" },
         { status: 200 },
     );
 }

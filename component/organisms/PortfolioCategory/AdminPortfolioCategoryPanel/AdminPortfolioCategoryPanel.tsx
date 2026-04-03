@@ -1,5 +1,3 @@
-"use client";
-
 import AdminPortfolioCategorySubpanel from "./AdminPortfolioCategorySubpanel/AdminPortfolioCategorySubpanel";
 import AdminPortfolioSubcategorySubpanel from "./AdminPortfolioSubcategorySubpanel/AdminPortfolioSubcategorySubpanel";
 import AdminPortfolioPhotosSubpanel from "./AdminPortfolioPhotosSubpanel/AdminPortfolioPhotosSubpanel";
