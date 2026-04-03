@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Cards from "../../atoms/Cards/Cards";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const GAP = 24; // gap-6
 
@@ -90,18 +91,22 @@ const Collaborations = () => {
                                     }px) / ${visibleCards})`,
                                 }}
                             >
-                                <Cards
+                                <div>
+                                    <Image
+                                        src={collaboration.primaryPhoto}
+                                        alt={collaboration.name}
+                                        width={500}
+                                        height={900}
+                                        className='w-full h-full rounded-lg object-cover'
+                                    />
+                                </div>
+                                {/* <Cards
                                     photo={collaboration.primaryPhoto}
                                     title={collaboration.name}
                                     description={collaboration.description}
                                     type='collaboration'
                                     className='w-full h-full'
-                                    onClick={() =>
-                                        router.push(
-                                            `/portfolio?category=${collaboration.id}`,
-                                        )
-                                    }
-                                />
+                                /> */}
                             </div>
                         ))}
                     </motion.div>

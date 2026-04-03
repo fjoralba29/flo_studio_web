@@ -38,9 +38,6 @@ const Categories = () => {
                         title={category.name}
                         description={category.description}
                         type='category'
-                        onClick={() =>
-                            router.push(`/portfolio?category=${category.id}`)
-                        }
                     />
                 ))}
             </div>
