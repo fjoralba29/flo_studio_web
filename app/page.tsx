@@ -81,13 +81,13 @@ export default function Home() {
                     </h2>
                     <p>
                         When you log in, you’ll have access to your own private
-                        profile — a secure space where all your wedding memories
-                        are stored.
+                        profile — a secure space where all your memories are
+                        stored.
                     </p>
 
                     <ul className='list-disc pl-5 space-y-2'>
                         <li>View and download your photos in high quality</li>
-                        <li>Access private links to your wedding videos</li>
+                        <li>Access private links to your videos</li>
                         <li>Share with friends and family anytime</li>
                     </ul>
 

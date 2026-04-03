@@ -14,7 +14,6 @@ const AdminHeader = () => {
 
     const publicPaths = [
         "/",
-        "/wedding",
         "/portfolio",
         "/contact",
         "/user-profile",

@@ -2,19 +2,13 @@
 
 import AdminCategoriesCard from "@/component/atoms/AdminCategoriesCard/AdminCategoriesCard";
 import Button from "@/component/atoms/Button/Button";
-import Gallery from "@/component/molecules/Gallery/Gallery";
-import {
-    useDeleteCategory,
-    useGetCategories,
-    useGetPhotosByCategoryID,
-} from "@/src/apis/categories";
+import { useDeleteCategory, useGetCategories } from "@/src/apis/categories";
 import { useCategoryStore } from "@/src/store/categories";
 import AddCategoryPhotosModal from "../AddCategoryPhotosModal/AddCategoryPhotosModal";
 import { useAddUserDataStore } from "@/src/store/addUserData";
 export const CategoryType = {
     Collaboration: "Collaboration",
     Category: "Category",
-    Wedding: "Wedding",
 } as const;
 
 export type CategoryTypeValue =
@@ -36,15 +30,6 @@ const AdminCategoriesPanel = () => {
 
     const mutateDeleteCategory = useDeleteCategory();
 
-    const { data: photoData = [] } = useGetPhotosByCategoryID();
-    const photoUrls =
-        photoData?.photos?.length > 0
-            ? photoData.photos?.map((item: any) => ({
-                  url: item.url,
-                  id: item.id,
-              }))
-            : [];
-
     const handleDeleteCategory = (categoryId: number) => {
         mutateDeleteCategory.mutate(categoryId);
     };
@@ -56,7 +41,7 @@ const AdminCategoriesPanel = () => {
     return (
         <div className='flex flex-col flex-1 p-5 gap-5'>
             {/* Category type buttons */}
-            <div className='flex overflow-x-auto gap-4 p-4 rounded-lg bg-grey-light scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200'>
+            <div className='flex overflow-x-auto self-center gap-4 p-4 rounded-lg bg-grey-light scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200'>
                 {Object.values(CategoryType).map((type, index) => (
                     <Button
                         key={index}
@@ -100,21 +85,6 @@ const AdminCategoriesPanel = () => {
                         </div>
                     ))}
                 </div>
-
-                {/* Photo gallery panel */}
-                {selectedTypeId && (
-                    <div className='flex flex-col w-full gap-3'>
-                        <Button
-                            theme='primary'
-                            size='xs'
-                            onClick={() => setPhotoModalOpen(true)}
-                            className='self-end'
-                        >
-                            Add Photos
-                        </Button>
-                        <Gallery images={photoUrls} />
-                    </div>
-                )}
 
                 <AddCategoryPhotosModal />
             </div>

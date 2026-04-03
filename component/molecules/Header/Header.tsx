@@ -19,7 +19,6 @@ const Header = () => {
 
     const publicPaths = [
         "/",
-        "/wedding",
         "/portfolio",
         "/contact",
         "/user-profile",
@@ -71,12 +70,7 @@ const Header = () => {
                     />
                 </a>
             )}
-            <a
-                href='/wedding'
-                className='navbar text-white'
-            >
-                Wedding
-            </a>
+
             <a
                 href='/contact'
                 className='navbar text-white'

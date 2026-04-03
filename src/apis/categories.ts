@@ -44,7 +44,6 @@ export const useCreateCategory = () => {
         }: Props) =>
             createCategory({ name, description, type, primaryPhoto, photos }),
         onSuccess: () => {
-            alert("Category created successfully!");
             toast.success("Category created successfully!");
             queryClient.invalidateQueries({ queryKey: ["categories"] }); // optional: refresh list
         },
@@ -110,21 +109,21 @@ export const useGetCategories = () => {
     });
 };
 
-export const getPhotosByCategoryID = async (categoryId: number) => {
-    const res = await axios.get(` /api/photos/${categoryId}`);
-    return res.data;
-};
+// export const getPhotosByCategoryID = async (categoryId: number) => {
+//     const res = await axios.get(` /api/photos/${categoryId}`);
+//     return res.data;
+// };
 
-export const useGetPhotosByCategoryID = () => {
-    const selectedCategoryId = useCategoryStore(
-        (state) => state.selectedTypeId,
-    );
-    return useQuery({
-        queryKey: ["category-photos", selectedCategoryId],
-        queryFn: () => getPhotosByCategoryID(selectedCategoryId as number),
-        enabled: !!selectedCategoryId,
-    });
-};
+// export const useGetPhotosByCategoryID = () => {
+//     const selectedCategoryId = useCategoryStore(
+//         (state) => state.selectedTypeId,
+//     );
+//     return useQuery({
+//         queryKey: ["category-photos", selectedCategoryId],
+//         queryFn: () => getPhotosByCategoryID(selectedCategoryId as number),
+//         enabled: !!selectedCategoryId,
+//     });
+// };
 
 export interface PhotoInput {
     url: string;

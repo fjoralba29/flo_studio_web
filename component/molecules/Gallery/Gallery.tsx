@@ -8,6 +8,7 @@ import { useUserStore } from "@/src/store/userStore";
 import { useDeletePhotos } from "@/src/apis/uploadImage";
 import { usePathname } from "next/navigation";
 import Container, { EmptyState } from "@/component/atoms/Container/Container";
+import { useDeletePortfolioPhoto } from "@/src/apis/portfolioCategories";
 
 type GalleryImage = {
     id: number;
@@ -17,6 +18,7 @@ type GalleryImage = {
 type GalleryProps = {
     images: GalleryImage[];
     isLoading?: boolean;
+    galleryType?: "portfolio" | "home";
 };
 
 const containerVariants = {
@@ -45,8 +47,13 @@ const itemVariants = {
     },
 };
 
-const Gallery = ({ images, isLoading = false }: GalleryProps) => {
+const Gallery = ({
+    images,
+    isLoading = false,
+    galleryType = "portfolio",
+}: GalleryProps) => {
     const { mutate: deletePhoto } = useDeletePhotos();
+    const { mutate: deletePortfolioPhoto } = useDeletePortfolioPhoto();
     const user = useUserStore((state) => state.user);
     const { type } = user || {};
     const pathname = usePathname();
@@ -68,7 +75,7 @@ const Gallery = ({ images, isLoading = false }: GalleryProps) => {
         setActiveIndex((i) =>
             i === null ? null : (i + 1) % galleryImages.length,
         );
-    }, [galleryImages.length]);
+    }, [galleryImages?.length]);
 
     const prev = useCallback(() => {
         setActiveIndex((i) =>
@@ -76,7 +83,7 @@ const Gallery = ({ images, isLoading = false }: GalleryProps) => {
                 ? null
                 : (i - 1 + galleryImages.length) % galleryImages.length,
         );
-    }, [galleryImages.length]);
+    }, [galleryImages?.length]);
 
     const handleImageLoad = (index: number) => {
         setLoadingImages((prev) => {
@@ -89,7 +96,9 @@ const Gallery = ({ images, isLoading = false }: GalleryProps) => {
     const handleDeleteImage = (imageId: number) => {
         setGalleryImages((prev) => prev.filter((img) => img.id !== imageId));
         setActiveIndex(null);
-        deletePhoto(imageId);
+        galleryType === "portfolio"
+            ? deletePortfolioPhoto(imageId)
+            : deletePhoto(imageId);
     };
 
     const canDelete = type === "Admin" && pathname !== "/portfolio";
@@ -131,9 +140,7 @@ const Gallery = ({ images, isLoading = false }: GalleryProps) => {
                                     alt={`Gallery image ${idx + 1}`}
                                     fill
                                     className='object-cover transition-transform duration-300 group-hover:scale-110'
-                                    onLoadingComplete={() =>
-                                        handleImageLoad(idx)
-                                    }
+                                    onLoad={() => handleImageLoad(idx)}
                                 />
                             </div>
 

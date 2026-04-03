@@ -8,7 +8,7 @@ const Header = dynamic(() => import("./Header"), { ssr: false });
 const UserHeader = dynamic(() => import("./UserHeader"), { ssr: false });
 const AdminHeader = dynamic(() => import("./AdminHeader"), { ssr: false });
 
-const publicPaths = ["/", "/wedding", "/portfolio", "/contact", "/about"];
+const publicPaths = ["/", "/portfolio", "/contact", "/about"];
 
 const HeaderController = () => {
     const pathname = usePathname();

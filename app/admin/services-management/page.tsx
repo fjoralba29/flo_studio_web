@@ -2,22 +2,19 @@
 
 import AdminFooter from "@/component/molecules/Footer/AdminFooter";
 import AdminHeader from "@/component/molecules/Header/AdminHeader";
-import AdminAddServicesForm from "@/component/organisms/AdminAddServicesForm/AdminAddServicesForm";
-import AdminServicesPanel from "@/component/organisms/AdminServicesPanel/AdminServicesPanel";
+import AdminAddServicesForm from "@/component/organisms/Services/AdminAddServicesForm/AdminAddServicesForm";
+import AdminServicesPanel from "@/component/organisms/Services/AdminServicesPanel/AdminServicesPanel";
 
 const ServicesManagement = () => {
     return (
         <>
             <AdminHeader />
-            <div className=' flex flex-col md:flex-row gap-5 p-5'>
+            <div className='flex h-screen flex-col md:flex-row gap-5'>
                 {/* Form on top for mobile, side by side on desktop */}
-                <div className='flex-1'>
-                    <AdminAddServicesForm />
-                </div>
 
-                <div className='flex-2'>
-                    <AdminServicesPanel />
-                </div>
+                <AdminAddServicesForm />
+
+                <AdminServicesPanel />
             </div>
             <AdminFooter />
         </>

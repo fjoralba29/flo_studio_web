@@ -23,7 +23,7 @@ const AdminServicesPanel = () => {
             </div>
 
             {/* Service Cards */}
-            <div className='flex flex-col gap-3 max-h-[80vh] overflow-y-auto'>
+            <div className='flex flex-col gap-3 max-h-[40vh] md:max-h-[80vh] overflow-y-auto'>
                 {services?.map((service: any) => (
                     <div
                         key={service.id}
@@ -33,7 +33,7 @@ const AdminServicesPanel = () => {
                             title={service.name}
                             description={service.description}
                             image={service.primaryPhoto}
-                            className='w-full md:flex-1'
+                            className='w-full '
                         />
                         <Button
                             theme='ghost'

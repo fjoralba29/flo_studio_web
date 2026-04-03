@@ -4,12 +4,12 @@ import { prisma } from "@/lib/prisma";
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const { name, description, type, primaryPhoto, photos } = body;
+        const { name, description, type, primaryPhoto } = body;
 
         if (!name || !type) {
             return NextResponse.json(
                 { error: "Missing required fields" },
-                { status: 400 }
+                { status: 400 },
             );
         }
 
@@ -19,16 +19,6 @@ export async function POST(request: Request) {
                 description,
                 type,
                 primaryPhoto,
-                photos: photos?.length
-                    ? {
-                          create: photos.map((url: string) => ({
-                              url,
-                          })),
-                      }
-                    : undefined,
-            },
-            include: {
-                photos: true,
             },
         });
 
@@ -45,9 +35,9 @@ export const runtime = "nodejs";
 export async function GET() {
     try {
         const categories = await prisma.category.findMany({
-            include: {
-                photos: true, // remove if not needed
-            },
+            // include: {
+            //     photos: true, // remove if not needed
+            // },
         });
 
         return NextResponse.json(categories);
@@ -55,7 +45,7 @@ export async function GET() {
         console.error("GET /api/categories error:", error);
         return NextResponse.json(
             { error: "Failed to fetch categories" },
-            { status: 500 }
+            { status: 500 },
         );
     }
 }

@@ -1,7 +1,7 @@
 import AdminFooter from "@/component/molecules/Footer/AdminFooter";
 import AdminHeader from "@/component/molecules/Header/AdminHeader";
-import AdminVideoForm from "@/component/organisms/AdminVideoForm/AdminVideoForm";
-import AdminVideoPanel from "@/component/organisms/AdminVideoPanel/AdminVideoPanel";
+import AdminVideoForm from "@/component/organisms/Video/AdminVideoForm/AdminVideoForm";
+import AdminVideoPanel from "@/component/organisms/Video/AdminVideoPanel/AdminVideoPanel";
 
 const VideoManagement = () => {
     return (

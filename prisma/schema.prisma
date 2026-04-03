@@ -11,7 +11,6 @@ enum UserType {
   Admin
 }
 
-
 model User {
   id        Int         @id @default(autoincrement())
   name      String
@@ -42,24 +41,25 @@ model UserEvent {
 }
 
 model Photo {
-  id          Int        @id @default(autoincrement())
-  title       String?
-  description String?
-  url         String // Cloudinary URL
-  category    Category?  @relation(fields: [categoryId], references: [id])
-  categoryId  Int?
-  userEvent   UserEvent? @relation(fields: [userEventId], references: [id])
-  userEventId Int?
-  createdAt   DateTime   @default(now())
+  id                     Int                   @id @default(autoincrement())
+  title                  String?
+  description            String?
+  url                    String // Cloudinary URL
+  userEvent              UserEvent?            @relation(fields: [userEventId], references: [id])
+  userEventId            Int?
+  createdAt              DateTime              @default(now())
+  portfolioSubcategoryId Int?
+  portfolioSubcategory   PortfolioSubcategory? @relation(fields: [portfolioSubcategoryId], references: [id])
+  portfolioCategoryId    Int?
+  portfolioCategory      PortfolioCategory?    @relation(fields: [portfolioCategoryId], references: [id])
 }
 
 model Category {
   id           Int          @id @default(autoincrement())
-  name         String
+  name         String?
   description  String?
   primaryPhoto String? // URL to Cloudinary
   type         CategoryType
-  photos       Photo[] // all photos added for this category
   createdAt    DateTime     @default(now())
 }
 
@@ -97,4 +97,21 @@ model Video {
   title     String
   url       String
   createdAt DateTime @default(now())
+}
+
+model PortfolioCategory {
+  id            Int                    @id @default(autoincrement())
+  name          String
+  primaryPhoto  String?
+  subcategories PortfolioSubcategory[]
+  photos        Photo[]
+}
+
+model PortfolioSubcategory {
+  id                  Int               @id @default(autoincrement())
+  name                String
+  primaryPhoto        String?
+  portfolioCategoryId Int
+  portfolioCategory   PortfolioCategory @relation(fields: [portfolioCategoryId], references: [id])
+  photos              Photo[]
 }

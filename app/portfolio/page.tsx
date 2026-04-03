@@ -1,38 +1,47 @@
 "use client";
 
-import FloatingNav from "@/component/atoms/FloatingNav/FloatingNav";
+import Cards from "@/component/atoms/Cards/Cards";
 import Footer from "@/component/molecules/Footer/Footer";
 import Gallery from "@/component/molecules/Gallery/Gallery";
 import Header from "@/component/molecules/Header/Header";
 import {
-    useGetCategories,
-    useGetPhotosByCategoryID,
-} from "@/src/apis/categories";
-import { useCategoryStore } from "@/src/store/categories";
-import { Suspense } from "react";
+    useGetPortfolioCategories,
+    useGetPortfolioSubcategories,
+} from "@/src/apis/portfolioCategories";
+import { useState } from "react";
 
 const PortfolioPage = () => {
-    const { data: categories = [] } = useGetCategories();
+    const [categorySelected, setCategorySelected] = useState<number | null>(
+        null,
+    );
+    const [subcategorySelected, setSubcategorySelected] = useState<
+        number | null
+    >(null);
 
-    const items = categories?.map((item: any) => ({
-        key: item.id,
-        label: item.name,
-        img: item.primaryPhoto,
-    }));
+    const { data: categories = [] } = useGetPortfolioCategories();
+    const { data: subcategories = [] } = useGetPortfolioSubcategories();
 
-    // Call hook at top-level
-    const {
-        data: photoData = [],
-        isLoading,
-        error,
-    } = useGetPhotosByCategoryID();
+    // Filter subcategories by selected category
+    const filteredSubcategories = subcategories.filter(
+        (item: any) => item.portfolioCategory.id === categorySelected,
+    );
 
-    const photoUrls =
-        photoData?.photos?.length > 0
-            ? photoData.photos?.map((item: any) => {
-                  return { url: item.url, id: item.id };
-              })
-            : [];
+    // Get selected subcategory object
+    const selectedSubcategory = filteredSubcategories.find(
+        (item: any) => item.id === subcategorySelected,
+    );
+
+    // Get category photos
+    const categoryPhotos =
+        categories.find((c: any) => c.id === categorySelected)?.photos || [];
+
+    // Get subcategory photos
+    const subcategoryPhotos = selectedSubcategory?.photos || [];
+
+    console.log("categoryPhotos:", categorySelected);
+    console.log("subcategoryPhotos:", subcategorySelected);
+
+    console.log("filter:", filteredSubcategories, subcategories);
 
     return (
         <div className='bg- min-h-screen'>
@@ -56,30 +65,87 @@ const PortfolioPage = () => {
                 </div>
             </div>
 
-            <div className='px-6 sm:px-6 lg:px-16 py-8 flex flex-col md:flex-row gap-6 mb-12'>
-                <Suspense
-                    fallback={
-                        <div className='text-white'>Loading filters...</div>
-                    }
-                >
-                    <FloatingNav menuItems={items} />
-                </Suspense>
+            <div
+                className={`px-6 sm:px-6 lg:px-16 py-8 flex ${!categorySelected ? "flex-row" : "flex-col"}  gap-6 mb-12`}
+            >
+                {/* STEP 1: Show Categories */}
+                {!categorySelected &&
+                    categories.map((category: any) => (
+                        <Cards
+                            key={category.id}
+                            photo={category.primaryPhoto}
+                            title={category.name}
+                            description={category.description}
+                            type='category'
+                            className='rounded-sm'
+                            onClick={() => {
+                                setCategorySelected(category.id);
+                                setSubcategorySelected(null);
+                            }}
+                        />
+                    ))}
 
-                {isLoading ? (
-                    <div className='text-white text-center py-20'>
-                        Loading...
-                    </div>
-                ) : error ? (
-                    <div className='text-red-500 text-center py-20'>
-                        Error loading photos
-                    </div>
-                ) : (
+                {/* STEP 2: When category is selected */}
+                {categorySelected && !subcategorySelected && (
                     <>
-                        <h2>{photoData?.name}</h2>
-                        <Gallery images={photoUrls} />
+                        <div
+                            className='cursor-pointer mb-4'
+                            onClick={() => {
+                                selectedSubcategory
+                                    ? setSubcategorySelected(null)
+                                    : setCategorySelected(null);
+                            }}
+                        >
+                            ← Back
+                        </div>
+
+                        {/* Subcategories ALWAYS visible if they exist */}
+                        <div className='w-full flex flex-col gap-4'>
+                            <div className='flex gap-4'>
+                                {filteredSubcategories.length > 0 &&
+                                    filteredSubcategories.map(
+                                        (subcategory: any) => (
+                                            <Cards
+                                                key={subcategory.id}
+                                                photo={subcategory.primaryPhoto}
+                                                title={subcategory.name}
+                                                description={
+                                                    subcategory.description
+                                                }
+                                                type='category'
+                                                className='!w-[500px] rounded-sm'
+                                                onClick={() => {
+                                                    setSubcategorySelected(
+                                                        subcategory.id,
+                                                    );
+                                                }}
+                                            />
+                                        ),
+                                    )}
+                            </div>
+                            <Gallery images={categoryPhotos} />
+                        </div>
+                    </>
+                )}
+
+                {/* STEP 3: Show Subcategory Gallery */}
+                {categorySelected && subcategorySelected && (
+                    <>
+                        <div
+                            className='cursor-pointer mb-4'
+                            onClick={() => {
+                                selectedSubcategory
+                                    ? setSubcategorySelected(null)
+                                    : setCategorySelected(null);
+                            }}
+                        >
+                            ← Back
+                        </div>
+                        <Gallery images={subcategoryPhotos} />
                     </>
                 )}
             </div>
+
             <Footer />
         </div>
     );

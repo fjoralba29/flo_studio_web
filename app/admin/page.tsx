@@ -66,6 +66,16 @@ const AdminDashboard = () => {
                             window.location.href = "/admin/user-management";
                         }}
                     />
+                    <Cards
+                        photo={"/photos/image10.png"}
+                        type={"category"}
+                        title='Portfolio management'
+                        // className='!w-[90%] sm:!w-[400px] !h-[300px]'
+                        onClick={() => {
+                            window.location.href =
+                                "/admin/portfolio-management";
+                        }}
+                    />
                 </div>
             </div>
 

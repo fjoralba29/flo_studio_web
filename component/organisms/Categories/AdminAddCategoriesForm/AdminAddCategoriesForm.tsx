@@ -18,29 +18,18 @@ const AdminAddCategoriesForm = () => {
     const isLoading = uploadImageMutation.isPending || isCreating;
 
     const handleSubmit = async (data: any) => {
-        const { primaryPhoto, photos, ...rest } = data;
+        const { primaryPhoto, ...rest } = data;
 
         let primaryPhotoUrl: string | undefined;
-        let photoUrls: string[] = [];
 
         if (primaryPhoto) {
-            primaryPhotoUrl = await uploadImageMutation.mutateAsync(
-                primaryPhoto
-            );
-        }
-
-        if (Array.isArray(photos) && photos.length > 0) {
-            photoUrls = await Promise.all(
-                photos.map((photo: string) =>
-                    uploadImageMutation.mutateAsync(photo)
-                )
-            );
+            primaryPhotoUrl =
+                await uploadImageMutation.mutateAsync(primaryPhoto);
         }
 
         await createCategory({
             ...rest,
             primaryPhoto: primaryPhotoUrl,
-            photos: photoUrls,
         });
     };
 
@@ -78,12 +67,6 @@ const AdminAddCategoriesForm = () => {
                             className='md:w-[300px]'
                         />
 
-                        <Input
-                            name='description'
-                            label='Description'
-                            className='md:w-[300px]'
-                        />
-
                         <div className='flex flex-col gap-2'>
                             <h5>Image</h5>
                             <Dropzone
@@ -96,20 +79,6 @@ const AdminAddCategoriesForm = () => {
                                 itemClassName='size-[100px]'
                             />
                         </div>
-                    </div>
-
-                    {/* Multiple Photos */}
-                    <div className='flex flex-col gap-2'>
-                        <h5>Photos</h5>
-                        <Dropzone
-                            allowedFiles='image'
-                            theme='secondary'
-                            name='photos'
-                            outputType='base64'
-                            multiSelect
-                            inputClassName='size-[100px]'
-                            itemClassName='size-[100px]'
-                        />
                     </div>
 
                     {/* Submit */}

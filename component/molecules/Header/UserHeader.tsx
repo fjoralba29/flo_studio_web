@@ -14,7 +14,6 @@ const UserHeader = () => {
 
     const publicPaths = [
         "/",
-        "/wedding",
         "/portfolio",
         "/contact",
         "/user-profile",

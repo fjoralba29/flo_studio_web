@@ -17,7 +17,7 @@ const AdminCategoriesCard = ({
 }: CardProps) => {
     return (
         <div
-            className={`flex items-center bg-white shadow-xs rounded-xl overflow-hidden  h-[100px] hover:shadow-sm transition-shadow duration-300 ${className}`}
+            className={`flex  bg-white shadow-xs rounded-xl hover:shadow-sm transition-shadow duration-300 ${className}`}
             onClick={onClick}
         >
             {/* Image */}
@@ -27,7 +27,7 @@ const AdminCategoriesCard = ({
                         src={image}
                         alt={title}
                         fill
-                        className='object-cover'
+                        className='object-cover rounded-l-xl'
                     />
                 </div>
             )}

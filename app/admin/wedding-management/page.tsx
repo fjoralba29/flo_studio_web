@@ -2,8 +2,8 @@
 
 import AdminFooter from "@/component/molecules/Footer/AdminFooter";
 import AdminHeader from "@/component/molecules/Header/AdminHeader";
-import AdminAddWeddingForm from "@/component/organisms/AdminAddWeddingForm/AdminAddWeddingForm";
-import AdminWeddingPanel from "@/component/organisms/AdminWeddingPanel/AdminWeddingPanel";
+import AdminAddWeddingForm from "@/component/organisms/Wedding/AdminAddWeddingForm/AdminAddWeddingForm";
+import AdminWeddingPanel from "@/component/organisms/Wedding/AdminWeddingPanel/AdminWeddingPanel";
 
 const WeddingManagementPage = () => {
     return (
