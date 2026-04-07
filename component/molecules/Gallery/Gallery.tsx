@@ -121,7 +121,7 @@ const Gallery = ({
                         <motion.div
                             key={image.id}
                             variants={itemVariants}
-                            className='relative w-full h-40 md:h-48 lg:h-56 overflow-hidden rounded-lg shadow-md group bg-gray-200'
+                            className='relative w-full h-48 md:h-52 lg:h-82 overflow-hidden rounded-lg shadow-md group bg-gray-200'
                         >
                             {/* IMAGE LOADER */}
                             {loadingImages[idx] && (
